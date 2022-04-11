@@ -2,10 +2,14 @@ version: '3.9'
 
 services:
   app:
-    image: node:17.8.0
+    build:
+      context: .
+      dockerfile: docker/prod.Dockerfile
     ports:
       - ${APP_PORT:-3000}:3000
     volumes:
-      - ./:/usr/src/app
-    working_dir: /usr/src/app
-    command: ["./node_modules/.bin/react-scripts", "start"]
+      - ./public:/usr/src/app/public
+      - ./src:/usr/src/app/src
+      - ./tsconfig.json:/usr/src/app/tsconfig.json
+    env_file:
+      - .env

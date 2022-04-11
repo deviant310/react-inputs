@@ -1,7 +1,13 @@
 .dockerignore
 npm-debug.log
-Dockerfile
+docker
+node_modules
 .git
 .gitignore
 .npmrc
 .nvmrc
+Makefile
+*.md
+.idea
+*.yml
+.env.example
