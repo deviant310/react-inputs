@@ -2,14 +2,11 @@ version: '3.9'
 
 services:
   app:
-    build:
-      context: .
-      dockerfile: docker/prod.Dockerfile
+    image: ${DOCKER_IMAGE}
     ports:
       - ${APP_PORT:-3000}:3000
     volumes:
-      - ./public:/usr/src/app/public
-      - ./src:/usr/src/app/src
-      - ./tsconfig.json:/usr/src/app/tsconfig.json
+      - ./:/usr/src/app
     env_file:
       - .env
+    command: ["dumb-init", "react-scripts", "build"]
