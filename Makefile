@@ -28,6 +28,6 @@ start:
 		--name ${APP_NAME} \
 		-v ${PWD}:/usr/src/app \
 		-w /usr/src/app \
-		-p $(or ${APP_PORT}, 4000):3000 \
+		-p $(or ${APP_PORT}, 3000):3000 \
 		${DOCKER_IMAGE} \
 		dumb-init react-scripts start
