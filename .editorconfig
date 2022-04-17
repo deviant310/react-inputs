@@ -1,0 +1,26 @@
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 2
+indent_style = space
+insert_final_newline = true
+max_line_length = 120
+tab_width = 2
+trim_trailing_whitespace = true
+ij_continuation_indent_size = 2
+ij_formatter_off_tag = @formatter:off
+ij_formatter_on_tag = @formatter:on
+ij_formatter_tags_enabled = false
+ij_smart_tabs = false
+ij_visual_guides = none
+ij_wrap_on_typing = false
+ij_typescript_spaces_within_imports = true
+ij_javascript_spaces_within_imports = true
+ij_typescript_use_double_quotes = false
+ij_javascript_use_double_quotes = false
+ij_any_space_before_method_parentheses = true
+ij_typescript_spaces_within_object_literal_braces = true
+ij_javascript_spaces_within_object_literal_braces = true
+ij_any_spaces_around_equality_operators = true
+ij_any_space_after_colon = true
+ij_any_space_before_colon = true

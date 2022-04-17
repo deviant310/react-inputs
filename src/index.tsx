@@ -1,19 +1,30 @@
-import { StrictMode } from 'react';
+import { ReactElement, StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App';
+import Form from './components/Form';
+import { FormField as FormFieldProps } from './types/Form';
+import { FieldType } from './types/Field';
 import reportWebVitals from './reportWebVitals';
 
-createRoot(document.getElementById("root") as HTMLElement).render(
+createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
-    <App
+    <Form
       fields={[
         {
-          type: 'number'
+          id: 1,
+          type: FieldType.Text,
+          value: 'hello'
         },
         {
-          type: 'text'
+          id: 2,
+          type: FieldType.Number,
+          value: 3,
         }
       ]}
+      renderFieldset={(fieldProps: FormFieldProps, fieldElement: ReactElement) => (
+        <fieldset key={fieldProps.id}>
+          {fieldElement}
+        </fieldset>
+      )}
     />
   </StrictMode>
 );

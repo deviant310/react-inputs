@@ -12,15 +12,7 @@ install:
 		-v ${PWD}:/usr/src/app \
 		-w /usr/src/app \
 		${DOCKER_IMAGE} \
-		npm i $(filter-out $@,$(MAKECMDGOALS))
-
-remove:
-	docker run \
-		--rm \
-		-v ${PWD}:/usr/src/app \
-		-w /usr/src/app \
-		${DOCKER_IMAGE} \
-		npm uninstall $(filter-out $@,$(MAKECMDGOALS))
+		npm i
 
 start:
 	docker run \
@@ -30,4 +22,4 @@ start:
 		-w /usr/src/app \
 		-p $(or ${APP_PORT}, 3000):3000 \
 		${DOCKER_IMAGE} \
-		dumb-init react-scripts start
+		dumb-init node scripts/start.js
