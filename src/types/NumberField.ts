@@ -1,6 +1,6 @@
-import { FieldBase, FieldType } from './Field';
+import { FieldBaseProps, FieldType } from './Field';
 
-export interface NumberField extends FieldBase {
+export interface NumberFieldProps extends FieldBaseProps {
   type: FieldType.Number;
   value?: number;
   min?: number;

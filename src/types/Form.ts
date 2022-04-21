@@ -1,10 +1,11 @@
-import { TextField } from './TextField';
-import { NumberField } from './NumberField';
+import { TextFieldProps } from './TextField';
+import { NumberFieldProps } from './NumberField';
+import { AutocompleteFieldProps } from './AutocompleteField';
 import { ReactElement } from 'react';
 
-export type FormField = TextField | NumberField;
+export type FormFieldProps = TextFieldProps | NumberFieldProps | AutocompleteFieldProps;
 
-export interface Form {
-  fields: FormField[];
-  renderFieldset?: (field: FormField, element: ReactElement) => ReactElement;
+export interface FormProps {
+  fields: FormFieldProps[];
+  renderFieldset?: (fieldProps: FormFieldProps, fieldElement: ReactElement) => ReactElement;
 }

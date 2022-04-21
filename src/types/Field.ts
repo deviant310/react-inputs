@@ -4,7 +4,7 @@ export enum FieldType {
   Autocomplete
 }
 
-export interface FieldBase {
+export interface FieldBaseProps {
   id: string | number;
   type: FieldType;
 }

@@ -1,7 +1,7 @@
-include .env
+-include .env
 
 env:
-	cp .env.example .env
+	cp ./.env.example .env
 
 image:
 	docker build -t ${DOCKER_IMAGE} .

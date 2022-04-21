@@ -1,7 +1,7 @@
 import { ReactElement, StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import Form from './components/Form';
-import { FormField as FormFieldProps } from './types/Form';
+import { FormFieldProps } from './types/Form';
 import { FieldType } from './types/Field';
 import reportWebVitals from './reportWebVitals';
 
@@ -11,7 +11,7 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       fields={[
         {
           id: 1,
-          type: FieldType.Text,
+          type: FieldType.Autocomplete,
           value: 'hello'
         },
         {

@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from 'react';
-import { NumberField as NumberFieldProps } from '../types/NumberField';
+import { NumberFieldProps } from '../types/NumberField';
 
 NumberField.defaultProps = {
   value: 0

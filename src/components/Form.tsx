@@ -1,6 +1,6 @@
 import React, { Fragment, ReactElement } from 'react';
 import Field from './Field';
-import { Form as FormProps, FormField as FormFieldProps } from '../types/Form';
+import { FormProps, FormFieldProps } from '../types/Form';
 
 Form.defaultProps = {
   renderFieldset: (fieldProps: FormFieldProps, fieldElement: ReactElement) => (
@@ -13,11 +13,9 @@ export default function Form (props: FormProps & typeof Form.defaultProps) {
 
   return (
     <>
-      {fields.map(field => {
-        return renderFieldset(field, (
-          <Field {...field}/>
-        ));
-      })}
+      {fields.map(field => renderFieldset(field, (
+        <Field {...field}/>
+      )))}
     </>
   );
 }
