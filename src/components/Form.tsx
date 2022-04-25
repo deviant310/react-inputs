@@ -13,9 +13,11 @@ export default function Form (props: FormProps & typeof Form.defaultProps) {
 
   return (
     <>
-      {fields.map(field => renderFieldset(field, (
-        <Field {...field}/>
-      )))}
+      {fields.map(field => (
+        <Fragment key={field.id}>
+          {renderFieldset(field, <Field {...field}/>)}
+        </Fragment>
+      ))}
     </>
   );
 }

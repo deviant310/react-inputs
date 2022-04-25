@@ -4,18 +4,15 @@ import NumberField from './NumberField';
 import AutocompleteField from './AutocompleteField';
 import { FormFieldProps } from '../types/Form';
 import { FieldType } from '../types/Field';
-import { TextFieldProps } from '../types/TextField';
-import { NumberFieldProps } from '../types/NumberField';
-import { AutocompleteFieldProps } from '../types/AutocompleteField';
 
 export default function Field (props: FormFieldProps) {
   switch (props.type) {
     case FieldType.Text:
     default:
-      return <TextField {...props as TextFieldProps}/>;
+      return <TextField {...props}/>;
     case FieldType.Number:
-      return <NumberField {...props as NumberFieldProps}/>;
+      return <NumberField {...props}/>;
     case FieldType.Autocomplete:
-      return <AutocompleteField {...props as AutocompleteFieldProps}/>;
+      return <AutocompleteField {...props}/>;
   }
 }

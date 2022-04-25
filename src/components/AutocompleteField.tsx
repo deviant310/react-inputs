@@ -1,39 +1,49 @@
-import React, { ChangeEvent, CSSProperties, useState } from 'react';
+import React, { ChangeEvent, CSSProperties, ReactElement, useState } from 'react';
 import { AutocompleteFieldProps } from '../types/AutocompleteField';
-
-AutocompleteField.defaultProps = {
-  value: '',
-  isAffected: false
-} as AutocompleteFieldProps;
 
 const styles: { [key: string]: CSSProperties } = {
   wrapper: {
     position: 'relative'
   },
+  input: {
+    width: '100%'
+  },
   dropdown: {
     position: 'absolute',
-    width: '100%'
+    width: '100%',
   }
 };
 
+AutocompleteField.defaultProps = {
+  value: '',
+  dropdownIsVisible: false,
+};
+
 export default function AutocompleteField (props: AutocompleteFieldProps & typeof AutocompleteField.defaultProps) {
-  const [state, setState] = useState(AutocompleteField.defaultProps);
+  const [state, setState] = useState({
+    value: props.value,
+    dropdownIsVisible: props.dropdownIsVisible,
+  });
+  const options = props.optionsBuilder(state.value);
 
   function onChange (e: ChangeEvent<HTMLInputElement>) {
-    setValue(e.target.value);
+    setState({
+      value: e.target.value,
+      dropdownIsVisible: Boolean(e.target.value.length),
+    });
   }
 
   return (
-    <div style={styles.wrapper}>
+    <div style={{ ...props.wrapperStyles, ...styles.wrapper }}>
       <input
         type="text"
-        value={value}
+        value={state.value}
         onChange={onChange}
+        style={{ ...props.inputStyles, ...styles.input }}
       />
-      {value.length > 0 && (
-        <div style={styles.dropdown}>
-          <div>one</div>
-          <div>two</div>
+      {state.dropdownIsVisible && options.length > 0 && (
+        <div style={{ ...props.dropdownStyles, ...styles.dropdown }}>
+          {options.map(props.renderOption)}
         </div>
       )}
     </div>
