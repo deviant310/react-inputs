@@ -23,3 +23,11 @@ start:
 		-p $(or ${APP_PORT}, 3000):3000 \
 		${DOCKER_IMAGE} \
 		dumb-init node scripts/start.js
+
+build:
+	docker run \
+		--rm \
+		-v ${PWD}:/usr/src/app \
+		-w /usr/src/app \
+		${DOCKER_IMAGE} \
+		node scripts/build.js

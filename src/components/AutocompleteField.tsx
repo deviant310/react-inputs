@@ -1,4 +1,4 @@
-import React, { ChangeEvent, CSSProperties, ReactElement, useState } from 'react';
+import React, { ChangeEvent, CSSProperties, useState } from 'react';
 import { AutocompleteFieldProps } from '../types/AutocompleteField';
 
 const styles: { [key: string]: CSSProperties } = {

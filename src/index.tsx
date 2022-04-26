@@ -20,7 +20,7 @@ createRoot(document.getElementById('root') as HTMLElement).render(
           value: 3,
         },
         {
-          id: 1,
+          id: 3,
           type: FieldType.Autocomplete,
           optionsBuilder: editingValue => [
             { id: 1, value: 'one' },
@@ -44,7 +44,7 @@ createRoot(document.getElementById('root') as HTMLElement).render(
         <fieldset>
           {fieldElement}
         </fieldset>
-      )}></Form>
+      )}/>
   </StrictMode>
 );
 
