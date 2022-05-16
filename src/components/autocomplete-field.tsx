@@ -1,5 +1,5 @@
 import React, { ChangeEvent, CSSProperties, useState } from 'react';
-import { AutocompleteFieldProps } from '../types/AutocompleteField';
+import { AutocompleteFieldProps } from '../types/autocomplete-field';
 
 const styles: { [key: string]: CSSProperties } = {
   wrapper: {

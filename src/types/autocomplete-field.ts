@@ -1,5 +1,5 @@
 import { CSSProperties, ReactElement } from 'react';
-import { FieldBaseProps, FieldType } from './Field';
+import { FieldBaseProps, FieldType } from './field';
 
 interface AutocompleteFieldOption {
   id: string | number;

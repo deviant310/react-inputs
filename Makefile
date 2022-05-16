@@ -11,23 +11,50 @@ install:
 		--rm \
 		-v ${PWD}:/usr/src/app \
 		-w /usr/src/app \
+		-u node \
+		--env-file=.env \
 		${DOCKER_IMAGE} \
-		npm i
+		npm i $(filter-out $@,$(MAKECMDGOALS))
 
-start:
+remove:
+	docker run \
+		--rm \
+		-v ${PWD}:/usr/src/app \
+		-w /usr/src/app \
+		-u node \
+		--env-file=.env \
+		${DOCKER_IMAGE} \
+		npm uninstall $(filter-out $@,$(MAKECMDGOALS))
+
+dev-server:
 	docker run \
 		--rm \
 		--name ${APP_NAME} \
 		-v ${PWD}:/usr/src/app \
 		-w /usr/src/app \
-		-p $(or ${APP_PORT}, 3000):3000 \
+		-u node \
+		-p ${DEV_SERVER_PORT_FORWARDED}:${DEV_SERVER_PORT} \
+		--env-file=.env \
 		${DOCKER_IMAGE} \
-		dumb-init node scripts/start.js
+		dumb-init node scripts/dev-server.js
 
-build:
+dev-watcher:
+	docker run \
+		--rm \
+		--name ${APP_NAME} \
+		-v ${PWD}:/usr/src/app \
+		-w /usr/src/app \
+		-u node \
+		--env-file=.env \
+		${DOCKER_IMAGE} \
+		dumb-init node scripts/dev-watcher.js
+
+production-build:
 	docker run \
 		--rm \
 		-v ${PWD}:/usr/src/app \
 		-w /usr/src/app \
+		-u node \
+		--env-file=.env \
 		${DOCKER_IMAGE} \
-		node scripts/build.js
+		node scripts/production-build.js

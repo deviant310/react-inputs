@@ -1,6 +1,6 @@
 import React, { Fragment, ReactElement } from 'react';
-import Field from './Field';
-import { FormProps, FormFieldProps } from '../types/Form';
+import Field from './field';
+import { FormProps, FormFieldProps } from '../types/form';
 
 Form.defaultProps = {
   renderFieldset: (fieldProps: FormFieldProps, fieldElement: ReactElement) => (

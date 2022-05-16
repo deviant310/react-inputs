@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from 'react';
-import { TextFieldProps } from '../types/TextField';
+import { TextFieldProps } from '../types/text-field';
 
 TextField.defaultProps = {
   value: ''

@@ -1,9 +1,8 @@
 import { ReactElement, StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import Form from './components/Form';
-import { FormFieldProps } from './types/Form';
-import { FieldType } from './types/Field';
-import reportWebVitals from './reportWebVitals';
+import Form from './components/form';
+import { FormFieldProps } from './types/form';
+import { FieldType } from './types/field';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
@@ -47,8 +46,3 @@ createRoot(document.getElementById('root') as HTMLElement).render(
       )}/>
   </StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals(console.log);

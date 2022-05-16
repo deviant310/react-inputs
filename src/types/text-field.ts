@@ -1,4 +1,4 @@
-import { FieldBaseProps, FieldType } from './Field';
+import { FieldBaseProps, FieldType } from './field';
 
 export interface TextFieldProps extends FieldBaseProps {
   type: FieldType.Text;

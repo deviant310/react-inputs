@@ -1,13 +1,7 @@
-FROM node:17.8.0
+FROM node:18.0.0
 
 RUN apt update -y && \
     apt install -y dumb-init
-RUN npm i npm@8.7.0 -g
-
-WORKDIR /usr/src/app
-
-RUN chown node:node /usr/src/app
-
-USER node
+RUN npm i npm@8.10.0 -g
 
 ENV PATH /usr/src/app/node_modules/.bin:$PATH

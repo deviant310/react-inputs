@@ -1,9 +1,9 @@
 import React from 'react';
-import TextField from './TextField';
-import NumberField from './NumberField';
-import AutocompleteField from './AutocompleteField';
-import { FormFieldProps } from '../types/Form';
-import { FieldType } from '../types/Field';
+import TextField from './text-field';
+import NumberField from './number-field';
+import AutocompleteField from './autocomplete-field';
+import { FormFieldProps } from '../types/form';
+import { FieldType } from '../types/field';
 
 export default function Field (props: FormFieldProps) {
   switch (props.type) {

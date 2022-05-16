@@ -1,4 +1,4 @@
-import { FieldBaseProps, FieldType } from './Field';
+import { FieldBaseProps, FieldType } from './field';
 
 export interface NumberFieldProps extends FieldBaseProps {
   type: FieldType.Number;
