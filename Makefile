@@ -53,6 +53,7 @@ production-build:
 	docker run \
 		--rm \
 		-v ${PWD}:/usr/src/app \
+		-v ${BUILD_PATH_HOST}:/usr/src/app/${BUILD_PATH} \
 		-w /usr/src/app \
 		-u node \
 		--env-file=.env \
