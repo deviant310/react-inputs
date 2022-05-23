@@ -43,6 +43,7 @@ dev-watcher:
 		--rm \
 		--name ${APP_NAME} \
 		-v ${PWD}:/usr/src/app \
+		-v ${PWD}/${BUILD_PATH_HOST}:/usr/src/app/${BUILD_PATH} \
 		-w /usr/src/app \
 		-u node \
 		--env-file=.env \

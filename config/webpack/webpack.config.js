@@ -1,17 +1,16 @@
-import { resolve, basename } from 'path';
-import { existsSync, readdirSync, rmSync, copyFileSync, writeFileSync } from 'fs';
-import ts from 'typescript';
-import glob from 'glob';
-import ESLintPlugin from 'eslint-webpack-plugin';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
-import paths from '../paths.js';
+const { resolve, basename } = require('path');
+const { existsSync, readdirSync, rmSync, copyFileSync } = require('fs');
+const ts = require('typescript');
+const ESLintPlugin = require('eslint-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const paths = require('../paths.js');
 
 const appName = process.env.APP_PUBLIC_NAME || '';
 const devServerPort = process.env.DEV_SERVER_PORT || 3000;
 const devServerPortForwarded = process.env.DEV_SERVER_PORT_FORWARDED || 3000;
 
-export default function (webpackEnv) {
+module.exports = webpackEnv => {
   const isDevelopmentBuild = webpackEnv.startsWith('dev');
   const isDevServer = webpackEnv === 'dev-server';
   const isProductionBuild = webpackEnv.startsWith('production');
@@ -31,7 +30,7 @@ export default function (webpackEnv) {
       minimize: isProductionBuild,
     },
     externals: {
-      ...isProductionBuild ? {
+      ...!isDevServer ? {
         react: 'react'
       } : {}
     },
@@ -92,34 +91,31 @@ export default function (webpackEnv) {
       },
       {
         apply: compiler => {
-          compiler.hooks.done.tap('Plugin', () => {
+          compiler.hooks.environment.tap('Plugin', () => {
             if (existsSync(paths.appBuild))
               copyFileSync(paths.appPackageJson, resolve(paths.appBuild, basename(paths.appPackageJson)));
           });
         }
       },
-      isProductionBuild && {
+      !isDevServer && {
         apply: compiler => {
           compiler.hooks.done.tap('Plugin', () => {
-            const files = glob.sync(resolve(paths.appSrc, '**/*{.ts,.tsx}'), {
-              ignore: [paths.appIndex, paths.appTest]
-            });
-            const compilerOptions = {
-              allowJs: true,
-              declaration: true,
-              emitDeclarationOnly: true,
-            };
-            const host = ts.createCompilerHost(compilerOptions);
+            setTimeout(() => {
+              const files = [paths.appMain].concat(
+                readdirSync(paths.appTypes)
+                  .map(basename => resolve(paths.appTypes, basename))
+              );
+              const compilerOptions = {
+                allowJs: true,
+                declaration: true,
+                emitDeclarationOnly: true,
+                declarationDir: paths.appBuild
+              };
+              const host = ts.createCompilerHost(compilerOptions);
+              const program = ts.createProgram(files, compilerOptions, host);
 
-            host.writeFile = (fileName, data, writeByteOrderMark, onError, sourceFileObject) => {
-              if (sourceFileObject[0].fileName === paths.appMain) {
-                writeFileSync(resolve(paths.appBuild, 'index.d.ts'), data);
-              }
-            };
-
-            const program = ts.createProgram(files, compilerOptions, host);
-
-            program.emit();
+              program.emit();
+            }, 0);
           });
         }
       },
@@ -130,7 +126,6 @@ export default function (webpackEnv) {
     ].filter(Boolean),
     stats: {
       colors: true,
-      assets: false,
       modules: false
     },
     devServer: {
@@ -156,4 +151,4 @@ export default function (webpackEnv) {
       level: 'none',
     },
   };
-}
+};

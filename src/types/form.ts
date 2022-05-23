@@ -1,11 +1,12 @@
-import { ReactElement } from 'react';
-import { TextFieldProps } from './text-field';
-import { NumberFieldProps } from './number-field';
-import { AutocompleteFieldProps } from './autocomplete-field';
+import { Dispatch, SetStateAction } from 'react';
 
-export type FormFieldProps = TextFieldProps | NumberFieldProps | AutocompleteFieldProps;
+export type FormData = Record<string, unknown>;
+
+export interface FormContextDefaultValue {
+  formData: FormData;
+  setFormData: Dispatch<SetStateAction<FormData>>;
+}
 
 export interface FormProps {
-  fields: FormFieldProps[];
-  renderFieldset?: (fieldProps: FormFieldProps, fieldElement: ReactElement) => ReactElement;
+  initialData?: FormData;
 }

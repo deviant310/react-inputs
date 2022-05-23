@@ -1,6 +1,13 @@
-import { FieldBaseProps, FieldType } from './field';
+import { ChangeEvent, FunctionComponent } from 'react';
+import { BaseFieldProps } from './field';
 
-export interface TextFieldProps extends FieldBaseProps {
-  type: FieldType.Text;
+export interface TextFieldInputProps {
+  type: 'text';
+  value: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+export interface TextFieldProps extends BaseFieldProps {
   value?: string;
+  inputComponent?: FunctionComponent<TextFieldInputProps>;
 }

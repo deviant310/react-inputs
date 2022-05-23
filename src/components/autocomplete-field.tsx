@@ -1,51 +1,47 @@
-import React, { ChangeEvent, CSSProperties, useState } from 'react';
-import { AutocompleteFieldProps } from '../types/autocomplete-field';
+import React, { ChangeEvent, useCallback, useContext, useState } from 'react';
+import { AutocompleteFieldInputProps, AutocompleteFieldProps } from '../types/autocomplete-field';
+import { FormContext } from '../store';
+import { mapStateToObj } from '../helpers';
+import { FormData } from '../types/form';
 
-const styles: { [key: string]: CSSProperties } = {
-  wrapper: {
-    position: 'relative'
-  },
-  input: {
-    width: '100%'
-  },
-  dropdown: {
-    position: 'absolute',
-    width: '100%',
-  }
-};
+const Container = (props: Record<string, unknown>) => <div {...props}/>;
+const Dropdown = (props: Record<string, unknown>) => <div {...props}/>;
+const Input = (props: AutocompleteFieldInputProps) => <input {...props}/>;
+
+function AutocompleteField (props: AutocompleteFieldProps & typeof AutocompleteField.defaultProps) {
+  const { formData, setFormData } = useContext(FormContext)
+  || mapStateToObj(useState({} as FormData), ['formData', 'setFormData'] as const);
+  const [dropdownIsVisible, setDropdownVisibility] = useState(props.dropdownIsVisible);
+  const value = formData[props.name] !== undefined ? formData[props.name] as string : props.value;
+  const options = props.optionsBuilder(value);
+
+  const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setDropdownVisibility(Boolean(e.target.value.length));
+    setFormData({ ...formData, [props.name]: e.target.value });
+  }, [formData]);
+
+  return (
+    <props.containerComponent>
+      <props.inputComponent
+        type="text"
+        value={value}
+        onChange={onChange}
+      />
+      {dropdownIsVisible && options.length > 0 && (
+        <props.dropdownComponent>
+          {options.map(props.optionComponent)}
+        </props.dropdownComponent>
+      )}
+    </props.containerComponent>
+  );
+}
 
 AutocompleteField.defaultProps = {
+  containerComponent: Container,
+  dropdownComponent: Dropdown,
+  inputComponent: Input,
   value: '',
   dropdownIsVisible: false,
 };
 
-export default function AutocompleteField (props: AutocompleteFieldProps & typeof AutocompleteField.defaultProps) {
-  const [state, setState] = useState({
-    value: props.value,
-    dropdownIsVisible: props.dropdownIsVisible,
-  });
-  const options = props.optionsBuilder(state.value);
-
-  function onChange (e: ChangeEvent<HTMLInputElement>) {
-    setState({
-      value: e.target.value,
-      dropdownIsVisible: Boolean(e.target.value.length),
-    });
-  }
-
-  return (
-    <div style={{ ...props.wrapperStyles, ...styles.wrapper }}>
-      <input
-        type="text"
-        value={state.value}
-        onChange={onChange}
-        style={{ ...props.inputStyles, ...styles.input }}
-      />
-      {state.dropdownIsVisible && options.length > 0 && (
-        <div style={{ ...props.dropdownStyles, ...styles.dropdown }}>
-          {options.map(props.renderOption)}
-        </div>
-      )}
-    </div>
-  );
-}
+export default AutocompleteField;

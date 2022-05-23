@@ -1,18 +1,23 @@
-import { CSSProperties, ReactElement } from 'react';
-import { FieldBaseProps, FieldType } from './field';
+import { ChangeEvent, FunctionComponent, PropsWithChildren } from 'react';
+import { BaseFieldProps } from './field';
 
-interface AutocompleteFieldOption {
+export interface AutocompleteFieldInputProps {
+  type: 'text';
+  value: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+export interface AutocompleteFieldOptionProps {
   id: string | number;
   value: string;
 }
 
-export interface AutocompleteFieldProps extends FieldBaseProps {
-  type: FieldType.Autocomplete;
-  optionsBuilder: (editingValue: string) => AutocompleteFieldOption[];
-  renderOption: (option: AutocompleteFieldOption) => ReactElement;
+export interface AutocompleteFieldProps extends BaseFieldProps {
+  optionsBuilder: (editingValue: string) => AutocompleteFieldOptionProps[];
+  optionComponent: FunctionComponent<AutocompleteFieldOptionProps>;
+  containerComponent?: FunctionComponent<PropsWithChildren<unknown>>;
+  dropdownComponent?: FunctionComponent<PropsWithChildren<unknown>>;
+  inputComponent?: FunctionComponent<AutocompleteFieldInputProps>;
   value?: string;
   dropdownIsVisible?: boolean;
-  wrapperStyles?: CSSProperties;
-  inputStyles?: CSSProperties;
-  dropdownStyles?: CSSProperties;
 }

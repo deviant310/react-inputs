@@ -1,7 +1,8 @@
 {
   "name": "react-form",
   "version": "1.0.0",
-  "type": "module",
+  "main": "index.js",
+  "types": "components/form.d.ts",
   "dependencies": {
     "react": "^18.1.0",
     "react-dom": "^18.1.0"
@@ -32,7 +33,6 @@
     "eslint": "^8.14.0",
     "eslint-webpack-plugin": "^3.1.1",
     "fork-ts-checker-webpack-plugin": "^7.2.11",
-    "glob": "^8.0.3",
     "html-webpack-plugin": "^5.5.0",
     "ts-loader": "^9.3.0",
     "typescript": "^4.6.3",

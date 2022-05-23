@@ -1,22 +1,32 @@
-import React, { ChangeEvent, useState } from 'react';
-import { TextFieldProps } from '../types/text-field';
+import React, { ChangeEvent, useCallback, useContext, useState } from 'react';
+import { TextFieldInputProps, TextFieldProps } from '../types/text-field';
+import { FormContext } from '../store';
+import { mapStateToObj } from '../helpers';
+import { FormData } from '../types/form';
 
-TextField.defaultProps = {
-  value: ''
-};
+const Input = (props: TextFieldInputProps) => <input {...props}/>;
 
-export default function TextField (props: TextFieldProps & typeof TextField.defaultProps) {
-  const [value, setValue] = useState(props.value);
+function TextField (props: TextFieldProps & typeof TextField.defaultProps) {
+  const { formData, setFormData } = useContext(FormContext)
+  || mapStateToObj(useState({} as FormData), ['formData', 'setFormData'] as const);
+  const value = formData[props.name] !== undefined ? formData[props.name] as string : props.value;
 
-  function onChange (e: ChangeEvent<HTMLInputElement>) {
-    setValue(e.target.value);
-  }
+  const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [props.name]: e.target.value });
+  }, [formData]);
 
   return (
-    <input
+    <props.inputComponent
       type="text"
       value={value}
       onChange={onChange}
     />
   );
 }
+
+TextField.defaultProps = {
+  value: '',
+  inputComponent: Input
+};
+
+export default TextField;
