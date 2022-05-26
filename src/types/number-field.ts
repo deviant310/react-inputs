@@ -13,3 +13,5 @@ export interface NumberFieldProps extends BaseFieldProps {
   max?: number;
   inputComponent?: FunctionComponent<NumberFieldInputProps>;
 }
+
+export type NumberFieldValue = number;

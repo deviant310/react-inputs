@@ -1,6 +1,8 @@
 const { resolve, basename } = require('path');
 const { existsSync, readdirSync, rmSync, copyFileSync } = require('fs');
+const ProgressPlugin = require('progress-webpack-plugin');
 const ts = require('typescript');
+const glob = require('glob');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
@@ -57,6 +59,7 @@ module.exports = webpackEnv => {
       ]
     },
     plugins: [
+      new ProgressPlugin(true),
       new ESLintPlugin({
         extensions: ['ts', 'tsx'],
         overrideConfig: {
@@ -101,10 +104,9 @@ module.exports = webpackEnv => {
         apply: compiler => {
           compiler.hooks.done.tap('Plugin', () => {
             setTimeout(() => {
-              const files = [paths.appMain].concat(
-                readdirSync(paths.appTypes)
-                  .map(basename => resolve(paths.appTypes, basename))
-              );
+              const files = glob.sync(resolve(paths.appSrc, '**/*{.ts,.tsx}'), {
+                ignore: [paths.appIndex, paths.appTest]
+              });
               const compilerOptions = {
                 allowJs: true,
                 declaration: true,

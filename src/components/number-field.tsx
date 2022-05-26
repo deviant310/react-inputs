@@ -1,53 +1,48 @@
-import React, { ChangeEvent, useCallback, useContext, useState } from 'react';
+import React, { ChangeEvent, useCallback } from 'react';
 import { NumberFieldInputProps, NumberFieldProps } from '../types/number-field';
-import { FormContext } from '../store';
-import { mapStateToObj } from '../helpers';
-import { FormData as Data } from '../types/form';
+import { useForm } from '../store';
 
 /**
  * Polyfill for parsing raw value to integer
  * @param entry
  */
 const parseInteger = (entry: string | number) => {
+  if(entry === undefined)
+    return 0;
+
   const [, digit, symbol] = [...entry.toString().matchAll(/(\d*)([-|+])$/g)][0] || [entry, entry, ''];
 
-  const integer = Number(digit ? `${symbol}${digit}` : '');
-
-  return !isNaN(integer) ? integer : 0;
+  return Number(digit ? `${symbol}${digit}` : '');
 };
-
-/**
- * Default input component
- * @param props
- */
-const Input = (props: NumberFieldInputProps) => <input {...props}/>;
 
 /**
  * NumberField component
  * @param props
  */
-function NumberField (props: NumberFieldProps & typeof NumberField.defaultProps) {
-  const { formData: data, setFormData: setData } = useContext(FormContext)
-  || mapStateToObj(useState({} as Data), ['formData', 'setFormData'] as const);
+function NumberField (props: NumberFieldProps) {
+  const finalProps = props as typeof props & typeof NumberField.defaultProps;
+  const { formData, setFormProperty } = useForm<number>() ?? {};
+  const value = parseInteger(formData?.[finalProps.name] ?? NumberField.defaultProps.value);
 
-  const value = parseInteger(
-    data[props.name] !== undefined
-      ? data[props.name] as number
-      : props.value
-  );
+  type Value = typeof value;
+
+  const setValue = useCallback((value: Value) => {
+    setFormProperty !== undefined && setFormProperty(finalProps.name, value);
+  }, [setFormProperty]);
 
   const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const value = parseInteger(e.target.value);
-
+    // @TODO реализовать на уровне валидации, т.к. при таком решении невозможно стирать некоторые значения
     /*if (
       (props.min !== undefined ? value >= props.min : true) &&
       (props.max !== undefined ? value <= props.max : true)
     )*/
-    setData({ ...data, [props.name]: value });
-  }, [data]);
+    if(!isNaN(value) && value.toString().replace('.', '').length <= 15)
+      setValue(value);
+  }, [setValue]);
 
   return (
-    <props.inputComponent
+    <finalProps.inputComponent
       type="text"
       value={value}
       onChange={onChange}
@@ -57,7 +52,7 @@ function NumberField (props: NumberFieldProps & typeof NumberField.defaultProps)
 
 NumberField.defaultProps = {
   value: 0,
-  inputComponent: Input
+  inputComponent: (props: NumberFieldInputProps) => <input {...props}/>
 };
 
 export default NumberField;

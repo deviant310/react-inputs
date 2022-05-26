@@ -1,46 +1,81 @@
-import React, { ChangeEvent, useCallback, useContext, useState } from 'react';
-import { AutocompleteFieldInputProps, AutocompleteFieldProps } from '../types/autocomplete-field';
-import { FormContext } from '../store';
-import { mapStateToObj } from '../helpers';
-import { FormData } from '../types/form';
+import React, { ChangeEvent, useCallback, useState, useEffect, useRef } from 'react';
+import {
+  AutocompleteFieldInputProps,
+  AutocompleteFieldProps,
+  AutocompleteFieldValue
+} from '../types/autocomplete-field';
+import { useForm } from '../store';
 
-const Container = (props: Record<string, unknown>) => <div {...props}/>;
-const Dropdown = (props: Record<string, unknown>) => <div {...props}/>;
-const Input = (props: AutocompleteFieldInputProps) => <input {...props}/>;
+function AutocompleteField<Option, ContainerElement> (props: AutocompleteFieldProps<Option, ContainerElement>) {
+  const finalProps = props as typeof props & typeof AutocompleteField.defaultProps;
+  const ref = useRef<HTMLElement>();
+  const { formData, setFormProperty } = useForm<AutocompleteFieldValue<Option>>() ?? {};
+  const [dropdownIsVisible, setDropdownVisibility] = useState(finalProps.dropdownIsVisible);
+  const value = { ...AutocompleteField.defaultProps.value, ...formData?.[finalProps.name] };
+  const options = finalProps.optionsBuilder(value.entered);
 
-function AutocompleteField (props: AutocompleteFieldProps & typeof AutocompleteField.defaultProps) {
-  const { formData, setFormData } = useContext(FormContext)
-  || mapStateToObj(useState({} as FormData), ['formData', 'setFormData'] as const);
-  const [dropdownIsVisible, setDropdownVisibility] = useState(props.dropdownIsVisible);
-  const value = formData[props.name] !== undefined ? formData[props.name] as string : props.value;
-  const options = props.optionsBuilder(value);
+  type Value = typeof value;
 
-  const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+  const getValueFromOption = useCallback((option: Option) => ({
+    entered: finalProps.displayValueForOption(option),
+    selected: option
+  }), []);
+
+  const setValue = useCallback((value: Value) => {
+    setFormProperty !== undefined && setFormProperty(finalProps.name, value);
+  }, [setFormProperty]);
+
+  const onInputChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setDropdownVisibility(Boolean(e.target.value.length));
-    setFormData({ ...formData, [props.name]: e.target.value });
-  }, [formData]);
+    setValue({ entered: e.target.value });
+  }, [setValue]);
+
+  const onOptionSelect = useCallback((e: React.MouseEvent<HTMLElement>, option: Option) => {
+    setDropdownVisibility(false);
+    setValue(getValueFromOption(option));
+  }, [setValue]);
+
+  const renderOption = useCallback((option: Option) => (
+    <finalProps.optionComponent
+      key={finalProps.getOptionKey(option)}
+      onClick={(e: React.MouseEvent<HTMLElement>) => onOptionSelect(e, option)}
+      data={option}
+    />
+  ), [onOptionSelect]);
+
+  useEffect(() => {
+    if (value.selected !== undefined)
+      setValue(getValueFromOption(value.selected));
+
+    document.addEventListener('mousedown', (e: MouseEvent) => {
+      if(ref.current !== undefined && !ref.current.contains(e.target as HTMLElement))
+        setDropdownVisibility(false);
+    });
+  }, []);
 
   return (
-    <props.containerComponent>
-      <props.inputComponent
+    <finalProps.containerComponent ref={ref}>
+      <finalProps.inputComponent
         type="text"
-        value={value}
-        onChange={onChange}
+        value={value.entered}
+        onChange={onInputChange}
       />
       {dropdownIsVisible && options.length > 0 && (
-        <props.dropdownComponent>
-          {options.map(props.optionComponent)}
-        </props.dropdownComponent>
+        <finalProps.dropdownComponent>
+          {options.map(renderOption)}
+        </finalProps.dropdownComponent>
       )}
-    </props.containerComponent>
+    </finalProps.containerComponent>
   );
 }
 
 AutocompleteField.defaultProps = {
-  containerComponent: Container,
-  dropdownComponent: Dropdown,
-  inputComponent: Input,
-  value: '',
+  containerComponent: (props: Record<string, unknown>) => <div {...props}/>,
+  dropdownComponent: (props: Record<string, unknown>) => <div {...props}/>,
+  inputComponent: (props: AutocompleteFieldInputProps) => <input {...props}/>,
+  value: {
+    entered: ''
+  },
   dropdownIsVisible: false,
 };
 

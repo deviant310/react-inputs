@@ -1,4 +1,10 @@
-import { ChangeEvent, FunctionComponent, PropsWithChildren } from 'react';
+import {
+  ChangeEvent,
+  ForwardRefExoticComponent,
+  FunctionComponent,
+  MouseEvent,
+  PropsWithChildren, PropsWithoutRef, RefAttributes
+} from 'react';
 import { BaseFieldProps } from './field';
 
 export interface AutocompleteFieldInputProps {
@@ -7,17 +13,23 @@ export interface AutocompleteFieldInputProps {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export interface AutocompleteFieldOptionProps {
-  id: string | number;
-  value: string;
+export interface AutocompleteFieldOptionProps<Data> {
+  onClick: (e: MouseEvent<HTMLElement>) => void;
+  data: Data;
 }
 
-export interface AutocompleteFieldProps extends BaseFieldProps {
-  optionsBuilder: (editingValue: string) => AutocompleteFieldOptionProps[];
-  optionComponent: FunctionComponent<AutocompleteFieldOptionProps>;
-  containerComponent?: FunctionComponent<PropsWithChildren<unknown>>;
+export interface AutocompleteFieldProps<Option, ContainerElement> extends BaseFieldProps {
+  optionsBuilder: (editingValue: string) => Array<Option>;
+  getOptionKey: (option: Option) => string | number;
+  displayValueForOption: (option: Option) => string;
+  optionComponent: FunctionComponent<AutocompleteFieldOptionProps<Option>>;
+  containerComponent?: ForwardRefExoticComponent<PropsWithoutRef<unknown> & RefAttributes<ContainerElement>>;
   dropdownComponent?: FunctionComponent<PropsWithChildren<unknown>>;
   inputComponent?: FunctionComponent<AutocompleteFieldInputProps>;
-  value?: string;
   dropdownIsVisible?: boolean;
+}
+
+export type AutocompleteFieldValue<Option> = {
+  entered?: string;
+  selected?: Option;
 }

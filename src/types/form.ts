@@ -1,12 +1,15 @@
-import { Dispatch, SetStateAction } from 'react';
+import { PropsWithChildren } from 'react';
+import { AutocompleteFieldValue } from './autocomplete-field';
+import { TextFieldValue } from './text-field';
+import { NumberFieldValue } from './number-field';
 
-export type FormData = Record<string, unknown>;
+export type FormValues = AutocompleteFieldValue<unknown> | TextFieldValue | NumberFieldValue | undefined;
 
-export interface FormContextDefaultValue {
-  formData: FormData;
-  setFormData: Dispatch<SetStateAction<FormData>>;
+export type FormData<Value extends FormValues = FormValues> = {
+  [key: string]: Value;
 }
 
-export interface FormProps {
+export type FormProps = PropsWithChildren<{
   initialData?: FormData;
-}
+  onSubmit?: (data?: FormData) => void;
+}>

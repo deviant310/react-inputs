@@ -11,3 +11,5 @@ export interface TextFieldProps extends BaseFieldProps {
   value?: string;
   inputComponent?: FunctionComponent<TextFieldInputProps>;
 }
+
+export type TextFieldValue = string;

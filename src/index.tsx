@@ -1,22 +1,25 @@
-import React, { StrictMode } from 'react';
+import React, { forwardRef } from 'react';
 import { createRoot } from 'react-dom/client';
-import Form from './components/form';
-import TextField from './components/text-field';
-import NumberField from './components/number-field';
-import AutocompleteField from './components/autocomplete-field';
-import { AutocompleteFieldInputProps, AutocompleteFieldOptionProps } from './types/autocomplete-field';
-import Submitter from './components/submitter';
-import { SubmitterButtonProps } from './types/submitter';
+import Form, {
+  TextField,
+  NumberField,
+  AutocompleteField,
+  Submit,
+  AutocompleteFieldInputProps,
+  AutocompleteFieldOptionProps,
+  SubmitButtonProps
+} from './components/form';
 
-const AutocompleteFieldOption = (props: AutocompleteFieldOptionProps) => (
-  <div key={props.id}>{props.value}</div>
-);
+type Country = {
+  id: number;
+  value: string;
+};
 
-const AutocompleteFieldContainer = (props: Record<string, unknown>) => (
-  <div style={{ position: 'relative' }} {...props}/>
-);
+const AutocompleteFieldContainer = forwardRef<HTMLDivElement>((props, ref) => (
+  <div ref={ref} style={{ position: 'relative' }} {...props}/>
+));
 
-const AutocompleteFieldDropdown = (props: Record<string, unknown>) => (
+const AutocompleteFieldDropdown = (props: unknown) => (
   <div
     style={{
       position: 'absolute',
@@ -34,44 +37,60 @@ const AutocompleteFieldInput = (props: AutocompleteFieldInputProps) => (
   </div>
 );
 
-const autocompleteFieldData = [
+const AutocompleteFieldOption = ({ data, ...props }: AutocompleteFieldOptionProps<Country>) => {
+  return (
+    <div {...props}>
+      {data.value}
+    </div>
+  );
+};
+
+const countries: Country[] = [
   { id: 1, value: 'Russia' },
   { id: 2, value: 'Georgia' }
 ];
 
-const SubmitButton = (props: SubmitterButtonProps) => <button {...props}>Отправить</button>;
+const SubmitButton = (props: SubmitButtonProps) => <div {...props}/>;
 
 createRoot(document.getElementById('root') as HTMLElement).render(
-  <StrictMode>
-    <Form initialData={{name: 'Anton', age: 67, country: 'Russia'}}>
-      <fieldset>
-        <TextField
-          name="name"
-        />
-      </fieldset>
-      <fieldset>
-        <NumberField
-          name="age"
-          min={1}
-        />
-      </fieldset>
-      <fieldset>
-        <AutocompleteField
-          name="country"
-          optionsBuilder={editingValue => autocompleteFieldData
-            .filter(option => option.value.includes(editingValue))}
-          optionComponent={AutocompleteFieldOption}
-          containerComponent={AutocompleteFieldContainer}
-          dropdownComponent={AutocompleteFieldDropdown}
-          inputComponent={AutocompleteFieldInput}
-        />
-      </fieldset>
-      <Submitter
-        onSubmit={(e, data) => {
-          console.log(data);
-        }}
-        buttonComponent={SubmitButton}
+  <Form
+    initialData={{
+      name: 'Anton',
+      age: 67,
+      country: {
+        selected: countries[1]
+      }
+    }
+    }
+    onSubmit={(data) => {
+      console.log(data);
+    }}
+  >
+    <fieldset>
+      <TextField
+        name="name"
       />
-    </Form>
-  </StrictMode>
+    </fieldset>
+    <fieldset>
+      <NumberField
+        name="age"
+        min={1}
+      />
+    </fieldset>
+    <fieldset>
+      <AutocompleteField
+        name="country"
+        optionsBuilder={editingValue => (
+          countries.filter(option => option.value.includes(editingValue))
+        )}
+        getOptionKey={option => option.id}
+        displayValueForOption={option => option.value}
+        optionComponent={AutocompleteFieldOption}
+        containerComponent={AutocompleteFieldContainer}
+        dropdownComponent={AutocompleteFieldDropdown}
+        inputComponent={AutocompleteFieldInput}
+      />
+    </fieldset>
+    <Submit buttonComponent={SubmitButton}>Отправить</Submit>
+  </Form>
 );
