@@ -1,6 +1,5 @@
 const { resolve, basename } = require('path');
 const { existsSync, readdirSync, rmSync, copyFileSync } = require('fs');
-const ProgressPlugin = require('progress-webpack-plugin');
 const ts = require('typescript');
 const glob = require('glob');
 const ESLintPlugin = require('eslint-webpack-plugin');
@@ -17,6 +16,7 @@ module.exports = webpackEnv => {
   const isDevServer = webpackEnv === 'dev-server';
   const isProductionBuild = webpackEnv.startsWith('production');
 
+  // noinspection WebpackConfigHighlighting
   return {
     mode: isProductionBuild ? 'production' : isDevelopmentBuild && 'development',
     entry: isDevServer ? paths.appIndex : paths.appMain,
@@ -59,7 +59,6 @@ module.exports = webpackEnv => {
       ]
     },
     plugins: [
-      new ProgressPlugin(true),
       new ESLintPlugin({
         extensions: ['ts', 'tsx'],
         overrideConfig: {

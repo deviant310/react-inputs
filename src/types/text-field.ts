@@ -1,4 +1,4 @@
-import { ChangeEvent, FunctionComponent } from 'react';
+import { ChangeEvent, FunctionComponent, PropsWithChildren } from 'react';
 import { BaseFieldProps } from './field';
 
 export interface TextFieldInputProps {
@@ -9,6 +9,7 @@ export interface TextFieldInputProps {
 
 export interface TextFieldProps extends BaseFieldProps {
   value?: string;
+  wrapperComponent?: FunctionComponent<PropsWithChildren<unknown>>;
   inputComponent?: FunctionComponent<TextFieldInputProps>;
 }
 

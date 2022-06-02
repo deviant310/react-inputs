@@ -15,7 +15,7 @@ type Country = {
   value: string;
 };
 
-const AutocompleteFieldContainer = forwardRef<HTMLDivElement>((props, ref) => (
+const AutocompleteFieldWrapper = forwardRef<HTMLDivElement>((props, ref) => (
   <div ref={ref} style={{ position: 'relative' }} {...props}/>
 ));
 
@@ -86,7 +86,7 @@ createRoot(document.getElementById('root') as HTMLElement).render(
         getOptionKey={option => option.id}
         displayValueForOption={option => option.value}
         optionComponent={AutocompleteFieldOption}
-        containerComponent={AutocompleteFieldContainer}
+        wrapperComponent={AutocompleteFieldWrapper}
         dropdownComponent={AutocompleteFieldDropdown}
         inputComponent={AutocompleteFieldInput}
       />

@@ -1,4 +1,4 @@
-import { ChangeEvent, FunctionComponent } from 'react';
+import { ChangeEvent, FunctionComponent, PropsWithChildren } from 'react';
 import { BaseFieldProps } from './field';
 
 export interface NumberFieldInputProps {
@@ -11,6 +11,7 @@ export interface NumberFieldProps extends BaseFieldProps {
   value?: number;
   min?: number;
   max?: number;
+  wrapperComponent?: FunctionComponent<PropsWithChildren<unknown>>;
   inputComponent?: FunctionComponent<NumberFieldInputProps>;
 }
 

@@ -17,12 +17,22 @@ function TextField (props: TextFieldProps) {
     setValue(e.target.value);
   }, [setValue]);
 
-  return (
+  const textFieldElement = (
     <finalProps.inputComponent
       type="text"
       value={value}
       onChange={onChange}
     />
+  );
+
+  return (
+    finalProps.wrapperComponent ? (
+      <finalProps.wrapperComponent>
+        {textFieldElement}
+      </finalProps.wrapperComponent>
+    ) : (
+      textFieldElement
+    )
   );
 }
 

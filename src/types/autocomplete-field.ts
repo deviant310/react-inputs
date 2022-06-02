@@ -18,12 +18,12 @@ export interface AutocompleteFieldOptionProps<Data> {
   data: Data;
 }
 
-export interface AutocompleteFieldProps<Option, ContainerElement> extends BaseFieldProps {
+export interface AutocompleteFieldProps<Option, ContainerElement extends HTMLElement> extends BaseFieldProps {
   optionsBuilder: (editingValue: string) => Array<Option>;
   getOptionKey: (option: Option) => string | number;
   displayValueForOption: (option: Option) => string;
   optionComponent: FunctionComponent<AutocompleteFieldOptionProps<Option>>;
-  containerComponent?: ForwardRefExoticComponent<PropsWithoutRef<unknown> & RefAttributes<ContainerElement>>;
+  wrapperComponent?: ForwardRefExoticComponent<PropsWithoutRef<unknown> & RefAttributes<ContainerElement>>;
   dropdownComponent?: FunctionComponent<PropsWithChildren<unknown>>;
   inputComponent?: FunctionComponent<AutocompleteFieldInputProps>;
   dropdownIsVisible?: boolean;

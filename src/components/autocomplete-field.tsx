@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useState, useEffect, useRef } from 'react';
+import React, { ChangeEvent, useCallback, useState, useEffect, useRef, forwardRef, PropsWithChildren } from 'react';
 import {
   AutocompleteFieldInputProps,
   AutocompleteFieldProps,
@@ -6,9 +6,9 @@ import {
 } from '../types/autocomplete-field';
 import { useForm } from '../store';
 
-function AutocompleteField<Option, ContainerElement> (props: AutocompleteFieldProps<Option, ContainerElement>) {
+function AutocompleteField<Option, ContainerElement extends HTMLElement> (props: AutocompleteFieldProps<Option, ContainerElement>) {
   const finalProps = props as typeof props & typeof AutocompleteField.defaultProps;
-  const ref = useRef<HTMLElement>();
+  const ref = useRef<HTMLDivElement>(null);
   const { formData, setFormProperty } = useForm<AutocompleteFieldValue<Option>>() ?? {};
   const [dropdownIsVisible, setDropdownVisibility] = useState(finalProps.dropdownIsVisible);
   const value = { ...AutocompleteField.defaultProps.value, ...formData?.[finalProps.name] };
@@ -48,13 +48,13 @@ function AutocompleteField<Option, ContainerElement> (props: AutocompleteFieldPr
       setValue(getValueFromOption(value.selected));
 
     document.addEventListener('mousedown', (e: MouseEvent) => {
-      if(ref.current !== undefined && !ref.current.contains(e.target as HTMLElement))
+      if(ref.current !== null && !ref.current.contains(e.target as HTMLElement))
         setDropdownVisibility(false);
     });
   }, []);
 
   return (
-    <finalProps.containerComponent ref={ref}>
+    <finalProps.wrapperComponent ref={ref}>
       <finalProps.inputComponent
         type="text"
         value={value.entered}
@@ -65,12 +65,12 @@ function AutocompleteField<Option, ContainerElement> (props: AutocompleteFieldPr
           {options.map(renderOption)}
         </finalProps.dropdownComponent>
       )}
-    </finalProps.containerComponent>
+    </finalProps.wrapperComponent>
   );
 }
 
 AutocompleteField.defaultProps = {
-  containerComponent: (props: Record<string, unknown>) => <div {...props}/>,
+  wrapperComponent: forwardRef<HTMLDivElement, PropsWithChildren<unknown>>((props, ref) => <div ref={ref} {...props}/>),
   dropdownComponent: (props: Record<string, unknown>) => <div {...props}/>,
   inputComponent: (props: AutocompleteFieldInputProps) => <input {...props}/>,
   value: {

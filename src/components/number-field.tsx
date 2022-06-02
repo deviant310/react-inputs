@@ -41,12 +41,22 @@ function NumberField (props: NumberFieldProps) {
       setValue(value);
   }, [setValue]);
 
-  return (
+  const numberFieldElement = (
     <finalProps.inputComponent
       type="text"
       value={value}
       onChange={onChange}
     />
+  );
+
+  return (
+    finalProps.wrapperComponent ? (
+      <finalProps.wrapperComponent>
+        {numberFieldElement}
+      </finalProps.wrapperComponent>
+    ) : (
+      numberFieldElement
+    )
   );
 }
 
