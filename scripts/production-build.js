@@ -1,7 +1,9 @@
+require('dotenv').config();
+
 const webpack = require('webpack');
 const configFactory = require('../config/webpack/webpack.config.js');
 
-const config = configFactory('production-build');
+const config = configFactory('production');
 const compiler = webpack(config);
 
 compiler.run((err, stats) => {

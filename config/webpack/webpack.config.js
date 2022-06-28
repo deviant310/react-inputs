@@ -6,19 +6,19 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const paths = require('../paths.js');
+const { name: appName } = require(paths.appPackageJson);
 
-const appName = process.env.APP_PUBLIC_NAME || '';
-const devServerPort = process.env.DEV_SERVER_PORT || 3000;
-const devServerPortForwarded = process.env.DEV_SERVER_PORT_FORWARDED || 3000;
+const isDevServer = process.env.WEBPACK_SERVE;
+const devServerPort = process.env.DEV_SERVER_PORT ??
+  (console.log('DEV_SERVER_PORT env var is required!') || process.exit());
 
-module.exports = webpackEnv => {
-  const isDevelopmentBuild = webpackEnv.startsWith('dev');
-  const isDevServer = webpackEnv === 'dev-server';
-  const isProductionBuild = webpackEnv.startsWith('production');
+module.exports = function (mode = 'development') {
+  const isDevelopmentBuild = mode === 'development';
+  const isProductionBuild = mode === 'production';
 
   // noinspection WebpackConfigHighlighting
   return {
-    mode: isProductionBuild ? 'production' : isDevelopmentBuild && 'development',
+    mode: isProductionBuild ? 'production' : 'development',
     entry: isDevServer ? paths.appIndex : paths.appMain,
     output: {
       filename: 'index.js',
@@ -43,14 +43,6 @@ module.exports = webpackEnv => {
           include: paths.appSrc,
           loader: 'babel-loader',
           options: {
-            presets: [
-              '@babel/preset-env',
-              '@babel/preset-typescript',
-              '@babel/preset-react',
-            ],
-            plugins: [
-              //'@babel/plugin-transform-runtime'
-            ],
             cacheDirectory: true,
             cacheCompression: false,
             compact: isProductionBuild
@@ -136,14 +128,12 @@ module.exports = webpackEnv => {
       compress: true,
       port: devServerPort,
       client: {
-        webSocketURL: {
-          port: devServerPortForwarded,
-        },
         overlay: {
           errors: true,
           warnings: false,
         },
       },
+      open: true
     },
     ...isDevelopmentBuild ? {
       devtool: 'cheap-module-source-map'

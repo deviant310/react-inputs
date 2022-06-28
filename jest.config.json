@@ -1,0 +1,9 @@
+{
+  "testEnvironment": "jsdom",
+  "modulePathIgnorePatterns": [
+    "<rootDir>/build"
+  ],
+  "setupFiles": [
+    "dotenv/config"
+  ]
+}

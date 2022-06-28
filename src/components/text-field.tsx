@@ -1,38 +1,28 @@
-import React, { ChangeEvent, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { TextFieldInputProps, TextFieldProps } from '../types/text-field';
-import { useForm } from '../store';
+import { FormData } from '../types/form';
 
-function TextField (props: TextFieldProps) {
-  const finalProps = props as typeof props & typeof TextField.defaultProps;
-  const { formData, setFormProperty } = useForm<string>() ?? {};
-  const value = formData?.[finalProps.name] ?? TextField.defaultProps.value;
+/**
+ * TextField component
+ * @param rawProps
+ */
+function TextField<Key extends keyof FormData> (rawProps: TextFieldProps<Key>) {
+  const props = rawProps as typeof rawProps & typeof TextField.defaultProps;
 
-  type Value = typeof value;
-
-  const setValue = useCallback((value: Value) => {
-    setFormProperty !== undefined && setFormProperty(finalProps.name, value);
-  }, [setFormProperty]);
-
-  const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-  }, [setValue]);
-
-  const textFieldElement = (
-    <finalProps.inputComponent
-      type="text"
-      value={value}
-      onChange={onChange}
-    />
+  const onChange = useCallback<TextFieldInputProps['onChange']>(
+    ({ target }) => {
+      if (props.onChange !== undefined)
+        props.onChange(props.name, target.value);
+    },
+    [props.onChange, props.name]
   );
 
   return (
-    finalProps.wrapperComponent ? (
-      <finalProps.wrapperComponent>
-        {textFieldElement}
-      </finalProps.wrapperComponent>
-    ) : (
-      textFieldElement
-    )
+    <props.inputComponent
+      type="text"
+      value={props.value}
+      onChange={onChange}
+    />
   );
 }
 

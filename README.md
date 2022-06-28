@@ -1,4 +1,4 @@
-# React Form
+# React Index
 
 React form component with fields
 

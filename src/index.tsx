@@ -1,14 +1,13 @@
 import React, { forwardRef } from 'react';
 import { createRoot } from 'react-dom/client';
-import Form, {
+import {
+  useForm,
   TextField,
   NumberField,
   AutocompleteField,
-  Submit,
   AutocompleteFieldInputProps,
   AutocompleteFieldOptionProps,
-  SubmitButtonProps
-} from './components/form';
+} from './main';
 
 type Country = {
   id: number;
@@ -16,7 +15,7 @@ type Country = {
 };
 
 const AutocompleteFieldWrapper = forwardRef<HTMLDivElement>((props, ref) => (
-  <div ref={ref} style={{ position: 'relative' }} {...props}/>
+  <div ref={ref} tabIndex={0} style={{ position: 'relative' }} {...props}/>
 ));
 
 const AutocompleteFieldDropdown = (props: unknown) => (
@@ -25,7 +24,8 @@ const AutocompleteFieldDropdown = (props: unknown) => (
       position: 'absolute',
       width: '100%',
       backgroundColor: 'white',
-      border: '1px solid grey'
+      border: '1px solid grey',
+      zIndex: 9999
     }}
     {...props}
   />
@@ -50,47 +50,42 @@ const countries: Country[] = [
   { id: 2, value: 'Georgia' }
 ];
 
-const SubmitButton = (props: SubmitButtonProps) => <div {...props}/>;
+function Form () {
+  const { data, setProperty } = useForm({
+    name: 'Anton',
+    age: 29,
+    country: countries[0],
+    phones: []
+  });
+
+  return (
+    <>
+      <fieldset>
+        <TextField name="name" value={data.name} onChange={setProperty}/>
+      </fieldset>
+      <fieldset>
+        <NumberField name="age" value={data.age} min={1} onChange={setProperty}/>
+      </fieldset>
+      <fieldset>
+        <AutocompleteField
+          name="country"
+          selected={data.country}
+          optionsBuilder={editingValue => (
+            countries.filter(option => option.value.includes(editingValue))
+          )}
+          getOptionKey={option => option.id}
+          displayValueForOption={option => option.value}
+          onSelect={setProperty}
+          optionComponent={AutocompleteFieldOption}
+          wrapperComponent={AutocompleteFieldWrapper}
+          dropdownComponent={AutocompleteFieldDropdown}
+          inputComponent={AutocompleteFieldInput}
+        />
+      </fieldset>
+    </>
+  );
+}
 
 createRoot(document.getElementById('root') as HTMLElement).render(
-  <Form
-    initialData={{
-      name: 'Anton',
-      age: 67,
-      country: {
-        selected: countries[1]
-      }
-    }
-    }
-    onSubmit={(data) => {
-      console.log(data);
-    }}
-  >
-    <fieldset>
-      <TextField
-        name="name"
-      />
-    </fieldset>
-    <fieldset>
-      <NumberField
-        name="age"
-        min={1}
-      />
-    </fieldset>
-    <fieldset>
-      <AutocompleteField
-        name="country"
-        optionsBuilder={editingValue => (
-          countries.filter(option => option.value.includes(editingValue))
-        )}
-        getOptionKey={option => option.id}
-        displayValueForOption={option => option.value}
-        optionComponent={AutocompleteFieldOption}
-        wrapperComponent={AutocompleteFieldWrapper}
-        dropdownComponent={AutocompleteFieldDropdown}
-        inputComponent={AutocompleteFieldInput}
-      />
-    </fieldset>
-    <Submit buttonComponent={SubmitButton}>Отправить</Submit>
-  </Form>
+  <Form/>
 );

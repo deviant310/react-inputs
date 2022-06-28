@@ -1,11 +1,12 @@
+require('dotenv').config();
+
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const configFactory = require('../config/webpack/webpack.config.js');
 
-const config = configFactory('dev-server');
+const config = configFactory('development');
 const compiler = webpack(config);
-const devServerOptions = { ...config.devServer, open: true };
-const server = new WebpackDevServer(devServerOptions, compiler);
+const server = new WebpackDevServer(config.devServer, compiler);
 
 console.log('Starting the development server...');
 

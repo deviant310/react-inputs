@@ -10,9 +10,6 @@ install:
 	docker run \
 		--rm \
 		-v ${PWD}:/usr/src/app \
-		-w /usr/src/app \
-		-u node \
-		--env-file=.env \
 		${DOCKER_IMAGE} \
 		npm i $(filter-out $@,$(MAKECMDGOALS))
 
@@ -20,9 +17,6 @@ remove:
 	docker run \
 		--rm \
 		-v ${PWD}:/usr/src/app \
-		-w /usr/src/app \
-		-u node \
-		--env-file=.env \
 		${DOCKER_IMAGE} \
 		npm uninstall $(filter-out $@,$(MAKECMDGOALS))
 
@@ -31,12 +25,11 @@ dev-server:
 		--rm \
 		--name ${APP_NAME} \
 		-v ${PWD}:/usr/src/app \
-		-w /usr/src/app \
-		-u node \
-		-p ${DEV_SERVER_PORT_FORWARDED}:${DEV_SERVER_PORT} \
-		--env-file=.env \
-		${DOCKER_IMAGE} \
-		dumb-init node scripts/dev-server.js
+		-p ${DEV_SERVER_PORT}:${DEV_SERVER_PORT} \
+		${DOCKER_IMAGE}
+
+open-browser:
+	open http://localhost:${DEV_SERVER_PORT}
 
 dev-watcher:
 	docker run \
@@ -44,19 +37,21 @@ dev-watcher:
 		--name ${APP_NAME} \
 		-v ${PWD}:/usr/src/app \
 		-v ${PWD}/${BUILD_PATH_HOST}:/usr/src/app/${BUILD_PATH} \
-		-w /usr/src/app \
-		-u node \
-		--env-file=.env \
 		${DOCKER_IMAGE} \
-		dumb-init node scripts/dev-watcher.js
+		node scripts/dev-watcher.js
 
 production-build:
 	docker run \
 		--rm \
 		-v ${PWD}:/usr/src/app \
 		-v ${PWD}/${BUILD_PATH_HOST}:/usr/src/app/${BUILD_PATH} \
-		-w /usr/src/app \
-		-u node \
-		--env-file=.env \
 		${DOCKER_IMAGE} \
 		node scripts/production-build.js
+
+test:
+	docker run \
+		--rm \
+		-v ${PWD}:/usr/src/app \
+		-e FORCE_COLOR=true \
+		${DOCKER_IMAGE} \
+		jest $(filter-out $@,$(MAKECMDGOALS))
