@@ -6,7 +6,9 @@ export type { FormData } from './types/form';
 export type { TextFieldInputProps } from './types/text-field';
 export type { NumberFieldInputProps } from './types/number-field';
 export type {
-  AutocompleteFieldProps,
+  AutocompleteFieldDropdownProps,
+  AutocompleteFieldInputProps,
   AutocompleteFieldOptionProps,
-  AutocompleteFieldInputProps
+  AutocompleteFieldProps,
+  AutocompleteFieldWrapperProps
 } from './types/autocomplete-field';

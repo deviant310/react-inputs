@@ -10,9 +10,7 @@ import { FormData } from '../types/form';
  * AutocompleteField component
  * @param rawProps
  */
-function AutocompleteField<Key extends keyof FormData, Option, ContainerElement extends HTMLElement> (
-  rawProps: AutocompleteFieldProps<Key, Option, ContainerElement>
-) {
+function AutocompleteField<Key extends keyof FormData, Option> (rawProps: AutocompleteFieldProps<Key, Option>) {
   const props = rawProps as typeof rawProps & typeof AutocompleteField.defaultProps;
   const [dropdownIsVisible, setDropdownVisibility] = useState(props.dropdownIsVisible);
   const [displayValue, setDisplayValue] = useState(props.initialValue);
@@ -61,6 +59,7 @@ function AutocompleteField<Key extends keyof FormData, Option, ContainerElement 
     (option: Option) => (
       <props.optionComponent
         key={props.getOptionKey(option)}
+        role="option"
         onClick={() => onOptionSelect(option)}
         data={option}
       />
@@ -74,14 +73,14 @@ function AutocompleteField<Key extends keyof FormData, Option, ContainerElement 
   }, []);
 
   return (
-    <props.wrapperComponent tabIndex={0} onBlur={onBlur}>
+    <props.wrapperComponent role="group" tabIndex={0} onBlur={onBlur}>
       <props.inputComponent
         type="text"
         value={displayValue}
         onChange={onInputChange}
       />
       {dropdownIsVisible && options.length > 0 && (
-        <props.dropdownComponent>
+        <props.dropdownComponent role="dialog">
           {options.map(renderOption)}
         </props.dropdownComponent>
       )}

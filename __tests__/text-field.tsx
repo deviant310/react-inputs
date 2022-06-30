@@ -1,7 +1,25 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { fireEvent, render } from '@testing-library/react';
-import { useForm, TextField } from '../src/main';
+import { useForm, TextField, TextFieldInputProps } from '../src/main';
+
+test('Initial value', () => {
+  const name = 'John';
+
+  const Form = () => {
+    const { data } = useForm({ name });
+
+    return (
+      <TextField name="name" value={data.name}/>
+    );
+  };
+
+  const { getByRole } = render(<Form/>);
+
+  const inputElement = getByRole('textbox');
+
+  expect(inputElement).toHaveValue(name);
+});
 
 test('Change field value', () => {
   const name = 'John';
@@ -19,15 +37,15 @@ test('Change field value', () => {
 
   const inputElement = getByRole('textbox');
 
-  expect(inputElement).toHaveValue(name);
-
   fireEvent.change(inputElement, { target: { value: nextName } });
+
   expect(inputElement).toHaveValue(nextName);
 });
 
 test('Change multiple fields values', () => {
   const firstName = 'John';
   const nextFirstName = 'Anton';
+
   const lastName = 'Doe';
   const nextLastName = 'Lebedev';
 
@@ -46,16 +64,31 @@ test('Change multiple fields values', () => {
 
   const inputElements = getAllByRole('textbox');
 
-  expect(inputElements[0]).toHaveValue(firstName);
-  expect(inputElements[1]).toHaveValue(lastName);
-
   fireEvent.change(inputElements[0], { target: { value: nextFirstName } });
-  expect(inputElements[0]).toHaveValue(nextFirstName);
   fireEvent.change(inputElements[1], { target: { value: nextLastName } });
+
   expect(inputElements[0]).toHaveValue(nextFirstName);
   expect(inputElements[1]).toHaveValue(nextLastName);
 });
 
-test('Check maximum number of input characters', () => {
+/*test('Typing maximum number of characters', () => {
 
+});*/
+
+test('Render custom components', () => {
+  const Input = (props: TextFieldInputProps) => (
+    <input data-testid="text-field-input" {...props}/>
+  );
+
+  const Form = () => {
+    return (
+      <TextField name="name" inputComponent={Input}/>
+    );
+  };
+
+  const { getByTestId } = render(<Form/>);
+
+  const inputElement = getByTestId('text-field-input');
+
+  expect(inputElement).toBeInTheDocument();
 });

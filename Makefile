@@ -54,4 +54,4 @@ test:
 		-v ${PWD}:/usr/src/app \
 		-e FORCE_COLOR=true \
 		${DOCKER_IMAGE} \
-		jest $(filter-out $@,$(MAKECMDGOALS))
+		jest $(filter-out $@,$(MAKECMDGOALS)) --verbose

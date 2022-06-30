@@ -1,109 +1,131 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { fireEvent, render } from '@testing-library/react';
-import Index, { NumberField, Submit } from '../src/form';
+import { useForm, NumberField, NumberFieldInputProps } from '../src/main';
+
+test('Initial value', () => {
+  const age = 15;
+
+  const Form = () => {
+    const { data } = useForm({ age });
+
+    return (
+      <NumberField name="age" value={data.age}/>
+    );
+  };
+
+  const { getByRole } = render(<Form/>);
+
+  const inputElement = getByRole('textbox');
+
+  expect(inputElement).toHaveValue(age.toString());
+});
 
 test('Change field value', () => {
   const age = 15;
-  const ageChanged = 16;
-  const initialData = { age };
-  const onSubmitMock = jest.fn();
+  const nextAge = 16;
 
-  const { getByRole } = render(
-    <Index initialData={initialData} onSubmit={onSubmitMock}>
-      <NumberField name="age"/>
-      <Submit>Отправить</Submit>
-    </Index>
-  );
+  const Form = () => {
+    const { data, setProperty } = useForm({ age });
+
+    return (
+      <NumberField name="age" value={data.age} onChange={setProperty}/>
+    );
+  };
+
+  const { getByRole } = render(<Form/>);
 
   const inputElement = getByRole('textbox');
-  const submitButtonElement = getByRole('button');
 
-  expect(inputElement).toHaveValue(age.toString());
+  fireEvent.change(inputElement, { target: { value: nextAge } });
 
-  fireEvent.change(inputElement, { target: { value: ageChanged } });
-  expect(inputElement).toHaveValue(ageChanged.toString());
-  fireEvent.click(submitButtonElement);
-  expect(onSubmitMock.mock.calls[0][0]).toEqual({ age: ageChanged });
+  expect(inputElement).toHaveValue(nextAge.toString());
 });
 
 test('Change multiple fields values', () => {
   const age = 15;
-  const ageChanged = 16;
-  const price = 500.50;
-  const priceChanged = 700.73;
-  const initialData = { age, price };
-  const onSubmitMock = jest.fn();
+  const nextAge = 16;
 
-  const { getByRole, getAllByRole } = render(
-    <Index initialData={initialData} onSubmit={onSubmitMock}>
-      <NumberField name="age"/>
-      <NumberField name="price"/>
-      <Submit>Отправить</Submit>
-    </Index>
-  );
+  const price = 500.50;
+  const nextPrice = 700.73;
+
+  const Form = () => {
+    const { data, setProperty } = useForm({ age, price });
+
+    return (
+      <>
+        <NumberField name="age" value={data.age} onChange={setProperty}/>
+        <NumberField name="price" value={data.price} onChange={setProperty}/>
+      </>
+    );
+  };
+
+  const { getAllByRole } = render(<Form/>);
 
   const inputElements = getAllByRole('textbox');
-  const submitButtonElement = getByRole('button');
 
-  expect(inputElements[0]).toHaveValue(age.toString());
-  expect(inputElements[1]).toHaveValue(price.toString());
+  fireEvent.change(inputElements[0], { target: { value: nextAge } });
+  fireEvent.change(inputElements[1], { target: { value: nextPrice } });
 
-  fireEvent.change(inputElements[0], { target: { value: ageChanged } });
-  expect(inputElements[0]).toHaveValue(ageChanged.toString());
-  fireEvent.change(inputElements[1], { target: { value: priceChanged } });
-  expect(inputElements[1]).toHaveValue(priceChanged.toString());
-  fireEvent.click(submitButtonElement);
-  expect(onSubmitMock.mock.calls[0][0]).toEqual({ age: ageChanged, price: priceChanged });
+  expect(inputElements[0]).toHaveValue(nextAge.toString());
+  expect(inputElements[1]).toHaveValue(nextPrice.toString());
 });
 
 test('Enter empty value', () => {
   const age = 15;
-  const initialData = { age };
-  const onSubmitMock = jest.fn();
 
-  const { getByRole } = render(
-    <Index initialData={initialData} onSubmit={onSubmitMock}>
-      <NumberField name="age"/>
-      <Submit>Отправить</Submit>
-    </Index>
-  );
+  const Form = () => {
+    const { data, setProperty } = useForm({ age });
+
+    return (
+      <NumberField name="age" value={data.age} onChange={setProperty}/>
+    );
+  };
+
+  const { getByRole } = render(<Form/>);
 
   const inputElement = getByRole('textbox');
-  const submitButtonElement = getByRole('button');
-
-  expect(inputElement).toHaveValue(age.toString());
 
   fireEvent.change(inputElement, { target: { value: '' } });
   expect(inputElement).toHaveValue('0');
-  fireEvent.click(submitButtonElement);
-  expect(onSubmitMock.mock.calls[0][0]).toEqual({ age: 0 });
 });
 
 test('Check maximum allowable value', () => {
   const distance = 1500;
-  const initialData = { distance };
-  const onSubmitMock = jest.fn();
 
-  const { getByRole } = render(
-    <Index initialData={initialData} onSubmit={onSubmitMock}>
-      <NumberField name="distance"/>
-      <Submit>Отправить</Submit>
-    </Index>
-  );
+  const Form = () => {
+    const { data, setProperty } = useForm({ distance });
+
+    return (
+      <NumberField name="distance" value={data.distance} onChange={setProperty}/>
+    );
+  };
+
+  const { getByRole } = render(<Form/>);
 
   const inputElement = getByRole('textbox');
-  const submitButtonElement = getByRole('button');
-
-  expect(inputElement).toHaveValue(distance.toString());
 
   fireEvent.change(inputElement, { target: { value: 1e15 } });
   expect(inputElement).toHaveValue(distance.toString());
-  fireEvent.click(submitButtonElement);
-  expect(onSubmitMock.mock.calls[0][0]).toEqual({ distance });
 
   fireEvent.change(inputElement, { target: { value: 1e14 } });
   expect(inputElement).toHaveValue(1e14.toString());
-  fireEvent.click(submitButtonElement);
-  expect(onSubmitMock.mock.calls[1][0]).toEqual({ distance: 1e14 });
+});
+
+test('Render custom components', () => {
+  const Input = (props: NumberFieldInputProps) => (
+    <input data-testid="number-field-input" {...props}/>
+  );
+
+  const Form = () => {
+    return (
+      <NumberField name="age" inputComponent={Input}/>
+    );
+  };
+
+  const { getByTestId } = render(<Form/>);
+
+  const inputElement = getByTestId('number-field-input');
+
+  expect(inputElement).toBeInTheDocument();
 });
