@@ -20,10 +20,10 @@ import Form from '../types/form';
  * @param initialData
  */
 function useForm<Data extends Form.Data> (initialData: Data) {
-  return useReducer<(state: Data, payload: Partial<Data>) => Data>(formDataReducer, initialData);
+  return useReducer<(state: Data, payload: Form.Payload<Data>) => Data>(formDataReducer, initialData);
 }
 
-function formDataReducer <Data extends Form.Data> (state: Data, payload: Partial<Data>) {
+function formDataReducer <Data extends Form.Data> (state: Data, payload: Form.Payload<Data>) {
   const payloadHasNewData = Object.entries(payload)
     .some(([key, value]) => state[key] !== value);
 

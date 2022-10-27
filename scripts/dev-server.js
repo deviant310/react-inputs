@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
-const configFactory = require('../config/webpack/webpack.config.js');
+const configFactory = require('../webpack.config.js');
 
 const config = configFactory('development');
 const compiler = webpack(config);

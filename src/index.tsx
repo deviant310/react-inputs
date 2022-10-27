@@ -13,38 +13,6 @@ type Option = {
   value: string;
 };
 
-const AutocompleteFieldContainer = (props: AutocompleteField.ContainerProps) => (
-  <span style={{ position: 'relative' }} {...props}/>
-);
-
-const AutocompleteFieldDropdown = (props: AutocompleteField.DropdownProps) => (
-  <div
-    style={{
-      position: 'absolute',
-      left: 0,
-      width: '100%',
-      backgroundColor: 'white',
-      border: '1px solid grey',
-      zIndex: 9999
-    }}
-    {...props}
-  />
-);
-
-const AutocompleteFieldInput = (props: AutocompleteField.InputProps) => (
-  <input className="autocomplete-field-input" {...props}/>
-);
-
-const AutocompleteFieldOption = ({ data, ...props }: AutocompleteField.OptionProps<Option>) => (
-  <div {...props}>
-    {data.value}
-  </div>
-);
-
-const TextFieldInput = (props: TextField.InputProps) => (
-  <input {...props}/>
-);
-
 const countries: Option[] = [
   { id: 1, value: 'Cyprus' },
   { id: 2, value: 'Georgia' }
@@ -108,11 +76,9 @@ function Form () {
         <AutocompleteField
           name="country"
           selected={data.country}
-          optionsBuilder={editingValue => (
-            countries.filter(option => option.value.includes(editingValue))
-          )}
-          getOptionKey={option => option.id}
-          displayValueForOption={option => option.value}
+          optionsBuilder={optionsBuilder.bind(countries)}
+          getOptionKey={getOptionId}
+          displayValueForOption={getOptionValue}
           onSelect={setData}
           optionComponent={AutocompleteFieldOption}
           containerComponent={AutocompleteFieldContainer}
@@ -123,11 +89,9 @@ function Form () {
         <AutocompleteField
           name="movie"
           selected={data.movie}
-          optionsBuilder={editingValue => (
-            movies.filter(option => option.value.includes(editingValue))
-          )}
-          getOptionKey={option => option.id}
-          displayValueForOption={option => option.value}
+          optionsBuilder={optionsBuilder.bind(movies)}
+          getOptionKey={getOptionId}
+          displayValueForOption={getOptionValue}
           onSelect={setData}
           optionComponent={AutocompleteFieldOption}
           containerComponent={AutocompleteFieldContainer}
@@ -157,6 +121,57 @@ function Form () {
       <button onClick={() => setData(initialData)}>Reset</button>
     </>
   );
+}
+
+function AutocompleteFieldContainer (props: AutocompleteField.ContainerProps) {
+  return <span style={{ position: 'relative' }} {...props}/>;
+}
+
+function AutocompleteFieldDropdown (props: AutocompleteField.DropdownProps) {
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        left: 0,
+        width: '100%',
+        backgroundColor: 'white',
+        border: '1px solid grey',
+        zIndex: 9999
+      }}
+      {...props}
+    />
+  );
+}
+
+function AutocompleteFieldInput (props: AutocompleteField.InputProps) {
+  return <input className="autocomplete-field-input" {...props}/>;
+}
+
+function AutocompleteFieldOption ({ data, ...props }: AutocompleteField.OptionProps<Option>) {
+  return <div {...props}>{data.value}</div>;
+}
+
+function TextFieldInput (props: TextField.InputProps) {
+  return <input {...props}/>;
+}
+
+function optionsBuilder (this: Option[], editingValue: string) {
+  return this
+    .filter(
+      option => option.value
+        .toLowerCase()
+        .includes(
+          editingValue.toLowerCase()
+        )
+    );
+}
+
+function getOptionId (option: Option) {
+  return option.id;
+}
+
+function getOptionValue (option: Option) {
+  return option.value;
 }
 
 createRoot(document.getElementById('root') as HTMLElement).render(

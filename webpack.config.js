@@ -6,7 +6,7 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const TypeDoc = require('typedoc');
-const paths = require('../paths.js');
+const paths = require('./paths.js');
 const { name: appName } = require(paths.appPackageJson);
 
 const isDevServer = Boolean(process.env.WEBPACK_SERVE);
@@ -116,7 +116,7 @@ module.exports = function (mode = 'development') {
                 allowJs: true,
                 declaration: true,
                 emitDeclarationOnly: true,
-                declarationDir: paths.appBuild
+                declarationDir: paths.appBuild,
               };
 
               const host = ts.createCompilerHost(compilerOptions);

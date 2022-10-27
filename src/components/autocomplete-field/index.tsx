@@ -15,7 +15,38 @@ import Option from './components/option';
 import Form from '../../types/form';
 
 /**
- * AutocompleteField component
+ * Autocomplete field
+ *
+ * ```
+ * import { AutocompleteField } from 'react-form';
+ *
+ * type Country = { id: number; value: string; }
+ *
+ * const countries: Country[] = [
+ *   { id: 1, value: 'Cyprus' },
+ *   { id: 2, value: 'Georgia' }
+ * ];
+ *
+ * const CountryOption = ({ data, ...props }: AutocompleteField.OptionProps<Country>) => (
+ *   <div {...props}>{data.title}</div>
+ * );
+ *
+ * function Form () {
+ *   return (
+ *     <AutocompleteField
+ *       name="country"
+ *       selected={countries[1]}
+ *       optionsBuilder={editingValue => (
+ *         countries.filter(option => option.value.includes(editingValue))
+ *       )}
+ *       getOptionKey={option => option.id}
+ *       displayValueForOption={option => option.value}
+ *       optionComponent={CountryOption}
+ *     />
+ *   );
+ * }
+ * ```
+ *
  * @param props
  */
 function AutocompleteFieldFC<Key extends string, Option> (props: AutocompleteField.Props<Key, Option>) {
@@ -147,18 +178,48 @@ namespace AutocompleteField {
     /**
      * Build options array depending on editing value
      *
-     * @param editingValue
+     * @example
+     * ```
+     * const countries = [
+     *   { id: 1, value: 'Cyprus' },
+     *   { id: 2, value: 'Georgia' }
+     * ];
+     *
+     * function optionsBuilder (editingValue: string) {
+     *   return countries.filter(({ value })) => value.includes(editingValue));
+     * }
+     * ```
      */
-    optionsBuilder: (editingValue: string) => Array<Option>;
-    getOptionKey: (option: Option) => string | number;
-    displayValueForOption: (option: Option) => string;
+    optionsBuilder: OptionsBuilder<Option>;
+    getOptionKey: OptionKeyExtractor<Option>;
+    displayValueForOption: OptionValueExtractor<Option>;
+    /**
+     * Option function component
+     *
+     * @example
+     * ```
+     * type Country = { id: number; value: string; }
+     *
+     * function CountryOption ({ data, ...props }: AutocompleteField.OptionProps<Country>) {
+     *   return <div {...props}>{data.title}</div>;
+     * }
+     * ```
+     */
     optionComponent: FunctionComponent<OptionProps<Option>>;
     selected?: Option | null;
-    onSelect?: (data: Form.Data<Key, Option | null>) => void;
+    onSelect?: SelectEventHandler<Key, Option>;
     containerComponent?: FunctionComponent<ContainerProps>;
     dropdownComponent?: FunctionComponent<DropdownProps>;
     inputComponent?: FunctionComponent<InputProps>;
   }
+
+  export type OptionsBuilder<Option> = (editingValue: string) => Option[];
+
+  export type OptionKeyExtractor<Option> = (option: Option) => string | number;
+
+  export type OptionValueExtractor<Option> = (option: Option) => string;
+
+  export type SelectEventHandler<Key extends string, Option> = (data: Form.Data<Key, Option | null>) => void;
 
   export type ContainerProps = PropsWithChildren<{
     role: 'group';
