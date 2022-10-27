@@ -1,18 +1,33 @@
-import { useCallback, useState } from 'react';
-import { FormData, FormDataAggregator } from '../types/form';
+import { useReducer } from 'react';
 
-function useForm<Data extends FormData> (initialData: Data) {
-  const [data, setData] = useState(initialData);
+import Form from '../types/form';
 
-  const setProperty = useCallback<FormDataAggregator<Data>>(
-    (key, value) => {
-      if(data[key] !== value)
-        setData({ ...data, [key]: value });
-    },
-    [data]
-  );
+/**
+ * Returns form data and a reducer action to update data key
+ *
+ * @example
+ * ```
+ * const [data, setData] = useForm({
+ *   name: 'John',
+ *   surname: 'Doe'
+ * });
+ *
+ * return (
+ *   <TextField value={data.name} onChange={setData}/>
+ * );
+ * ```
+ *
+ * @param initialData
+ */
+function useForm<Data extends Form.Data> (initialData: Data) {
+  return useReducer<(state: Data, payload: Partial<Data>) => Data>(formDataReducer, initialData);
+}
 
-  return { data, setProperty };
+function formDataReducer <Data extends Form.Data> (state: Data, payload: Partial<Data>) {
+  const payloadHasNewData = Object.entries(payload)
+    .some(([key, value]) => state[key] !== value);
+
+  return payloadHasNewData ? { ...state, ...payload } : state;
 }
 
 export default useForm;

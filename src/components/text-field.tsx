@@ -1,34 +1,63 @@
-import React, { useCallback } from 'react';
-import { TextFieldInputProps, TextFieldProps } from '../types/text-field';
-import { FormData } from '../types/form';
+import { ChangeEvent, FunctionComponent, memo, useCallback } from 'react';
+
+import Form from '../types/form';
 
 /**
  * TextField component
- * @param rawProps
+ * @param props
  */
-function TextField<Key extends keyof FormData> (rawProps: TextFieldProps<Key>) {
-  const props = rawProps as typeof rawProps & typeof TextField.defaultProps;
+function TextFieldFC<Name extends string, Value extends string> (props: TextField.Props<Name, Value>) {
+  const {
+    value,
+    inputComponent: Input,
+    name,
+    label,
+    onChange,
+  } = props as typeof props & typeof TextFieldFC.defaultProps;
 
-  const onChange = useCallback<TextFieldInputProps['onChange']>(
-    ({ target }) => {
-      if (props.onChange !== undefined)
-        props.onChange(props.name, target.value);
-    },
-    [props.onChange, props.name]
+  const setValue = useCallback(
+    (value: Value) => onChange?.({ [name]: value }),
+    [onChange, name]
+  );
+
+  const onInputChange = useCallback(
+    ({ target }: ChangeEvent<HTMLInputElement>) => setValue(target.value as Value),
+    [setValue]
   );
 
   return (
-    <props.inputComponent
+    <Input
       type="text"
-      value={props.value}
-      onChange={onChange}
+      value={value}
+      placeholder={label}
+      onChange={onInputChange}
     />
   );
 }
 
-TextField.defaultProps = {
+TextFieldFC.defaultProps = {
   value: '',
-  inputComponent: (props: TextFieldInputProps) => <input {...props}/>
+  inputComponent: (props: TextField.InputProps) => <input {...props}/>
 };
+
+/**
+ * TextField memo component
+ */
+const TextField = memo(TextFieldFC) as unknown as typeof TextFieldFC;
+
+namespace TextField {
+  export interface Props<Name extends string, Value extends string> extends Form.FieldProps<Name> {
+    value?: Value;
+    inputComponent?: FunctionComponent<InputProps>;
+    onChange?: (data: Form.Data<Name, Value>) => void;
+  }
+
+  export interface InputProps {
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    placeholder?: string;
+    type: 'text';
+    value: string;
+  }
+}
 
 export default TextField;

@@ -1,5 +1,12 @@
-export type FormData = {
-  [key: string]: unknown;
+namespace Form {
+  export type Data<Key extends string = string, Value = unknown> = {
+    [K in string as Key]: Value;
+  };
+
+  export interface FieldProps<Name extends string> {
+    name: Name;
+    label?: string;
+  }
 }
 
-export type FormDataAggregator<T extends FormData> = (key: keyof T, value?: T[keyof T]) => void;
+export default Form;

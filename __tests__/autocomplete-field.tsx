@@ -1,21 +1,17 @@
 import React from 'react';
+
 import '@testing-library/jest-dom';
+
 import { getByRole, getAllByRole, fireEvent, render } from '@testing-library/react';
-import {
-  useForm,
-  AutocompleteField,
-  AutocompleteFieldOptionProps,
-  AutocompleteFieldWrapperProps,
-  AutocompleteFieldDropdownProps,
-  AutocompleteFieldInputProps
-} from '../src/main';
+
+import useForm, { AutocompleteField } from '../src/main';
 
 type Option = {
   id: number;
   value: string;
 };
 
-const AutocompleteFieldOption = ({ data, ...props }: AutocompleteFieldOptionProps<Option>) => (
+const AutocompleteFieldOption = ({ data, ...props }: AutocompleteField.OptionProps<Option>) => (
   <div data-id={data.id} {...props}>{data.value}</div>
 );
 
@@ -45,7 +41,7 @@ test('Initial value', () => {
   const country = countries[1];
 
   const Form = () => {
-    const { data } = useForm({ country });
+    const [data] = useForm({ country });
 
     return (
       <AutocompleteField
@@ -91,13 +87,16 @@ test('Typing search query', () => {
 });
 
 test('Change field value', () => {
-  const country = countries[0];
   const nextCountry = countries[1];
+
   const nextCountryValue = nextCountry.value;
+
   const nextCountrySearchQuery = nextCountryValue.slice(0, 3);
 
   const Form = () => {
-    const { data, setProperty } = useForm({ country });
+    const [data, setData] = useForm({
+      country: countries[0] as Option | null
+    });
 
     return (
       <AutocompleteField
@@ -106,7 +105,7 @@ test('Change field value', () => {
         optionsBuilder={countriesOptionsBuilder}
         getOptionKey={getOptionKey}
         displayValueForOption={displayValueForOption}
-        onSelect={setProperty}
+        onSelect={setData}
         optionComponent={AutocompleteFieldOption}
       />
     );
@@ -126,18 +125,23 @@ test('Change field value', () => {
 });
 
 test('Change multiple fields values', () => {
-  const country = countries[0];
   const nextCountry = countries[1];
+
   const nextCountryValue = nextCountry.value;
+
   const nextCountrySearchQuery = nextCountryValue.slice(0, 3);
 
-  const movie = movies[0];
   const nextMovie = movies[1];
+
   const nextMovieValue = nextMovie.value;
+
   const nextMovieSearchQuery = nextMovieValue.slice(0, 3);
 
   const Form = () => {
-    const { data, setProperty } = useForm({ country, movie });
+    const [data, setData] = useForm({
+      country: countries[0] as Option | null,
+      movie: movies[0] as Option | null,
+    });
 
     return (
       <>
@@ -147,16 +151,17 @@ test('Change multiple fields values', () => {
           optionsBuilder={countriesOptionsBuilder}
           getOptionKey={getOptionKey}
           displayValueForOption={displayValueForOption}
-          onSelect={setProperty}
+          onSelect={setData}
           optionComponent={AutocompleteFieldOption}
         />
+
         <AutocompleteField
           name="movie"
           selected={data.movie}
           optionsBuilder={moviesOptionsBuilder}
           getOptionKey={getOptionKey}
           displayValueForOption={displayValueForOption}
-          onSelect={setProperty}
+          onSelect={setData}
           optionComponent={AutocompleteFieldOption}
         />
       </>
@@ -168,33 +173,38 @@ test('Change multiple fields values', () => {
   const fieldElements = formRenderResult.getAllByRole('group');
 
   const countryInputElement = getByRole(fieldElements[0], 'textbox');
+
   const movieInputElement = getByRole(fieldElements[1], 'textbox');
 
   fireEvent.change(countryInputElement, { target: { value: nextCountrySearchQuery } });
+
   fireEvent.change(movieInputElement, { target: { value: nextMovieSearchQuery } });
 
   const countryFirstOptionDropdownElement = getAllByRole(fieldElements[0], 'option')[0];
+
   const movieFirstOptionDropdownElement = getAllByRole(fieldElements[1], 'option')[0];
 
   fireEvent.click(countryFirstOptionDropdownElement);
+
   fireEvent.click(movieFirstOptionDropdownElement);
 
   expect(countryInputElement).toHaveValue(nextCountryValue);
+
   expect(movieInputElement).toHaveValue(nextMovieValue);
 });
 
 test('Render custom components', () => {
   const searchQuery = countries[0].value.slice(0, 3);
 
-  const Wrapper = (props: AutocompleteFieldWrapperProps) => (
+  const Container = (props: AutocompleteField.ContainerProps) => (
     <div data-testid="autocomplete-field-wrapper" {...props}/>
   );
 
-  const Dropdown = (props: AutocompleteFieldDropdownProps) => (
+  const Dropdown = (props: AutocompleteField.DropdownProps) => (
     <div data-testid="autocomplete-field-dropdown" {...props}/>
   );
 
-  const Input = (props: AutocompleteFieldInputProps) => (
+  const Input = (props: AutocompleteField.InputProps) => (
     <input data-testid="autocomplete-field-input" {...props}/>
   );
 
@@ -206,7 +216,7 @@ test('Render custom components', () => {
         getOptionKey={getOptionKey}
         displayValueForOption={displayValueForOption}
         optionComponent={AutocompleteFieldOption}
-        wrapperComponent={Wrapper}
+        containerComponent={Container}
         dropdownComponent={Dropdown}
         inputComponent={Input}
       />
@@ -216,9 +226,11 @@ test('Render custom components', () => {
   const { getByTestId } = render(<Form/>);
 
   const wrapperElement = getByTestId('autocomplete-field-wrapper');
+
   const inputElement = getByTestId('autocomplete-field-input');
 
   expect(wrapperElement).toBeInTheDocument();
+
   expect(inputElement).toBeInTheDocument();
 
   fireEvent.change(inputElement, { target: { value: searchQuery } });

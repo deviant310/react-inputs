@@ -13,6 +13,13 @@ install:
 		${DOCKER_IMAGE} \
 		npm i $(filter-out $@,$(MAKECMDGOALS))
 
+update:
+	docker run \
+		--rm \
+		-v ${PWD}:/usr/src/app \
+		${DOCKER_IMAGE} \
+		npm update $(filter-out $@,$(MAKECMDGOALS))
+
 remove:
 	docker run \
 		--rm \
@@ -34,6 +41,7 @@ open-browser:
 dev-watcher:
 	docker run \
 		--rm \
+		--init \
 		--name ${APP_NAME} \
 		-v ${PWD}:/usr/src/app \
 		-v ${PWD}/${BUILD_PATH_HOST}:/usr/src/app/${BUILD_PATH} \

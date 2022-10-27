@@ -1,90 +1,174 @@
 {
-  "env": {
-    "browser": true,
-    "es2021": true,
-    "node": true
+  "env" : {
+    "browser" : true,
+    "es2021" : true,
+    "node" : true
   },
-  "extends": [
+  "extends" : [
     "eslint:recommended"
   ],
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
+  "parserOptions" : {
+    "ecmaFeatures" : {
+      "jsx" : true
     },
-    "ecmaVersion": 12,
-    "sourceType": "module"
+    "ecmaVersion" : 12,
+    "sourceType" : "module"
   },
-  "rules": {
-    "quote-props": "off",
-    "no-trailing-spaces": "off",
-    "semi": [
+  "plugins" : [
+    "react",
+    "react-hooks"
+  ],
+  "rules" : {
+    "indent" : [
+      "error",
+      2,
+      {
+        "SwitchCase" : 1
+      }
+    ],
+    "no-mixed-spaces-and-tabs": "error",
+    "padding-line-between-statements" : [
+      "error",
+      {
+        "blankLine" : "always",
+        "prev" : "*",
+        "next" : "*"
+      },
+      {
+        "blankLine" : "any",
+        "prev" : "singleline-const",
+        "next" : "singleline-const"
+      },
+      {
+        "blankLine" : "any",
+        "prev" : "singleline-let",
+        "next" : "singleline-let"
+      },
+      {
+        "blankLine" : "any",
+        "prev" : "singleline-var",
+        "next" : "singleline-var"
+      },
+      {
+        "blankLine" : "any",
+        "prev" : "*",
+        "next" : "default"
+      },
+      {
+        "blankLine" : "any",
+        "prev" : "case",
+        "next" : "case"
+      },
+      {
+        "blankLine" : "any",
+        "prev" : "debugger",
+        "next" : "*"
+      },
+      {
+        "blankLine" : "any",
+        "prev" : "*",
+        "next" : "debugger"
+      },
+      {
+        "blankLine" : "any",
+        "prev" : "expression",
+        "next" : "expression"
+      }
+    ],
+    "quotes" : [
+      "error",
+      "single"
+    ],
+    "quote-props" : "off",
+    "no-trailing-spaces" : "off",
+    "semi" : [
       2,
       "always",
       {
-        "omitLastInOneLineBlock": true
+        "omitLastInOneLineBlock" : true
       }
     ],
-    "no-undef": "off",
-    "no-use-before-define": "off",
-    "spaced-comment": "off",
-    "no-multiple-empty-lines": [
+    "no-undef" : "off",
+    "no-use-before-define" : "off",
+    "spaced-comment" : "off",
+    "no-multiple-empty-lines" : [
       "error",
       {
-        "max": 1,
-        "maxEOF": 0
+        "max" : 1,
+        "maxEOF" : 0
       }
     ],
-    "max-len": "off"
+    "max-len" : "off",
+    "object-curly-spacing" : [
+      "error",
+      "always"
+    ],
+    "keyword-spacing" : [
+      "error",
+      {
+        "before" : true,
+        "after" : true
+      }
+    ],
+    "react/jsx-newline" : [
+      2
+    ],
+    "react-hooks/rules-of-hooks" : "error",
+    "react-hooks/exhaustive-deps" : "error"
   },
-  "overrides": [
+  "overrides" : [
     {
-      "files": [
+      "files" : [
         "*.ts",
         "*.tsx"
       ],
-      "parser": "@typescript-eslint/parser",
-      "extends": [
+      "parser" : "@typescript-eslint/parser",
+      "extends" : [
         "plugin:@typescript-eslint/recommended"
       ],
-      "plugins": [
+      "plugins" : [
         "@typescript-eslint"
       ],
-      "rules": {
-        "@typescript-eslint/quotes": [
+      "rules" : {
+        "@typescript-eslint/indent" : [
+          "error",
+          2
+        ],
+        "@typescript-eslint/quotes" : [
           "error",
           "single",
           {
-            "allowTemplateLiterals": true
+            "allowTemplateLiterals" : true
           }
         ],
-        "@typescript-eslint/member-delimiter-style": [
+        "@typescript-eslint/member-delimiter-style" : [
           "error",
           {
-            "multiline": {
-              "delimiter": "semi",
-              "requireLast": true
+            "multiline" : {
+              "delimiter" : "semi",
+              "requireLast" : true
             },
-            "singleline": {
-              "delimiter": "semi",
-              "requireLast": false
+            "singleline" : {
+              "delimiter" : "semi",
+              "requireLast" : false
             }
           }
         ],
-        "@typescript-eslint/no-namespace": "off",
-        "@typescript-eslint/type-annotation-spacing": [
+        "@typescript-eslint/no-namespace" : "off",
+        "@typescript-eslint/type-annotation-spacing" : [
           "error",
           {
-            "before": false,
-            "after": true,
-            "overrides": {
-              "arrow": {
-                "before": true,
-                "after": true
+            "before" : false,
+            "after" : true,
+            "overrides" : {
+              "arrow" : {
+                "before" : true,
+                "after" : true
               }
             }
           }
         ],
-        "@typescript-eslint/space-before-function-paren": [
+        "@typescript-eslint/space-before-function-paren" : [
           "error",
           "always"
         ]

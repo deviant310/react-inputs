@@ -11,9 +11,9 @@ module.exports = {
   appSrc: resolvePath('./src'),
   appIndex: resolvePath('./src/index.tsx'),
   appMain: resolvePath('./src/main.ts'),
-  appTest: resolvePath('./src/test.tsx'),
   appTypes: resolvePath('./src/types'),
   appBuild: resolvePath(process.env.BUILD_PATH || './build'),
-  appPublic: resolvePath('./public'),
-  appHtml: resolvePath('./public/index.html')
+  appStatic: resolvePath('./static'),
+  appHtml: resolvePath('./static/index.html'),
+  appDocs: resolvePath('./docs')
 };

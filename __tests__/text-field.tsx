@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
+
 import '@testing-library/jest-dom';
+
 import { fireEvent, render } from '@testing-library/react';
-import { useForm, TextField, TextFieldInputProps } from '../src/main';
+
+import useForm, { TextField } from '../src/main';
 
 test('Initial value', () => {
   const name = 'John';
 
   const Form = () => {
-    const { data } = useForm({ name });
+    const [data, setData] = useForm({ name });
 
     return (
-      <TextField name="name" value={data.name}/>
+      <TextField name="name" value={data.name} onChange={setData}/>
     );
   };
 
@@ -23,13 +26,14 @@ test('Initial value', () => {
 
 test('Change field value', () => {
   const name = 'John';
+
   const nextName = 'Anton';
 
   const Form = () => {
-    const { data, setProperty } = useForm({ name });
+    const [data, setData] = useForm({ name });
 
     return (
-      <TextField name="name" value={data.name} onChange={setProperty}/>
+      <TextField name="name" value={data.name} onChange={setData}/>
     );
   };
 
@@ -44,18 +48,21 @@ test('Change field value', () => {
 
 test('Change multiple fields values', () => {
   const firstName = 'John';
-  const nextFirstName = 'Anton';
 
   const lastName = 'Doe';
+
+  const nextFirstName = 'Anton';
+
   const nextLastName = 'Lebedev';
 
   const Form = () => {
-    const { data, setProperty } = useForm({ firstName, lastName });
+    const [data, setData] = useForm({ firstName, lastName });
 
     return (
       <>
-        <TextField name="firstName" value={data.firstName} onChange={setProperty}/>
-        <TextField name="lastName" value={data.lastName} onChange={setProperty}/>
+        <TextField name="firstName" value={data.firstName} onChange={setData}/>
+
+        <TextField name="lastName" value={data.lastName} onChange={setData}/>
       </>
     );
   };
@@ -65,9 +72,11 @@ test('Change multiple fields values', () => {
   const inputElements = getAllByRole('textbox');
 
   fireEvent.change(inputElements[0], { target: { value: nextFirstName } });
+
   fireEvent.change(inputElements[1], { target: { value: nextLastName } });
 
   expect(inputElements[0]).toHaveValue(nextFirstName);
+
   expect(inputElements[1]).toHaveValue(nextLastName);
 });
 
@@ -75,10 +84,10 @@ test('Change multiple fields values', () => {
 
 });*/
 
-test('Render custom components', () => {
-  const Input = (props: TextFieldInputProps) => (
-    <input data-testid="text-field-input" {...props}/>
-  );
+test('Render custom input component', () => {
+  const Input = forwardRef<HTMLInputElement, TextField.InputProps>((props, ref) => (
+    <input data-testid="text-field-input" {...props} ref={ref}/>
+  ));
 
   const Form = () => {
     return (

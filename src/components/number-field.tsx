@@ -1,62 +1,96 @@
-import React, { useCallback } from 'react';
-import { NumberFieldInputProps, NumberFieldProps } from '../types/number-field';
-import { FormData } from '../types/form';
+import {
+  ChangeEvent,
+  FunctionComponent,
+  memo,
+  useCallback,
+} from 'react';
+
+import Form from '../types/form';
 
 /**
  * NumberField component
- * @param rawProps
+ * @param props
  */
-function NumberField<Key extends keyof FormData> (rawProps: NumberFieldProps<Key>) {
-  const props = rawProps as typeof rawProps & typeof NumberField.defaultProps;
-  const value = parseInteger(props.value);
+function NumberFieldFC<Name extends string, Value extends number> (props: NumberField.Props<Name, Value>) {
+  const {
+    value,
+    inputComponent: Input,
+    name,
+    label,
+    onChange
+  } = props as typeof props & typeof NumberFieldFC.defaultProps;
 
-  const onChange = useCallback<NumberFieldInputProps['onChange']>(
-    ({ target }) => {
-      const value = parseInteger(target.value);
-      // @TODO реализовать на уровне валидации, т.к. при таком решении невозможно стирать некоторые значения
-      /*if (
-        (props.min !== undefined ? value >= props.min : true) &&
-        (props.max !== undefined ? value <= props.max : true)
-      )*/
-      if (props.onChange !== undefined && !isNaN(value) && isCorrect(value))
-        props.onChange(props.name, value);
+  const setValue = useCallback(
+    (value: Value) => onChange?.({ [name]: value }),
+    [onChange, name]
+  );
+
+  const onInputChange = useCallback(
+    ({ target }: ChangeEvent<HTMLInputElement>) => {
+      const value = parseInteger(target.value) as Value;
+
+      if (!isNaN(value) && numberHasAppropriateLength(value))
+        setValue(value);
     },
-    [props.onChange, props.name]
+    [setValue]
   );
 
   return (
-    <props.inputComponent
+    <Input
+      onChange={onInputChange}
+      placeholder={label}
       type="text"
       value={value}
-      onChange={onChange}
     />
   );
 }
 
-NumberField.defaultProps = {
+NumberFieldFC.defaultProps = {
   value: 0,
-  inputComponent: (props: NumberFieldInputProps) => <input {...props}/>
+  inputComponent: (props: NumberField.InputProps) => <input {...props}/>
 };
 
 /**
  * Transform raw value to integer
  * @param entry
  */
-const parseInteger = (entry: string | number) => {
+function parseInteger (entry: string | number) {
   if (entry === undefined)
     return 0;
 
   const [, digit, symbol] = [...entry.toString().matchAll(/(\d*)([-|+])$/g)][0] || [entry, entry, ''];
 
   return Number(digit ? `${symbol}${digit}` : '');
-};
+}
 
 /**
  * Check value length
  * @param value
  */
-const isCorrect = (value: number) => {
+function numberHasAppropriateLength (value: number) {
   return value.toString().replace('.', '').length <= 15;
-};
+}
+
+/**
+ * NumberField memo component
+ */
+const NumberField = memo(NumberFieldFC) as unknown as typeof NumberFieldFC;
+
+namespace NumberField {
+  export interface Props<Name extends string, Value extends number> extends Form.FieldProps<Name> {
+    value?: Value;
+    inputComponent?: FunctionComponent<InputProps>;
+    max?: number;
+    min?: number;
+    onChange?: (data: Form.Data<Name, Value>) => void;
+  }
+
+  export type InputProps = {
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    placeholder?: string;
+    type: 'text';
+    value: number;
+  }
+}
 
 export default NumberField;
