@@ -1,5 +1,5 @@
 {
   "name" : "React Form",
   "includeVersion" : true,
-  "entryPointStrategy" : "expand"
+  "titleLink" : "/react-form/docs"
 }
