@@ -28,3 +28,6 @@ yarn-error.log*
 
 # docker
 docker-compose.override.yml
+
+# other
+/docs
