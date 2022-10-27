@@ -1,8 +1,4 @@
-[React Form - v1.0.0](../README.md) / [Exports](../modules.md) / [TextField](../modules/TextField.md) / Props
-
-# Interface: Props<Name, Value\>
-
-[TextField](../modules/TextField.md).Props
+[TextField](../modules/TextField).Props
 
 ## Type parameters
 
@@ -13,7 +9,7 @@
 
 ## Hierarchy
 
-- [`FieldProps`](Form.FieldProps.md)<`Name`\>
+- [`FieldProps`](./Form.FieldProps)<`Name`\>
 
   ↳ **`Props`**
 
@@ -21,17 +17,17 @@
 
 ### Properties
 
-- [inputComponent](TextField.Props.md#inputcomponent)
-- [label](TextField.Props.md#label)
-- [name](TextField.Props.md#name)
-- [onChange](TextField.Props.md#onchange)
-- [value](TextField.Props.md#value)
+- [inputComponent](./TextField.Props#inputcomponent)
+- [label](./TextField.Props#label)
+- [name](./TextField.Props#name)
+- [onChange](./TextField.Props#onchange)
+- [value](./TextField.Props#value)
 
 ## Properties
 
 ### inputComponent
 
-• `Optional` **inputComponent**: `FunctionComponent`<[`InputProps`](TextField.InputProps.md)\>
+• `Optional` **inputComponent**: `FunctionComponent`<[`InputProps`](./TextField.InputProps)\>
 
 #### Defined in
 
@@ -45,7 +41,7 @@ ___
 
 #### Inherited from
 
-[FieldProps](Form.FieldProps.md).[label](Form.FieldProps.md#label)
+[FieldProps](./Form.FieldProps).[label](./Form.FieldProps#label)
 
 #### Defined in
 
@@ -59,7 +55,7 @@ ___
 
 #### Inherited from
 
-[FieldProps](Form.FieldProps.md).[name](Form.FieldProps.md#name)
+[FieldProps](./Form.FieldProps).[name](./Form.FieldProps#name)
 
 #### Defined in
 
@@ -69,7 +65,7 @@ ___
 
 ### onChange
 
-• `Optional` **onChange**: (`data`: [`Data`](../modules/Form.md#data)<`Name`, `Value`\>) => `void`
+• `Optional` **onChange**: (`data`: [`Data`](../modules/Form#data)<`Name`, `Value`\>) => `void`
 
 #### Type declaration
 
@@ -79,7 +75,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `data` | [`Data`](../modules/Form.md#data)<`Name`, `Value`\> |
+| `data` | [`Data`](../modules/Form#data)<`Name`, `Value`\> |
 
 ##### Returns
 

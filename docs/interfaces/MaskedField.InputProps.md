@@ -1,17 +1,13 @@
-[React Form - v1.0.0](../README.md) / [Exports](../modules.md) / [MaskedField](../modules/MaskedField.md) / InputProps
-
-# Interface: InputProps
-
-[MaskedField](../modules/MaskedField.md).InputProps
+[MaskedField](../modules/MaskedField).InputProps
 
 ## Table of contents
 
 ### Properties
 
-- [onChange](MaskedField.InputProps.md#onchange)
-- [placeholder](MaskedField.InputProps.md#placeholder)
-- [type](MaskedField.InputProps.md#type)
-- [value](MaskedField.InputProps.md#value)
+- [onChange](./MaskedField.InputProps#onchange)
+- [placeholder](./MaskedField.InputProps#placeholder)
+- [type](./MaskedField.InputProps#type)
+- [value](./MaskedField.InputProps#value)
 
 ## Properties
 

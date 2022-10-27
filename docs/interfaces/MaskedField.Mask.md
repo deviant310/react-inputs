@@ -1,17 +1,13 @@
-[React Form - v1.0.0](../README.md) / [Exports](../modules.md) / [MaskedField](../modules/MaskedField.md) / Mask
-
-# Interface: Mask
-
-[MaskedField](../modules/MaskedField.md).Mask
+[MaskedField](../modules/MaskedField).Mask
 
 ## Table of contents
 
 ### Properties
 
-- [entriesOffsets](MaskedField.Mask.md#entriesoffsets)
-- [payload](MaskedField.Mask.md#payload)
-- [startOffset](MaskedField.Mask.md#startoffset)
-- [text](MaskedField.Mask.md#text)
+- [entriesOffsets](./MaskedField.Mask#entriesoffsets)
+- [payload](./MaskedField.Mask#payload)
+- [startOffset](./MaskedField.Mask#startoffset)
+- [text](./MaskedField.Mask#text)
 
 ## Properties
 

@@ -1,8 +1,4 @@
-[React Form - v1.0.0](../README.md) / [Exports](../modules.md) / [NumberField](../modules/NumberField.md) / Props
-
-# Interface: Props<Name, Value\>
-
-[NumberField](../modules/NumberField.md).Props
+[NumberField](../modules/NumberField).Props
 
 ## Type parameters
 
@@ -13,7 +9,7 @@
 
 ## Hierarchy
 
-- [`FieldProps`](Form.FieldProps.md)<`Name`\>
+- [`FieldProps`](./Form.FieldProps)<`Name`\>
 
   ↳ **`Props`**
 
@@ -21,19 +17,19 @@
 
 ### Properties
 
-- [inputComponent](NumberField.Props.md#inputcomponent)
-- [label](NumberField.Props.md#label)
-- [max](NumberField.Props.md#max)
-- [min](NumberField.Props.md#min)
-- [name](NumberField.Props.md#name)
-- [onChange](NumberField.Props.md#onchange)
-- [value](NumberField.Props.md#value)
+- [inputComponent](./NumberField.Props#inputcomponent)
+- [label](./NumberField.Props#label)
+- [max](./NumberField.Props#max)
+- [min](./NumberField.Props#min)
+- [name](./NumberField.Props#name)
+- [onChange](./NumberField.Props#onchange)
+- [value](./NumberField.Props#value)
 
 ## Properties
 
 ### inputComponent
 
-• `Optional` **inputComponent**: `FunctionComponent`<[`InputProps`](../modules/NumberField.md#inputprops)\>
+• `Optional` **inputComponent**: `FunctionComponent`<[`InputProps`](../modules/NumberField#inputprops)\>
 
 #### Defined in
 
@@ -47,7 +43,7 @@ ___
 
 #### Inherited from
 
-[FieldProps](Form.FieldProps.md).[label](Form.FieldProps.md#label)
+[FieldProps](./Form.FieldProps).[label](./Form.FieldProps#label)
 
 #### Defined in
 
@@ -81,7 +77,7 @@ ___
 
 #### Inherited from
 
-[FieldProps](Form.FieldProps.md).[name](Form.FieldProps.md#name)
+[FieldProps](./Form.FieldProps).[name](./Form.FieldProps#name)
 
 #### Defined in
 
@@ -91,7 +87,7 @@ ___
 
 ### onChange
 
-• `Optional` **onChange**: (`data`: [`Data`](../modules/Form.md#data)<`Name`, `Value`\>) => `void`
+• `Optional` **onChange**: (`data`: [`Data`](../modules/Form#data)<`Name`, `Value`\>) => `void`
 
 #### Type declaration
 
@@ -101,7 +97,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `data` | [`Data`](../modules/Form.md#data)<`Name`, `Value`\> |
+| `data` | [`Data`](../modules/Form#data)<`Name`, `Value`\> |
 
 ##### Returns
 

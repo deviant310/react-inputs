@@ -1,16 +1,12 @@
-[React Form - v1.0.0](../README.md) / [Exports](../modules.md) / NumberField
-
-# Namespace: NumberField
-
 ## Table of contents
 
 ### Interfaces
 
-- [Props](../interfaces/NumberField.Props.md)
+- [Props](../interfaces/NumberField.Props)
 
 ### Type Aliases
 
-- [InputProps](NumberField.md#inputprops)
+- [InputProps](./NumberField#inputprops)
 
 ## Type Aliases
 

@@ -1,17 +1,13 @@
-[React Form - v1.0.0](../README.md) / [Exports](../modules.md) / [TextField](../modules/TextField.md) / InputProps
-
-# Interface: InputProps
-
-[TextField](../modules/TextField.md).InputProps
+[TextField](../modules/TextField).InputProps
 
 ## Table of contents
 
 ### Properties
 
-- [onChange](TextField.InputProps.md#onchange)
-- [placeholder](TextField.InputProps.md#placeholder)
-- [type](TextField.InputProps.md#type)
-- [value](TextField.InputProps.md#value)
+- [onChange](./TextField.InputProps#onchange)
+- [placeholder](./TextField.InputProps#placeholder)
+- [type](./TextField.InputProps#type)
+- [value](./TextField.InputProps#value)
 
 ## Properties
 

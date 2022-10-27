@@ -1,5 +1,6 @@
 {
   "name" : "React Form",
   "includeVersion" : true,
-  "entryPointStrategy" : "expand"
+  "entryPointStrategy" : "expand",
+  "theme" : "gitlab-wiki"
 }

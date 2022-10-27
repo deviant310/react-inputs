@@ -1,17 +1,13 @@
-[React Form - v1.0.0](../README.md) / [Exports](../modules.md) / [AutocompleteField](../modules/AutocompleteField.md) / InputProps
-
-# Interface: InputProps
-
-[AutocompleteField](../modules/AutocompleteField.md).InputProps
+[AutocompleteField](../modules/AutocompleteField).InputProps
 
 ## Table of contents
 
 ### Properties
 
-- [onChange](AutocompleteField.InputProps.md#onchange)
-- [placeholder](AutocompleteField.InputProps.md#placeholder)
-- [type](AutocompleteField.InputProps.md#type)
-- [value](AutocompleteField.InputProps.md#value)
+- [onChange](./AutocompleteField.InputProps#onchange)
+- [placeholder](./AutocompleteField.InputProps#placeholder)
+- [type](./AutocompleteField.InputProps#type)
+- [value](./AutocompleteField.InputProps#value)
 
 ## Properties
 

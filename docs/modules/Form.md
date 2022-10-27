@@ -1,17 +1,13 @@
-[React Form - v1.0.0](../README.md) / [Exports](../modules.md) / Form
-
-# Namespace: Form
-
 ## Table of contents
 
 ### Interfaces
 
-- [FieldProps](../interfaces/Form.FieldProps.md)
+- [FieldProps](../interfaces/Form.FieldProps)
 
 ### Type Aliases
 
-- [Data](Form.md#data)
-- [Payload](Form.md#payload)
+- [Data](./Form#data)
+- [Payload](./Form#payload)
 
 ## Type Aliases
 
@@ -40,7 +36,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `T` | extends [`Data`](Form.md#data) |
+| `T` | extends [`Data`](./Form#data) |
 
 #### Defined in
 

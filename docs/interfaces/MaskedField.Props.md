@@ -1,8 +1,4 @@
-[React Form - v1.0.0](../README.md) / [Exports](../modules.md) / [MaskedField](../modules/MaskedField.md) / Props
-
-# Interface: Props<Name, Value\>
-
-[MaskedField](../modules/MaskedField.md).Props
+[MaskedField](../modules/MaskedField).Props
 
 ## Type parameters
 
@@ -13,7 +9,7 @@
 
 ## Hierarchy
 
-- [`FieldProps`](Form.FieldProps.md)<`Name`\>
+- [`FieldProps`](./Form.FieldProps)<`Name`\>
 
   ↳ **`Props`**
 
@@ -21,20 +17,20 @@
 
 ### Properties
 
-- [inputComponent](MaskedField.Props.md#inputcomponent)
-- [label](MaskedField.Props.md#label)
-- [mask](MaskedField.Props.md#mask)
-- [name](MaskedField.Props.md#name)
-- [onChange](MaskedField.Props.md#onchange)
-- [source](MaskedField.Props.md#source)
-- [stub](MaskedField.Props.md#stub)
-- [value](MaskedField.Props.md#value)
+- [inputComponent](./MaskedField.Props#inputcomponent)
+- [label](./MaskedField.Props#label)
+- [mask](./MaskedField.Props#mask)
+- [name](./MaskedField.Props#name)
+- [onChange](./MaskedField.Props#onchange)
+- [source](./MaskedField.Props#source)
+- [stub](./MaskedField.Props#stub)
+- [value](./MaskedField.Props#value)
 
 ## Properties
 
 ### inputComponent
 
-• `Optional` **inputComponent**: `ForwardRefExoticComponent`<[`InputProps`](MaskedField.InputProps.md) & `RefAttributes`<`HTMLInputElement`\>\>
+• `Optional` **inputComponent**: `ForwardRefExoticComponent`<[`InputProps`](./MaskedField.InputProps) & `RefAttributes`<`HTMLInputElement`\>\>
 
 #### Defined in
 
@@ -48,7 +44,7 @@ ___
 
 #### Inherited from
 
-[FieldProps](Form.FieldProps.md).[label](Form.FieldProps.md#label)
+[FieldProps](./Form.FieldProps).[label](./Form.FieldProps#label)
 
 #### Defined in
 
@@ -72,7 +68,7 @@ ___
 
 #### Inherited from
 
-[FieldProps](Form.FieldProps.md).[name](Form.FieldProps.md#name)
+[FieldProps](./Form.FieldProps).[name](./Form.FieldProps#name)
 
 #### Defined in
 
@@ -82,7 +78,7 @@ ___
 
 ### onChange
 
-• `Optional` **onChange**: (`data`: [`Data`](../modules/Form.md#data)<`Name`, `Value`\>) => `void`
+• `Optional` **onChange**: (`data`: [`Data`](../modules/Form#data)<`Name`, `Value`\>) => `void`
 
 #### Type declaration
 
@@ -92,7 +88,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `data` | [`Data`](../modules/Form.md#data)<`Name`, `Value`\> |
+| `data` | [`Data`](../modules/Form#data)<`Name`, `Value`\> |
 
 ##### Returns
 

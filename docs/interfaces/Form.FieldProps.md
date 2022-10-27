@@ -1,8 +1,4 @@
-[React Form - v1.0.0](../README.md) / [Exports](../modules.md) / [Form](../modules/Form.md) / FieldProps
-
-# Interface: FieldProps<Name\>
-
-[Form](../modules/Form.md).FieldProps
+[Form](../modules/Form).FieldProps
 
 ## Type parameters
 
@@ -14,20 +10,20 @@
 
 - **`FieldProps`**
 
-  ↳ [`Props`](AutocompleteField.Props.md)
+  ↳ [`Props`](./AutocompleteField.Props)
 
-  ↳ [`Props`](MaskedField.Props.md)
+  ↳ [`Props`](./MaskedField.Props)
 
-  ↳ [`Props`](NumberField.Props.md)
+  ↳ [`Props`](./NumberField.Props)
 
-  ↳ [`Props`](TextField.Props.md)
+  ↳ [`Props`](./TextField.Props)
 
 ## Table of contents
 
 ### Properties
 
-- [label](Form.FieldProps.md#label)
-- [name](Form.FieldProps.md#name)
+- [label](./Form.FieldProps#label)
+- [name](./Form.FieldProps#name)
 
 ## Properties
 
