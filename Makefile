@@ -79,5 +79,6 @@ docs:
 	docker run \
 		--rm \
 		-v ${PWD}:/usr/src/app \
+		-v ${PWD}/$(or $(filter-out $@,$(MAKECMDGOALS)), docs):/usr/src/docs \
 		${DOCKER_IMAGE} \
-		typedoc $(filter-out $@,$(MAKECMDGOALS))
+		typedoc --cleanOutputDir false --out ../docs

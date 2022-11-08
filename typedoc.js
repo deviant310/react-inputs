@@ -9,7 +9,7 @@ module.exports = {
   includeVersion: true,
   includes: ['./static/docs'],
   name: appName,
-  out: './docu',
+  out: '../d',
   readme: 'none',
   sort: [
     'required-first',
