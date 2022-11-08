@@ -2,9 +2,9 @@ import React from 'react';
 
 import '@testing-library/jest-dom';
 
-import { getByRole, getAllByRole, fireEvent, render } from '@testing-library/react';
+import { fireEvent, getAllByRole, getByRole, render } from '@testing-library/react';
 
-import useForm, { AutocompleteField } from '../src/main';
+import { AutocompleteField, useForm } from 'react-form';
 
 type Option = {
   id: number;
@@ -34,7 +34,6 @@ const moviesOptionsBuilder = (editingValue: string) => (
 );
 
 const getOptionKey = (option: Option) => option.id;
-
 const displayValueForOption = (option: Option) => option.value;
 
 test('Initial value', () => {
@@ -45,18 +44,17 @@ test('Initial value', () => {
 
     return (
       <AutocompleteField
-        name="country"
-        selected={data.country}
-        optionsBuilder={countriesOptionsBuilder}
-        getOptionKey={getOptionKey}
         displayValueForOption={displayValueForOption}
+        getOptionKey={getOptionKey}
+        name="country"
         optionComponent={AutocompleteFieldOption}
+        optionsBuilder={countriesOptionsBuilder}
+        selected={data.country}
       />
     );
   };
 
   const { getByRole } = render(<Form/>);
-
   const inputElement = getByRole('textbox');
 
   expect(inputElement).toHaveValue(country.value);
@@ -68,17 +66,16 @@ test('Typing search query', () => {
   const Form = () => {
     return (
       <AutocompleteField
-        name="country"
-        optionsBuilder={countriesOptionsBuilder}
-        getOptionKey={getOptionKey}
         displayValueForOption={displayValueForOption}
+        getOptionKey={getOptionKey}
+        name="country"
         optionComponent={AutocompleteFieldOption}
+        optionsBuilder={countriesOptionsBuilder}
       />
     );
   };
 
   const { getByRole } = render(<Form/>);
-
   const inputElement = getByRole('textbox');
 
   fireEvent.change(inputElement, { target: { value: searchQuery } });
@@ -88,9 +85,7 @@ test('Typing search query', () => {
 
 test('Change field value', () => {
   const nextCountry = countries[1];
-
   const nextCountryValue = nextCountry.value;
-
   const nextCountrySearchQuery = nextCountryValue.slice(0, 3);
 
   const Form = () => {
@@ -100,19 +95,18 @@ test('Change field value', () => {
 
     return (
       <AutocompleteField
-        name="country"
-        selected={data.country}
-        optionsBuilder={countriesOptionsBuilder}
-        getOptionKey={getOptionKey}
         displayValueForOption={displayValueForOption}
-        onSelect={setData}
+        getOptionKey={getOptionKey}
+        name="country"
+        onChange={setData}
         optionComponent={AutocompleteFieldOption}
+        optionsBuilder={countriesOptionsBuilder}
+        selected={data.country}
       />
     );
   };
 
-  const { getByRole, getAllByRole } = render(<Form/>);
-
+  const { getAllByRole, getByRole } = render(<Form/>);
   const inputElement = getByRole('textbox');
 
   fireEvent.change(inputElement, { target: { value: nextCountrySearchQuery } });
@@ -126,15 +120,10 @@ test('Change field value', () => {
 
 test('Change multiple fields values', () => {
   const nextCountry = countries[1];
-
   const nextCountryValue = nextCountry.value;
-
   const nextCountrySearchQuery = nextCountryValue.slice(0, 3);
-
   const nextMovie = movies[1];
-
   const nextMovieValue = nextMovie.value;
-
   const nextMovieSearchQuery = nextMovieValue.slice(0, 3);
 
   const Form = () => {
@@ -146,34 +135,31 @@ test('Change multiple fields values', () => {
     return (
       <>
         <AutocompleteField
-          name="country"
-          selected={data.country}
-          optionsBuilder={countriesOptionsBuilder}
-          getOptionKey={getOptionKey}
           displayValueForOption={displayValueForOption}
-          onSelect={setData}
+          getOptionKey={getOptionKey}
+          name="country"
+          onChange={setData}
           optionComponent={AutocompleteFieldOption}
+          optionsBuilder={countriesOptionsBuilder}
+          selected={data.country}
         />
 
         <AutocompleteField
-          name="movie"
-          selected={data.movie}
-          optionsBuilder={moviesOptionsBuilder}
-          getOptionKey={getOptionKey}
           displayValueForOption={displayValueForOption}
-          onSelect={setData}
+          getOptionKey={getOptionKey}
+          name="movie"
+          onChange={setData}
           optionComponent={AutocompleteFieldOption}
+          optionsBuilder={moviesOptionsBuilder}
+          selected={data.movie}
         />
       </>
     );
   };
 
   const formRenderResult = render(<Form/>);
-
   const fieldElements = formRenderResult.getAllByRole('group');
-
   const countryInputElement = getByRole(fieldElements[0], 'textbox');
-
   const movieInputElement = getByRole(fieldElements[1], 'textbox');
 
   fireEvent.change(countryInputElement, { target: { value: nextCountrySearchQuery } });
@@ -181,7 +167,6 @@ test('Change multiple fields values', () => {
   fireEvent.change(movieInputElement, { target: { value: nextMovieSearchQuery } });
 
   const countryFirstOptionDropdownElement = getAllByRole(fieldElements[0], 'option')[0];
-
   const movieFirstOptionDropdownElement = getAllByRole(fieldElements[1], 'option')[0];
 
   fireEvent.click(countryFirstOptionDropdownElement);
@@ -211,22 +196,20 @@ test('Render custom components', () => {
   const Form = () => {
     return (
       <AutocompleteField
-        name="country"
-        optionsBuilder={countriesOptionsBuilder}
-        getOptionKey={getOptionKey}
-        displayValueForOption={displayValueForOption}
-        optionComponent={AutocompleteFieldOption}
         containerComponent={Container}
+        displayValueForOption={displayValueForOption}
         dropdownComponent={Dropdown}
+        getOptionKey={getOptionKey}
         inputComponent={Input}
+        name="country"
+        optionComponent={AutocompleteFieldOption}
+        optionsBuilder={countriesOptionsBuilder}
       />
     );
   };
 
   const { getByTestId } = render(<Form/>);
-
   const wrapperElement = getByTestId('autocomplete-field-wrapper');
-
   const inputElement = getByTestId('autocomplete-field-input');
 
   expect(wrapperElement).toBeInTheDocument();

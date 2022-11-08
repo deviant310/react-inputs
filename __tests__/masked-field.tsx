@@ -1,10 +1,12 @@
 import React, { forwardRef } from 'react';
 
+import userEvent from '@testing-library/user-event';
+
 import '@testing-library/jest-dom';
 
 import { fireEvent, render } from '@testing-library/react';
 
-import useForm, { MaskedField } from '../src/main';
+import { MaskedField, useForm } from 'react-form';
 
 test('Initial value', () => {
   const phone = '+995123456789';
@@ -14,8 +16,8 @@ test('Initial value', () => {
 
     return (
       <MaskedField
-        name="phone"
         mask="+995 ###-###-###"
+        name="phone"
         onChange={setData}
         source={String.raw`\+995|(\d)`}
         value={data.phone}
@@ -37,8 +39,8 @@ test('Change field value', () => {
 
     return (
       <MaskedField
-        name="phone"
         mask="+995 ###-###-###"
+        name="phone"
         onChange={setData}
         source={String.raw`\+995|(\d)`}
         value={data.phone}
@@ -54,6 +56,69 @@ test('Change field value', () => {
   expect(inputElement).toHaveValue('+995 999-443-328');
 });
 
+test('Check caret position', async () => {
+  const event = userEvent.setup();
+  const phone = '+995123456789';
+
+  const Form = () => {
+    const [data, setData] = useForm({ phone });
+
+    return (
+      <MaskedField
+        mask="+995 ###-###-###"
+        name="phone"
+        onChange={setData}
+        source={String.raw`\+995|(\d)`}
+        value={data.phone}
+      />
+    );
+  };
+
+  const { getByRole } = render(<Form/>);
+  const inputElement = getByRole('textbox') as HTMLInputElement;
+
+  await event.type(inputElement, '{backspace}');
+
+  await new Promise(resolve => {
+    setTimeout(resolve, 1000);
+    /*requestAnimationFrame(() => {
+      console.log('first rerender');
+
+      resolve(undefined);
+    });*/
+  });
+
+  console.log('first deleting', inputElement.selectionStart);
+
+  await event.type(inputElement, '{backspace}');
+
+  await new Promise(resolve => {
+    requestAnimationFrame(() => {
+      console.log('second rerender');
+
+      resolve(undefined);
+    });
+  });
+
+  console.log('second deleting', inputElement.selectionStart);
+
+  await event.type(inputElement, '{backspace}');
+
+  await new Promise(resolve => {
+    requestAnimationFrame(() => {
+      console.log('third rerender');
+
+      resolve(undefined);
+    });
+  });
+
+  console.log('third deleting', inputElement.selectionStart);
+
+  console.log(inputElement.value);
+
+  expect(inputElement.selectionStart).toEqual(12);
+});
+
 test('Edit field value', () => {
   const phone = '+995123456789';
 
@@ -62,8 +127,8 @@ test('Edit field value', () => {
 
     return (
       <MaskedField
-        name="phone"
         mask="+995 ###-###-###"
+        name="phone"
         onChange={setData}
         source={String.raw`\+995|(\d)`}
         value={data.phone}
@@ -84,21 +149,21 @@ test('Change multiple fields values', () => {
   const card = '1234567812345678';
 
   const Form = () => {
-    const [data, setData] = useForm({ phone, card });
+    const [data, setData] = useForm({ card, phone });
 
     return (
       <>
         <MaskedField
-          name="phone"
           mask="+995 ###-###-###"
+          name="phone"
           onChange={setData}
           source={String.raw`\+995|(\d)`}
           value={data.phone}
         />
 
         <MaskedField
-          name="card"
           mask="####-####-####-####"
+          name="card"
           onChange={setData}
           source={String.raw`(\d)`}
           value={data.card}
@@ -127,10 +192,10 @@ test('Render custom input component', () => {
   const Form = () => {
     return (
       <MaskedField
-        name="phone"
-        mask="+995 ###-###-###"
-        source={String.raw`\+995|(\d)`}
         inputComponent={Input}
+        mask="+995 ###-###-###"
+        name="phone"
+        source={String.raw`\+995|(\d)`}
       />
     );
   };

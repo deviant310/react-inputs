@@ -1,5 +1,11 @@
 -include .env
 
+define Package
+$(shell docker run --rm -v ${PWD}/package.json:/usr/src/app/package.json ${DOCKER_IMAGE} node -p "require('./package.json').$(1)")
+endef
+
+APP_NAME:= $(call Package, name)
+
 env:
 	cp ./.env.example .env
 
@@ -38,23 +44,19 @@ dev-server:
 open-browser:
 	open http://localhost:${DEV_SERVER_PORT}
 
-dev-watcher:
+development-build:
 	docker run \
 		--rm \
-		--init \
-		--name ${APP_NAME} \
 		-v ${PWD}:/usr/src/app \
-		-v ${PWD}/${BUILD_PATH_HOST}:/usr/src/app/${BUILD_PATH} \
 		${DOCKER_IMAGE} \
-		node scripts/dev-watcher.js
+		webpack
 
 production-build:
 	docker run \
 		--rm \
 		-v ${PWD}:/usr/src/app \
-		-v ${PWD}/${BUILD_PATH_HOST}:/usr/src/app/${BUILD_PATH} \
 		${DOCKER_IMAGE} \
-		node scripts/production-build.js
+		webpack --env production
 
 test:
 	docker run \
@@ -62,4 +64,20 @@ test:
 		-v ${PWD}:/usr/src/app \
 		-e FORCE_COLOR=true \
 		${DOCKER_IMAGE} \
-		jest $(filter-out $@,$(MAKECMDGOALS)) --verbose
+		jest $(filter-out $@,$(MAKECMDGOALS))
+
+pack:
+	docker run \
+		--rm \
+		-v ${PWD}:/usr/src/app \
+		-v ${PWD}/$(filter-out $@,$(MAKECMDGOALS)):/usr/src/pack \
+		${DOCKER_IMAGE} \
+		npm pack --pack-destination="../pack"
+
+.PHONY: docs
+docs:
+	docker run \
+		--rm \
+		-v ${PWD}:/usr/src/app \
+		${DOCKER_IMAGE} \
+		typedoc $(filter-out $@,$(MAKECMDGOALS))

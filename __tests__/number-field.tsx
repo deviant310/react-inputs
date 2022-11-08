@@ -1,10 +1,10 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 
 import '@testing-library/jest-dom';
 
 import { fireEvent, render } from '@testing-library/react';
 
-import useForm, { NumberField } from '../src/main';
+import { NumberField, useForm } from 'react-form';
 
 test('Initial value', () => {
   const age = 15;
@@ -13,12 +13,11 @@ test('Initial value', () => {
     const [data, setData] = useForm({ age });
 
     return (
-      <NumberField name="age" value={data.age} onChange={setData}/>
+      <NumberField name="age" onChange={setData} value={data.age}/>
     );
   };
 
   const { getByRole } = render(<Form/>);
-
   const inputElement = getByRole('textbox');
 
   expect(inputElement).toHaveValue(age.toString());
@@ -26,19 +25,17 @@ test('Initial value', () => {
 
 test('Change field value', () => {
   const age = 15;
-
   const nextAge = 16;
 
   const Form = () => {
     const [data, setData] = useForm({ age });
 
     return (
-      <NumberField name="age" value={data.age} onChange={setData}/>
+      <NumberField name="age" onChange={setData} value={data.age}/>
     );
   };
 
   const { getByRole } = render(<Form/>);
-
   const inputElement = getByRole('textbox');
 
   fireEvent.change(inputElement, { target: { value: nextAge } });
@@ -48,11 +45,8 @@ test('Change field value', () => {
 
 test('Change multiple fields values', () => {
   const age = 15;
-
   const nextAge = 16;
-
   const price = 500.50;
-
   const nextPrice = 700.73;
 
   const Form = () => {
@@ -60,15 +54,14 @@ test('Change multiple fields values', () => {
 
     return (
       <>
-        <NumberField name="age" value={data.age} onChange={setData}/>
+        <NumberField name="age" onChange={setData} value={data.age}/>
 
-        <NumberField name="price" value={data.price} onChange={setData}/>
+        <NumberField name="price" onChange={setData} value={data.price}/>
       </>
     );
   };
 
   const { getAllByRole } = render(<Form/>);
-
   const inputElements = getAllByRole('textbox');
 
   fireEvent.change(inputElements[0], { target: { value: nextAge } });
@@ -87,12 +80,11 @@ test('Enter empty value', () => {
     const [data, setData] = useForm({ age });
 
     return (
-      <NumberField name="age" value={data.age} onChange={setData}/>
+      <NumberField name="age" onChange={setData} value={data.age}/>
     );
   };
 
   const { getByRole } = render(<Form/>);
-
   const inputElement = getByRole('textbox');
 
   fireEvent.change(inputElement, { target: { value: '' } });
@@ -107,12 +99,11 @@ test('Check maximum allowable value', () => {
     const [data, setData] = useForm({ distance });
 
     return (
-      <NumberField name="distance" value={data.distance} onChange={setData}/>
+      <NumberField name="distance" onChange={setData} value={data.distance}/>
     );
   };
 
   const { getByRole } = render(<Form/>);
-
   const inputElement = getByRole('textbox');
 
   fireEvent.change(inputElement, { target: { value: 1e15 } });
@@ -131,12 +122,11 @@ test('Render custom input component', () => {
 
   const Form = () => {
     return (
-      <NumberField name="age" inputComponent={Input}/>
+      <NumberField inputComponent={Input} name="age"/>
     );
   };
 
   const { getByTestId } = render(<Form/>);
-
   const inputElement = getByTestId('number-field-input');
 
   expect(inputElement).toBeInTheDocument();

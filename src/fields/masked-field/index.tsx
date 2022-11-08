@@ -1,36 +1,40 @@
 import {
   ChangeEvent,
-  forwardRef,
   ForwardRefExoticComponent,
-  memo,
   PropsWithoutRef,
   RefAttributes,
+  forwardRef,
+  memo,
   useCallback,
   useEffect,
   useRef,
   useState
 } from 'react';
 
-import Form from '../../types/form';
+import { FieldChangeEvent, FieldProps } from '../../form';
 
 const MASK_PATTERN_SYMBOL = '#';
 const MASK_STUB_SYMBOL = '_';
 
 /**
- * MaskedField component
- * @param props
+ * A component for helping the user entering some text by configured mask.
+ *
+ * Input pattern is determined by {@link MaskedField.Props.mask} parameter.
+ * The user's text input is controlled by {@link MaskedField.Props.source} parameter.
  */
-function MaskedFieldFC<Name extends string, Value extends string> (props: MaskedField.Props<Name, Value>) {
+export const MaskedField = memo(props => {
+  type Name = typeof name;
+
   const {
-    inputComponent: Input,
+    inputComponent: Input = DefaultInput,
     label,
-    name,
     mask: maskString,
+    name,
     onChange,
     source,
-    stub,
-    value,
-  } = props as typeof props & typeof MaskedFieldFC.defaultProps;
+    stub = MASK_STUB_SYMBOL,
+    value = '',
+  } = props;
 
   const initialValue = useRef(value);
   const input = useRef<HTMLInputElement>(null);
@@ -69,7 +73,7 @@ function MaskedFieldFC<Name extends string, Value extends string> (props: Masked
         .map(match => match[0])
         .join('');
 
-      return { text, payload, entriesOffsets, startOffset };
+      return { entriesOffsets, payload, startOffset, text };
     },
     [maskString, source, stub]
   );
@@ -81,29 +85,29 @@ function MaskedFieldFC<Name extends string, Value extends string> (props: Masked
     []
   );
 
-  const setValues = useCallback(
-    (value: Value, displayValue: string) => {
+  const setFieldData = useCallback(
+    (value: string, displayValue: string) => {
       setDisplayValue(displayValue);
 
-      onChange?.({ [name]: value });
+      onChange?.({ [name]: value } as Record<Name, string>);
     },
     [onChange, name]
   );
 
   const onInputChange = useCallback(
     ({ target }: ChangeEvent<HTMLInputElement>) => {
-      const { value, selectionStart } = target;
+      const { selectionStart, value } = target;
 
       if (!selectionStart) return;
 
       const mask = getMaskFromRawText(value);
       const caretAt = getMaskRealCaretPositionByInitialCaretPosition(mask, selectionStart);
 
-      setValues(mask.payload as Value, mask.text);
+      setFieldData(mask.payload, mask.text);
 
       requestAnimationFrame(() => setCaretPosition(caretAt));
     },
-    [getMaskFromRawText, setCaretPosition, setValues]
+    [getMaskFromRawText, setCaretPosition, setFieldData]
   );
 
   const onInputMouseDown = useCallback(
@@ -133,7 +137,6 @@ function MaskedFieldFC<Name extends string, Value extends string> (props: Masked
         if (selectionStart === null) return;
 
         const mask = getMaskFromRawText(value);
-
         const firstCharPosition = mask.entriesOffsets[0];
         const lastCharPosition = mask.entriesOffsets[mask.entriesOffsets.length - 1];
 
@@ -165,9 +168,9 @@ function MaskedFieldFC<Name extends string, Value extends string> (props: Masked
     () => {
       const mask = getMaskFromRawText(initialValue.current);
 
-      setValues(mask.payload as Value, mask.text);
+      setFieldData(mask.payload, mask.text);
     },
-    [getMaskFromRawText, setValues]
+    [getMaskFromRawText, setFieldData]
   );
 
   useEffect(
@@ -175,10 +178,12 @@ function MaskedFieldFC<Name extends string, Value extends string> (props: Masked
       const currentInput = input.current;
 
       currentInput?.addEventListener('mousedown', onInputMouseDown);
+
       currentInput?.addEventListener('keydown', onInputKeyDown);
 
       return () => {
         currentInput?.removeEventListener('mousedown', onInputMouseDown);
+
         currentInput?.removeEventListener('keydown', onInputKeyDown);
       };
     },
@@ -209,15 +214,11 @@ function MaskedFieldFC<Name extends string, Value extends string> (props: Masked
       value={displayValue}
     />
   );
-}
+}) as MaskedField.Component;
 
-MaskedFieldFC.defaultProps = {
-  value: '',
-  inputComponent: forwardRef<HTMLInputElement, MaskedField.InputProps>((props, ref) => (
-    <input {...props} ref={ref}/>
-  )),
-  stub: MASK_STUB_SYMBOL
-};
+const DefaultInput = forwardRef<HTMLInputElement, MaskedField.InputProps>((props, ref) => (
+  <input {...props} ref={ref}/>
+));
 
 /**
  * Getting mask real caret position by initial caret position
@@ -231,9 +232,7 @@ function getMaskRealCaretPositionByInitialCaretPosition (
   lazy?: boolean
 ) {
   const { entriesOffsets, startOffset } = mask;
-
   const initialCharPosition = initialCaretPosition - 1;
-
   const whereOffsetGreaterThanPositionOrEqual = (offset: number) => offset >= initialCharPosition;
   const whereOffsetGreaterThanPosition = (offset: number) => offset > initialCharPosition;
 
@@ -253,31 +252,29 @@ function getMaskRealCaretPositionByInitialCaretPosition (
     : startOffset;
 }
 
-const MaskedField = memo(MaskedFieldFC) as unknown as typeof MaskedFieldFC;
+export namespace MaskedField {
+  export type Component = <Name extends string> (props: Props<Name>) => JSX.Element;
 
-namespace MaskedField {
-  export interface Props<Name extends string, Value extends string> extends Form.FieldProps<Name> {
+  export interface Props<Name extends string> extends FieldProps<Name> {
     inputComponent?: ForwardRefExoticComponent<PropsWithoutRef<InputProps> & RefAttributes<HTMLInputElement>>;
     mask: string;
-    onChange?: (data: Form.Data<Name, Value>) => void;
+    onChange?: FieldChangeEvent<Name, string>;
     source: string;
     stub?: string;
-    value?: Value;
+    value?: string;
   }
 
   export interface InputProps {
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    onChange (e: ChangeEvent<HTMLInputElement>): void;
     placeholder?: string;
     type: 'text';
     value: string;
   }
 
   export interface Mask {
-    text: string;
-    payload: string;
     entriesOffsets: number[];
+    payload: string;
     startOffset: number;
+    text: string;
   }
 }
-
-export default MaskedField;

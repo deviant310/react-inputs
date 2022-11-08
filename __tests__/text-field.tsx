@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 
 import { fireEvent, render } from '@testing-library/react';
 
-import useForm, { TextField } from '../src/main';
+import { TextField, useForm } from 'react-form';
 
 test('Initial value', () => {
   const name = 'John';
@@ -13,12 +13,11 @@ test('Initial value', () => {
     const [data, setData] = useForm({ name });
 
     return (
-      <TextField name="name" value={data.name} onChange={setData}/>
+      <TextField name="name" onChange={setData} value={data.name}/>
     );
   };
 
   const { getByRole } = render(<Form/>);
-
   const inputElement = getByRole('textbox');
 
   expect(inputElement).toHaveValue(name);
@@ -26,19 +25,17 @@ test('Initial value', () => {
 
 test('Change field value', () => {
   const name = 'John';
-
   const nextName = 'Anton';
 
   const Form = () => {
     const [data, setData] = useForm({ name });
 
     return (
-      <TextField name="name" value={data.name} onChange={setData}/>
+      <TextField name="name" onChange={setData} value={data.name}/>
     );
   };
 
   const { getByRole } = render(<Form/>);
-
   const inputElement = getByRole('textbox');
 
   fireEvent.change(inputElement, { target: { value: nextName } });
@@ -48,11 +45,8 @@ test('Change field value', () => {
 
 test('Change multiple fields values', () => {
   const firstName = 'John';
-
   const lastName = 'Doe';
-
   const nextFirstName = 'Anton';
-
   const nextLastName = 'Lebedev';
 
   const Form = () => {
@@ -60,15 +54,14 @@ test('Change multiple fields values', () => {
 
     return (
       <>
-        <TextField name="firstName" value={data.firstName} onChange={setData}/>
+        <TextField name="firstName" onChange={setData} value={data.firstName}/>
 
-        <TextField name="lastName" value={data.lastName} onChange={setData}/>
+        <TextField name="lastName" onChange={setData} value={data.lastName}/>
       </>
     );
   };
 
   const { getAllByRole } = render(<Form/>);
-
   const inputElements = getAllByRole('textbox');
 
   fireEvent.change(inputElements[0], { target: { value: nextFirstName } });
@@ -91,12 +84,11 @@ test('Render custom input component', () => {
 
   const Form = () => {
     return (
-      <TextField name="name" inputComponent={Input}/>
+      <TextField inputComponent={Input} name="name"/>
     );
   };
 
   const { getByTestId } = render(<Form/>);
-
   const inputElement = getByTestId('text-field-input');
 
   expect(inputElement).toBeInTheDocument();

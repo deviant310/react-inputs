@@ -1,19 +1,15 @@
 const { realpathSync } = require('fs');
 const { resolve } = require('path');
-
 const appDirectory = realpathSync(process.cwd());
 const resolvePath = relativePath => resolve(appDirectory, relativePath);
 
 module.exports = {
-  appPath: resolvePath('.'),
-  appPackageJson: resolvePath('package.json'),
-  dotenv: resolvePath('.env'),
-  appSrc: resolvePath('./src'),
+  appBuild: resolvePath(process.env.BUILD_PATH || './build'),
+  appDocs: resolvePath('./docs'),
+  appHtml: resolvePath('./static/index.html'),
   appIndex: resolvePath('./src/index.tsx'),
   appMain: resolvePath('./src/main.ts'),
-  appTypes: resolvePath('./src/types'),
-  appBuild: resolvePath(process.env.BUILD_PATH || './build'),
+  appSrc: resolvePath('./src'),
   appStatic: resolvePath('./static'),
-  appHtml: resolvePath('./static/index.html'),
-  appDocs: resolvePath('./docs')
+  dotenv: resolvePath('.env')
 };
