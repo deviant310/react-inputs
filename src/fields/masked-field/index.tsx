@@ -1,20 +1,24 @@
 import {
   ChangeEvent,
-  ForwardRefExoticComponent,
-  PropsWithoutRef,
-  RefAttributes,
-  forwardRef,
+  KeyboardEvent,
+  MouseEvent,
   memo,
   useCallback,
   useEffect,
   useRef,
-  useState
+  useState,
 } from 'react';
 
-import { FieldChangeEvent, FieldProps } from '../../form';
+import { Input as DefaultInput, } from './components/input';
 
-const MASK_PATTERN_SYMBOL = '#';
-const MASK_STUB_SYMBOL = '_';
+import MaskedValue from './masked-value';
+
+import Form from '../../form';
+
+type EditingInfo = {
+  caretMovedBy: 'typing' | 'deleting';
+  caretNativePosition: number;
+}
 
 /**
  * A component for helping the user entering some text by configured mask.
@@ -28,253 +32,153 @@ export const MaskedField = memo(props => {
   const {
     inputComponent: Input = DefaultInput,
     label,
-    mask: maskString,
+    mask: definition,
     name,
     onChange,
     source,
-    stub = MASK_STUB_SYMBOL,
+    stub = '_',
     value = '',
   } = props;
 
-  const initialValue = useRef(value);
-  const input = useRef<HTMLInputElement>(null);
-  const componentIsReadyToResetDisplayValue = useRef(false);
-  const [displayValue, setDisplayValue] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const getMaskFromRawText = useCallback(
-    (rawText: string): MaskedField.Mask => {
-      const capturedEntries = [...rawText.matchAll(RegExp(source, 'g'))]
-        .map(match => match[1])
-        .filter(Boolean);
-
-      const startOffset = maskString.indexOf(MASK_PATTERN_SYMBOL);
-      const entriesOffsets: number[] = [];
-
-      let entryIndex = 0;
-
-      const text = maskString.replace(
-        RegExp(String.raw`${MASK_PATTERN_SYMBOL}`, 'g'),
-        (match, offset) => {
-          const entry = capturedEntries[entryIndex];
-
-          entryIndex++;
-
-          if (entry) {
-            entriesOffsets.push(offset);
-
-            return entry;
-          } else {
-            return stub;
-          }
-        }
-      );
-
-      const payload = [...text.matchAll(RegExp(source, 'g'))]
-        .map(match => match[0])
-        .join('');
-
-      return { entriesOffsets, payload, startOffset, text };
-    },
-    [maskString, source, stub]
+  const maskedValue = useRef(
+    new MaskedValue({ definition, source, stub, value })
   );
 
-  const setCaretPosition = useCallback(
-    (position: number) => {
-      input.current?.setSelectionRange(position, position);
-    },
-    []
-  );
+  const [editingInfo, setEditingInfo] = useState<EditingInfo>({
+    caretMovedBy: 'typing',
+    caretNativePosition: definition.length,
+  });
 
-  const setFieldData = useCallback(
-    (value: string, displayValue: string) => {
-      setDisplayValue(displayValue);
-
+  const setValue = useCallback(
+    (value: string) => {
       onChange?.({ [name]: value } as Record<Name, string>);
     },
     [onChange, name]
   );
 
-  const onInputChange = useCallback(
-    ({ target }: ChangeEvent<HTMLInputElement>) => {
-      const { selectionStart, value } = target;
+  const restoreCaretPositionFrom = useCallback(
+    (position: number, lazy?: boolean) => {
+      if (inputRef.current === null) return;
 
-      if (!selectionStart) return;
+      const caretPosition = maskedValue.current.getRelevantCaretPositionClosestTo(position, lazy);
 
-      const mask = getMaskFromRawText(value);
-      const caretAt = getMaskRealCaretPositionByInitialCaretPosition(mask, selectionStart);
-
-      setFieldData(mask.payload, mask.text);
-
-      requestAnimationFrame(() => setCaretPosition(caretAt));
+      inputRef.current.setSelectionRange(caretPosition, caretPosition);
     },
-    [getMaskFromRawText, setCaretPosition, setFieldData]
-  );
-
-  const onInputMouseDown = useCallback(
-    (event: Event) => {
-      requestAnimationFrame(() => {
-        const target = event.target as HTMLInputElement;
-        const { selectionStart } = target;
-
-        if (selectionStart === null) return;
-
-        const mask = getMaskFromRawText(value);
-        const caretAt = getMaskRealCaretPositionByInitialCaretPosition(mask, selectionStart, true);
-
-        setCaretPosition(caretAt);
-      });
-    },
-    [getMaskFromRawText, setCaretPosition, value]
+    []
   );
 
   const onInputKeyDown = useCallback(
-    (event: KeyboardEvent) => {
-      requestAnimationFrame(() => {
-        const { code } = event;
-        const target = event.target as HTMLInputElement;
-        const { selectionStart, value } = target;
+    (event: KeyboardEvent<HTMLInputElement>) => {
+      const { selectionEnd } = event.currentTarget;
 
-        if (selectionStart === null) return;
+      if (selectionEnd === null) return;
 
-        const mask = getMaskFromRawText(value);
-        const firstCharPosition = mask.entriesOffsets[0];
-        const lastCharPosition = mask.entriesOffsets[mask.entriesOffsets.length - 1];
+      switch (true) {
+        case event.code === 'ArrowLeft': {
+          event.preventDefault();
 
-        switch (code) {
-          case 'ArrowLeft': {
-            const caretAt = getMaskRealCaretPositionByInitialCaretPosition(mask, selectionStart, true);
-
-            return setCaretPosition(caretAt);
-          }
-
-          case 'ArrowRight': {
-            const caretAt = getMaskRealCaretPositionByInitialCaretPosition(mask, selectionStart);
-
-            return setCaretPosition(caretAt);
-          }
-
-          case 'ArrowUp':
-            return setCaretPosition(firstCharPosition);
-
-          case 'ArrowDown':
-            return setCaretPosition(lastCharPosition + 1);
+          return restoreCaretPositionFrom(selectionEnd - 1, true);
         }
-      });
-    },
-    [getMaskFromRawText, setCaretPosition]
-  );
 
-  useEffect(
-    () => {
-      const mask = getMaskFromRawText(initialValue.current);
+        case event.code === 'ArrowRight': {
+          event.preventDefault();
 
-      setFieldData(mask.payload, mask.text);
-    },
-    [getMaskFromRawText, setFieldData]
-  );
-
-  useEffect(
-    () => {
-      const currentInput = input.current;
-
-      currentInput?.addEventListener('mousedown', onInputMouseDown);
-
-      currentInput?.addEventListener('keydown', onInputKeyDown);
-
-      return () => {
-        currentInput?.removeEventListener('mousedown', onInputMouseDown);
-
-        currentInput?.removeEventListener('keydown', onInputKeyDown);
-      };
-    },
-    [onInputChange, onInputMouseDown, onInputKeyDown]
-  );
-
-  useEffect(
-    () => {
-      if (componentIsReadyToResetDisplayValue.current) {
-        const { text: maskedText } = getMaskFromRawText(value);
-
-        if (displayValue !== maskedText) {
-          setDisplayValue(maskedText);
+          return restoreCaretPositionFrom(selectionEnd + 1);
         }
-      } else {
-        componentIsReadyToResetDisplayValue.current = true;
+
+        case event.code === 'ArrowUp': {
+          event.preventDefault();
+
+          return restoreCaretPositionFrom(maskedValue.current.firstEntryOffset);
+        }
+
+        case event.code === 'ArrowDown': {
+          event.preventDefault();
+
+          return restoreCaretPositionFrom(maskedValue.current.lastEntryOffset + 1);
+        }
       }
     },
-    [setCaretPosition, getMaskFromRawText, value, displayValue]
+    [restoreCaretPositionFrom]
+  );
+
+  const onInputChange = useCallback(
+    ({ currentTarget }: ChangeEvent<HTMLInputElement>) => {
+      const { selectionEnd, value } = currentTarget;
+
+      if (selectionEnd === null) return;
+
+      const maskedValuePreviousPayload =  maskedValue.current.payload;
+
+      maskedValue.current = maskedValue.current.copyWith({ value });
+
+      setEditingInfo({
+        caretMovedBy: maskedValue.current.payload.length < maskedValuePreviousPayload.length
+          ? 'deleting'
+          : 'typing',
+        caretNativePosition: selectionEnd,
+      });
+
+      setValue(maskedValue.current.payload);
+    },
+    [setValue]
+  );
+
+  const onInputMouseDown = useCallback(
+    ({ currentTarget }: MouseEvent<HTMLInputElement>) => {
+      requestAnimationFrame(() => {
+        if (currentTarget.selectionEnd !== null)
+          restoreCaretPositionFrom(currentTarget.selectionEnd, true);
+      });
+    },
+    [restoreCaretPositionFrom]
+  );
+
+  useEffect(
+    () => {
+      restoreCaretPositionFrom(
+        editingInfo.caretNativePosition,
+        editingInfo.caretMovedBy === 'deleting'
+      );
+    },
+    [editingInfo, restoreCaretPositionFrom]
+  );
+
+  useEffect(
+    () => {
+      maskedValue.current = maskedValue.current.copyWith({ definition, source, stub });
+
+      setValue(maskedValue.current.payload);
+    },
+    [definition, setValue, source, stub]
   );
 
   return (
     <Input
       onChange={onInputChange}
+      onKeyDown={onInputKeyDown}
+      onMouseDown={onInputMouseDown}
       placeholder={label}
-      ref={input}
+      ref={inputRef}
       type="text"
-      value={displayValue}
+      value={maskedValue.current.text}
     />
   );
 }) as MaskedField.Component;
 
-const DefaultInput = forwardRef<HTMLInputElement, MaskedField.InputProps>((props, ref) => (
-  <input {...props} ref={ref}/>
-));
-
-/**
- * Getting mask real caret position by initial caret position
- * @param mask
- * @param initialCaretPosition
- * @param lazy
- */
-function getMaskRealCaretPositionByInitialCaretPosition (
-  mask: MaskedField.Mask,
-  initialCaretPosition: number,
-  lazy?: boolean
-) {
-  const { entriesOffsets, startOffset } = mask;
-  const initialCharPosition = initialCaretPosition - 1;
-  const whereOffsetGreaterThanPositionOrEqual = (offset: number) => offset >= initialCharPosition;
-  const whereOffsetGreaterThanPosition = (offset: number) => offset > initialCharPosition;
-
-  const closestCharPositionIndex = entriesOffsets
-    .findIndex(
-      lazy
-        ? whereOffsetGreaterThanPosition
-        : whereOffsetGreaterThanPositionOrEqual
-    ) - (lazy ? 1 : 0);
-
-  return entriesOffsets.length > 0
-    ? (
-      initialCharPosition < entriesOffsets[0]
-        ? startOffset
-        : (entriesOffsets[closestCharPositionIndex] ?? entriesOffsets[entriesOffsets.length - 1]) + 1
-    )
-    : startOffset;
-}
-
 export namespace MaskedField {
   export type Component = <Name extends string> (props: Props<Name>) => JSX.Element;
 
-  export interface Props<Name extends string> extends FieldProps<Name> {
-    inputComponent?: ForwardRefExoticComponent<PropsWithoutRef<InputProps> & RefAttributes<HTMLInputElement>>;
+  export type InputComponent = DefaultInput.Component;
+
+  export interface Props<Name extends string> extends Form.FieldProps<Name> {
+    inputComponent?: InputComponent;
     mask: string;
-    onChange?: FieldChangeEvent<Name, string>;
+    onChange?: Form.FieldChangeEvent<Name, string>;
     source: string;
     stub?: string;
     value?: string;
-  }
-
-  export interface InputProps {
-    onChange (e: ChangeEvent<HTMLInputElement>): void;
-    placeholder?: string;
-    type: 'text';
-    value: string;
-  }
-
-  export interface Mask {
-    entriesOffsets: number[];
-    payload: string;
-    startOffset: number;
-    text: string;
   }
 }

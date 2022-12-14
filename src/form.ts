@@ -1,8 +1,6 @@
-/**
- * @group Docker
- * [[include:docker.md]]
- */
 import { useReducer } from 'react';
+
+import { Some } from './utility-types';
 
 /**
  * Returns form data and a reducer action to update data key
@@ -18,7 +16,7 @@ import { useReducer } from 'react';
  * );
  * ```
  */
-export function useForm<Data extends AbstractData = AbstractData> (initialData: Data) {
+export function useForm<Data extends Form.AbstractData> (initialData: Data) {
   return useReducer<typeof formDataReducer<Data>>(formDataReducer, initialData);
 }
 
@@ -28,36 +26,36 @@ export function useForm<Data extends AbstractData = AbstractData> (initialData: 
  * @param state
  * @param payload
  */
-function formDataReducer<Data extends AbstractData = AbstractData> (state: Data, payload: Payload<Data>) {
-  const payloadHasNewData = Object.entries(payload)
+function formDataReducer<Data extends Form.AbstractData> (state: Data, payload: Some<Data>) {
+  const payloadHasNewData = Object
+    .entries(payload)
     .some(([key, value]) => state[key] !== value);
 
-  return payloadHasNewData ? { ...state, ...payload } : state;
+  return payloadHasNewData
+    ? { ...state, ...payload }
+    : state;
 }
 
-/**
- * Abstract form data interface
- */
-export type AbstractData = Record<string, unknown>;
+namespace Form {
+  /**
+   * Abstract form data interface
+   */
+  export type AbstractData = Record<string, unknown>;
 
-/**
- * Payload interface for updating specific form data properties
- */
-type Payload<Data extends AbstractData> = Exclude<{
-  [K in keyof Data]: Pick<Data, K>;
-}[keyof Data], undefined>;
+  /**
+   * Base field props interface
+   */
+  export interface FieldProps<Name extends string> {
+    label?: string;
+    name: Name;
+  }
 
-/**
- * Base field props interface
- */
-export interface FieldProps<Name extends string> {
-  label?: string;
-  name: Name;
+  /**
+   * Field change event handler
+   */
+  export interface FieldChangeEvent<Name extends string, Value = unknown> {
+    (data: Record<Name, Value>): void;
+  }
 }
 
-/**
- * Field change event handler
- */
-export interface FieldChangeEvent<Name extends string, Value = unknown> {
-  (data: Record<Name, Value>): void;
-}
+export default Form;

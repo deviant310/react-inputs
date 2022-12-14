@@ -13,11 +13,11 @@ test('Initial value', () => {
     const [data, setData] = useForm({ name });
 
     return (
-      <TextField name="name" onChange={setData} value={data.name}/>
+      <TextField name="name" onChange={setData} value={data.name} />
     );
   };
 
-  const { getByRole } = render(<Form/>);
+  const { getByRole } = render(<Form />);
   const inputElement = getByRole('textbox');
 
   expect(inputElement).toHaveValue(name);
@@ -31,11 +31,11 @@ test('Change field value', () => {
     const [data, setData] = useForm({ name });
 
     return (
-      <TextField name="name" onChange={setData} value={data.name}/>
+      <TextField name="name" onChange={setData} value={data.name} />
     );
   };
 
-  const { getByRole } = render(<Form/>);
+  const { getByRole } = render(<Form />);
   const inputElement = getByRole('textbox');
 
   fireEvent.change(inputElement, { target: { value: nextName } });
@@ -54,14 +54,14 @@ test('Change multiple fields values', () => {
 
     return (
       <>
-        <TextField name="firstName" onChange={setData} value={data.firstName}/>
+        <TextField name="firstName" onChange={setData} value={data.firstName} />
 
-        <TextField name="lastName" onChange={setData} value={data.lastName}/>
+        <TextField name="lastName" onChange={setData} value={data.lastName} />
       </>
     );
   };
 
-  const { getAllByRole } = render(<Form/>);
+  const { getAllByRole } = render(<Form />);
   const inputElements = getAllByRole('textbox');
 
   fireEvent.change(inputElements[0], { target: { value: nextFirstName } });
@@ -79,16 +79,16 @@ test('Change multiple fields values', () => {
 
 test('Render custom input component', () => {
   const Input = forwardRef<HTMLInputElement, TextField.InputProps>((props, ref) => (
-    <input data-testid="text-field-input" {...props} ref={ref}/>
+    <input data-testid="text-field-input" {...props} ref={ref} />
   ));
 
   const Form = () => {
     return (
-      <TextField inputComponent={Input} name="name"/>
+      <TextField inputComponent={Input} name="name" />
     );
   };
 
-  const { getByTestId } = render(<Form/>);
+  const { getByTestId } = render(<Form />);
   const inputElement = getByTestId('text-field-input');
 
   expect(inputElement).toBeInTheDocument();

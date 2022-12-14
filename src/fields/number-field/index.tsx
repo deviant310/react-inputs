@@ -1,6 +1,6 @@
 import { ChangeEvent, FunctionComponent, memo, useCallback } from 'react';
 
-import { FieldChangeEvent, FieldProps } from '../../form';
+import Form from '../../form';
 
 /**
  * Number field component
@@ -41,7 +41,7 @@ export const NumberField = memo(props => {
   );
 }) as NumberField.Component;
 
-const DefaultInput = (props: NumberField.InputProps) => <input {...props}/>;
+const DefaultInput = (props: NumberField.InputProps) => <input {...props} />;
 
 /**
  * Transform raw value to integer
@@ -69,11 +69,11 @@ export namespace NumberField {
     <Name extends string>(props: Props<Name>): JSX.Element;
   }
 
-  export interface Props<Name extends string> extends FieldProps<Name> {
+  export interface Props<Name extends string> extends Form.FieldProps<Name> {
     inputComponent?: FunctionComponent<InputProps>;
     max?: number;
     min?: number;
-    onChange?: FieldChangeEvent<Name, number>;
+    onChange?: Form.FieldChangeEvent<Name, number>;
     value?: number;
   }
 

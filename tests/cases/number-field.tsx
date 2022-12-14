@@ -13,11 +13,11 @@ test('Initial value', () => {
     const [data, setData] = useForm({ age });
 
     return (
-      <NumberField name="age" onChange={setData} value={data.age}/>
+      <NumberField name="age" onChange={setData} value={data.age} />
     );
   };
 
-  const { getByRole } = render(<Form/>);
+  const { getByRole } = render(<Form />);
   const inputElement = getByRole('textbox');
 
   expect(inputElement).toHaveValue(age.toString());
@@ -31,11 +31,11 @@ test('Change field value', () => {
     const [data, setData] = useForm({ age });
 
     return (
-      <NumberField name="age" onChange={setData} value={data.age}/>
+      <NumberField name="age" onChange={setData} value={data.age} />
     );
   };
 
-  const { getByRole } = render(<Form/>);
+  const { getByRole } = render(<Form />);
   const inputElement = getByRole('textbox');
 
   fireEvent.change(inputElement, { target: { value: nextAge } });
@@ -54,14 +54,14 @@ test('Change multiple fields values', () => {
 
     return (
       <>
-        <NumberField name="age" onChange={setData} value={data.age}/>
+        <NumberField name="age" onChange={setData} value={data.age} />
 
-        <NumberField name="price" onChange={setData} value={data.price}/>
+        <NumberField name="price" onChange={setData} value={data.price} />
       </>
     );
   };
 
-  const { getAllByRole } = render(<Form/>);
+  const { getAllByRole } = render(<Form />);
   const inputElements = getAllByRole('textbox');
 
   fireEvent.change(inputElements[0], { target: { value: nextAge } });
@@ -80,11 +80,11 @@ test('Enter empty value', () => {
     const [data, setData] = useForm({ age });
 
     return (
-      <NumberField name="age" onChange={setData} value={data.age}/>
+      <NumberField name="age" onChange={setData} value={data.age} />
     );
   };
 
-  const { getByRole } = render(<Form/>);
+  const { getByRole } = render(<Form />);
   const inputElement = getByRole('textbox');
 
   fireEvent.change(inputElement, { target: { value: '' } });
@@ -99,11 +99,11 @@ test('Check maximum allowable value', () => {
     const [data, setData] = useForm({ distance });
 
     return (
-      <NumberField name="distance" onChange={setData} value={data.distance}/>
+      <NumberField name="distance" onChange={setData} value={data.distance} />
     );
   };
 
-  const { getByRole } = render(<Form/>);
+  const { getByRole } = render(<Form />);
   const inputElement = getByRole('textbox');
 
   fireEvent.change(inputElement, { target: { value: 1e15 } });
@@ -117,16 +117,16 @@ test('Check maximum allowable value', () => {
 
 test('Render custom input component', () => {
   const Input = forwardRef<HTMLInputElement, NumberField.InputProps>((props, ref) => (
-    <input data-testid="number-field-input" {...props} ref={ref}/>
+    <input data-testid="number-field-input" {...props} ref={ref} />
   ));
 
   const Form = () => {
     return (
-      <NumberField inputComponent={Input} name="age"/>
+      <NumberField inputComponent={Input} name="age" />
     );
   };
 
-  const { getByTestId } = render(<Form/>);
+  const { getByTestId } = render(<Form />);
   const inputElement = getByTestId('number-field-input');
 
   expect(inputElement).toBeInTheDocument();

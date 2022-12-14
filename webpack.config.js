@@ -8,11 +8,12 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const ts = require('typescript');
 const glob = require('glob');
 const app = require('./package.json');
-const paths = require('./paths');
+const paths = require('./paths.js');
 const isDevServer = Boolean(process.env.WEBPACK_SERVE);
 const devServerPort = process.env.DEV_SERVER_PORT ?? 3000;
 
-module.exports = ({ production }) => {
+module.exports = env => {
+  const { production } = env ?? {};
   const isProductionBuild = Boolean(production);
 
   // noinspection WebpackConfigHighlighting
@@ -28,7 +29,7 @@ module.exports = ({ production }) => {
       open: true,
       port: devServerPort,
       static: {
-        directory: paths.appBuild,
+        directory: paths.appOutput,
       }
     },
     devtool: !isProductionBuild && 'source-map',
@@ -60,11 +61,11 @@ module.exports = ({ production }) => {
     },
     output: {
       libraryTarget: 'umd',
-      path: paths.appBuild
+      path: paths.appOutput
     },
     plugins: [
       new ESLintPlugin({
-        extensions: ['ts', 'tsx'],
+        extensions: ['js', 'jsx', 'ts', 'tsx'],
         failOnError: true,
         overrideConfig: {
           rules: {
@@ -93,9 +94,9 @@ module.exports = ({ production }) => {
       !isDevServer && {
         apply: compiler => {
           compiler.hooks.environment.tap('Clear old build', () => {
-            if (existsSync(paths.appBuild)) {
-              readdirSync(paths.appBuild).forEach(baseName => {
-                const path = resolve(paths.appBuild, baseName);
+            if (existsSync(paths.appOutput)) {
+              readdirSync(paths.appOutput).forEach(baseName => {
+                const path = resolve(paths.appOutput, baseName);
 
                 rmSync(path, { recursive: true });
               });
@@ -114,7 +115,7 @@ module.exports = ({ production }) => {
               const compilerOptions = {
                 allowJs: true,
                 declaration: true,
-                declarationDir: paths.appBuild,
+                declarationDir: paths.appOutput,
                 emitDeclarationOnly: true,
               };
 
@@ -127,7 +128,7 @@ module.exports = ({ production }) => {
         }
       },
       isDevServer && new HtmlWebpackPlugin({
-        template: paths.appHtml,
+        template: paths.appHtmlTemplate,
         title: app.name
       }),
     ].filter(Boolean),

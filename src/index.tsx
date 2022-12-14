@@ -2,7 +2,7 @@
  * Dev-server entrypoint
  */
 
-import { forwardRef, useEffect } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 
 import { createRoot } from 'react-dom/client';
 
@@ -13,28 +13,11 @@ type Option = {
   value: string;
 };
 
-const countries: Option[] = [
-  { id: 1, value: 'Cyprus' },
-  { id: 2, value: 'Georgia' }
-];
-
-const movies: Option[] = [
-  { id: 1, value: 'Home Alone' },
-  { id: 2, value: 'From Dusk till Dawn' }
-];
-
-const initialData = {
-  age: 29,
-  card: '12345678',
-  country: countries[0] as Option | null,
-  lastName: 'Lebedev',
-  movie: movies[0] as Option | null,
-  name: 'Anton',
-  phone: '+79995266422',
-  salary: 3500
-};
-
 const Form = () => {
+  const [phoneMask] = useState('+7 (###) ###-##-##');
+  const [cardMask] = useState('####-####-####-####');
+  const [phoneSource] = useState(String.raw`\+7|(\d)`);
+  const [cardSource] = useState(String.raw`(\d)`);
   const [data, setData] = useForm(initialData);
 
   useEffect(() => console.log(data), [data]);
@@ -79,6 +62,7 @@ const Form = () => {
           dropdownComponent={AutocompleteFieldDropdown}
           getOptionKey={getOptionId}
           inputComponent={AutocompleteFieldInput}
+          label="Country"
           name="country"
           onChange={setData}
           optionComponent={AutocompleteFieldOption}
@@ -103,19 +87,19 @@ const Form = () => {
       <fieldset>
         <MaskedField
           inputComponent={PhoneInput}
-          mask="+7 (###) ###-##-##"
+          mask={phoneMask}
           name="phone"
           onChange={setData}
-          source={String.raw`\+7|(\d)`}
+          source={phoneSource}
           value={data.phone}
         />
 
         <MaskedField
           inputComponent={PhoneInput}
-          mask="####-####-####-####"
+          mask={cardMask}
           name="card"
           onChange={setData}
-          source={String.raw`(\d)`}
+          source={cardSource}
           value={data.card}
         />
       </fieldset>
@@ -126,7 +110,7 @@ const Form = () => {
 };
 
 const AutocompleteFieldContainer = (props: AutocompleteField.ContainerProps) => (
-  <span style={{ position: 'relative' }} {...props}/>
+  <span style={{ position: 'relative' }} {...props} />
 );
 
 const AutocompleteFieldDropdown = (props: AutocompleteField.DropdownProps) => (
@@ -143,16 +127,37 @@ const AutocompleteFieldDropdown = (props: AutocompleteField.DropdownProps) => (
   />
 );
 
-const AutocompleteFieldInput = (props: AutocompleteField.InputProps) => (
-  <input className="autocomplete-field-input" {...props}/>
-);
+const countries: Option[] = [
+  { id: 1, value: 'Cyprus' },
+  { id: 2, value: 'Georgia' }
+];
+
+const movies: Option[] = [
+  { id: 1, value: 'Home Alone' },
+  { id: 2, value: 'From Dusk till Dawn' }
+];
+
+const initialData = {
+  age: 29,
+  card: '12345678',
+  country: countries[0] as Option | null,
+  lastName: 'Lebedev',
+  movie: movies[0] as Option | null,
+  name: 'Anton',
+  phone: '+79991234',
+  salary: 3500
+};
+
+const AutocompleteFieldInput = forwardRef<HTMLInputElement, AutocompleteField.InputProps>((props, ref) => (
+  <input {...props} ref={ref} />
+));
 
 const AutocompleteFieldOption = ({ data, ...props }: AutocompleteField.OptionProps<Option>) => (
   <div {...props}>{data.value}</div>
 );
 
 const TextFieldInput = (props: TextField.InputProps) => (
-  <input {...props}/>
+  <input {...props} />
 );
 
 function optionsBuilder (this: Option[], editingValue: string) {
@@ -169,10 +174,10 @@ function optionsBuilder (this: Option[], editingValue: string) {
 const getOptionId = (option: Option) => option.id;
 const getOptionValue = (option: Option) => option.value;
 
-const PhoneInput = forwardRef<HTMLInputElement, MaskedField.InputProps>((props, ref) => (
+const PhoneInput: MaskedField.InputComponent = forwardRef((props, ref) => (
   <input {...props} ref={ref} />
 ));
 
-createRoot(document.getElementById('root') as HTMLElement).render(
-  <Form/>
-);
+const root = document.getElementById('root') as HTMLElement;
+
+createRoot(root).render(<Form />);

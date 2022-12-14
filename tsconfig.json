@@ -24,11 +24,6 @@
   "include": [
     "src/**/*",
     "static/docs/examples/**/*",
-    "__tests__/**/*"
-  ],
-  "ts-node": {
-    "compilerOptions": {
-      "module": "CommonJS"
-    }
-  }
+    "tests/**/*"
+  ]
 }

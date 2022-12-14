@@ -39,3 +39,4 @@ ij_typescript_space_before_property_colon = false
 ij_json_space_before_colon = false
 ij_typescript_blank_lines_around_method_in_interface = 0
 ij_typescript_blank_lines_around_field_in_interface = 0
+ij_typescript_keep_simple_methods_in_one_line = true

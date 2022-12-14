@@ -39,7 +39,8 @@ dev-server:
 		--name ${APP_NAME} \
 		-v ${PWD}:/usr/src/app \
 		-p ${DEV_SERVER_PORT}:${DEV_SERVER_PORT} \
-		${DOCKER_IMAGE}
+		${DOCKER_IMAGE} \
+		webpack serve
 
 open-browser:
 	open http://localhost:${DEV_SERVER_PORT}

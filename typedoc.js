@@ -9,11 +9,12 @@ module.exports = {
   includeVersion: true,
   includes: ['./static/docs'],
   name: appName,
-  out: '../d',
   readme: 'none',
   sort: [
     'required-first',
     'source-order'
   ],
-  titleLink: '/react-form/docs'
+  theme: 'gitlab-wiki',
+  titleLink: '/react-form/docs',
+  treatWarningsAsErrors: true
 };

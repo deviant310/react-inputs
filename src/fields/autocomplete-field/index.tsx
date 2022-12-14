@@ -1,17 +1,20 @@
 import {
   ChangeEvent,
   FocusEvent,
+  ForwardRefExoticComponent,
   FunctionComponent,
   MouseEvent,
   PropsWithChildren,
+  PropsWithoutRef,
+  RefAttributes,
+  forwardRef,
   memo,
   useCallback,
   useEffect,
-  useMemo,
-  useState,
+  useMemo, useRef, useState,
 } from 'react';
 
-import { type FieldChangeEvent, type FieldProps } from '../../form';
+import Form from '../../form';
 
 /**
  * A component for helping the user make a selection by entering some text and choosing from among a list of options.
@@ -20,11 +23,12 @@ import { type FieldChangeEvent, type FieldProps } from '../../form';
  * The options to be displayed are determined using {@link AutocompleteField.Props.optionsBuilder}
  * and rendered with {@link AutocompleteField.Props.optionComponent}.
  *
+ * @label Autocomplete field
+ * @group Fields
  * @example
  * ```tsx
  * [[include:examples/autocomplete-field/basic-usage.tsx]]
  * ```
- *
  */
 export const AutocompleteField = memo(props => {
   type Name = typeof name;
@@ -37,6 +41,7 @@ export const AutocompleteField = memo(props => {
     containerComponent: Container = DefaultContainer,
     displayValueForOption,
     dropdownComponent: Dropdown = DefaultDropdown,
+    dropdownIsVisibleByDefault = false,
     getOptionKey,
     inputComponent: Input = DefaultInput,
     label,
@@ -47,7 +52,8 @@ export const AutocompleteField = memo(props => {
     selected = null,
   } = props;
 
-  const [dropdownIsVisible, setDropdownVisibility] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [dropdownIsVisible, setDropdownVisibility] = useState(dropdownIsVisibleByDefault);
   const [displayValue, setDisplayValue] = useState('');
 
   const options = useMemo(
@@ -73,7 +79,11 @@ export const AutocompleteField = memo(props => {
 
       setDropdownVisibility(false);
 
-      setDisplayValue(selected !== null ? displayValueForOption(selected) : '');
+      setDisplayValue(
+        selected !== null
+          ? displayValueForOption(selected)
+          : ''
+      );
     },
     [selected, displayValueForOption]
   );
@@ -108,7 +118,7 @@ export const AutocompleteField = memo(props => {
         data={option}
         key={getOptionKey(option)}
         onClick={() => onOptionSelect(option)}
-        role="option"/>
+        role="option" />
     ),
     [getOptionKey, onOptionSelect, Option]
   );
@@ -128,6 +138,7 @@ export const AutocompleteField = memo(props => {
       <Input
         onChange={onInputChange}
         placeholder={label}
+        ref={inputRef}
         type="text"
         value={displayValue}
       />
@@ -141,10 +152,23 @@ export const AutocompleteField = memo(props => {
   );
 }) as AutocompleteField.Component;
 
-const DefaultContainer = (props: AutocompleteField.ContainerProps) => <div {...props}/>;
-const DefaultDropdown = (props: AutocompleteField.DropdownProps) => <div {...props}/>;
-const DefaultInput = (props: AutocompleteField.InputProps) => <input {...props}/>;
+const DefaultContainer: AutocompleteField.ContainerComponent = props => (
+  <div {...props} />
+);
 
+const DefaultDropdown: NonNullable<AutocompleteField.Props<string, unknown>['dropdownComponent']> = props => (
+  <div {...props} />
+);
+
+const DefaultInput: NonNullable<AutocompleteField.Props<string, unknown>['inputComponent']> = forwardRef(
+  (props, ref) => (
+    <input {...props} ref={ref} />
+  )
+);
+
+/**
+ * @group Fields
+ */
 export namespace AutocompleteField {
   /**
    * @ignore
@@ -156,11 +180,12 @@ export namespace AutocompleteField {
   /**
    * Autocomplete field props interface
    */
-  export interface Props<Name extends string, Option> extends FieldProps<Name> {
+  export interface Props<Name extends string, Option> extends Form.FieldProps<Name> {
     /**
      * Custom container component
+     * @default
      */
-    containerComponent?: FunctionComponent<ContainerProps>;
+    containerComponent?: ContainerComponent;
 
     /**
      * A function that should return the string to display in the input when the option is selected.
@@ -168,7 +193,10 @@ export namespace AutocompleteField {
      * @param option
      */
     displayValueForOption (option: Option): string;
+
     dropdownComponent?: FunctionComponent<DropdownProps>;
+
+    dropdownIsVisibleByDefault?: boolean;
 
     /**
      * A function that should return the unique key to identify every option component in React DOM tree.
@@ -178,10 +206,10 @@ export namespace AutocompleteField {
     /**
      * Custom input component
      */
-    inputComponent?: FunctionComponent<InputProps>;
+    inputComponent?: ForwardRefExoticComponent<PropsWithoutRef<InputProps> & RefAttributes<HTMLInputElement>>;
 
     /** {@inheritDoc FieldChangeEvent} */
-    onChange?: FieldChangeEvent<Name, Option | null>;
+    onChange?: Form.FieldChangeEvent<Name, Option | null>;
 
     /**
      * Option component from which options list are rendering
@@ -195,9 +223,12 @@ export namespace AutocompleteField {
 
     /**
      * Current selected option
+     * @default null
      */
     selected?: Option | null;
   }
+
+  export type ContainerComponent = FunctionComponent<ContainerProps>;
 
   /**
    * Autocomplete field container props interface

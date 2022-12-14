@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import '@testing-library/jest-dom';
 
@@ -36,7 +36,7 @@ const moviesOptionsBuilder = (editingValue: string) => (
 const getOptionKey = (option: Option) => option.id;
 const displayValueForOption = (option: Option) => option.value;
 
-test('Initial value', () => {
+test('initial value', () => {
   const country = countries[1];
 
   const Form = () => {
@@ -54,13 +54,13 @@ test('Initial value', () => {
     );
   };
 
-  const { getByRole } = render(<Form/>);
+  const { getByRole } = render(<Form />);
   const inputElement = getByRole('textbox');
 
   expect(inputElement).toHaveValue(country.value);
 });
 
-test('Typing search query', () => {
+test('typing search query', () => {
   const searchQuery = countries[0].value.slice(0, 3);
 
   const Form = () => {
@@ -75,7 +75,7 @@ test('Typing search query', () => {
     );
   };
 
-  const { getByRole } = render(<Form/>);
+  const { getByRole } = render(<Form />);
   const inputElement = getByRole('textbox');
 
   fireEvent.change(inputElement, { target: { value: searchQuery } });
@@ -83,7 +83,7 @@ test('Typing search query', () => {
   expect(inputElement).toHaveValue(searchQuery);
 });
 
-test('Change field value', () => {
+test('change field value', () => {
   const nextCountry = countries[1];
   const nextCountryValue = nextCountry.value;
   const nextCountrySearchQuery = nextCountryValue.slice(0, 3);
@@ -106,7 +106,7 @@ test('Change field value', () => {
     );
   };
 
-  const { getAllByRole, getByRole } = render(<Form/>);
+  const { getAllByRole, getByRole } = render(<Form />);
   const inputElement = getByRole('textbox');
 
   fireEvent.change(inputElement, { target: { value: nextCountrySearchQuery } });
@@ -118,7 +118,7 @@ test('Change field value', () => {
   expect(inputElement).toHaveValue(nextCountryValue);
 });
 
-test('Change multiple fields values', () => {
+test('change multiple fields values', () => {
   const nextCountry = countries[1];
   const nextCountryValue = nextCountry.value;
   const nextCountrySearchQuery = nextCountryValue.slice(0, 3);
@@ -157,7 +157,7 @@ test('Change multiple fields values', () => {
     );
   };
 
-  const formRenderResult = render(<Form/>);
+  const formRenderResult = render(<Form />);
   const fieldElements = formRenderResult.getAllByRole('group');
   const countryInputElement = getByRole(fieldElements[0], 'textbox');
   const movieInputElement = getByRole(fieldElements[1], 'textbox');
@@ -178,20 +178,20 @@ test('Change multiple fields values', () => {
   expect(movieInputElement).toHaveValue(nextMovieValue);
 });
 
-test('Render custom components', () => {
+test('render custom components', () => {
   const searchQuery = countries[0].value.slice(0, 3);
 
   const Container = (props: AutocompleteField.ContainerProps) => (
-    <div data-testid="autocomplete-field-wrapper" {...props}/>
+    <div data-testid="autocomplete-field-wrapper" {...props} />
   );
 
   const Dropdown = (props: AutocompleteField.DropdownProps) => (
-    <div data-testid="autocomplete-field-dropdown" {...props}/>
+    <div data-testid="autocomplete-field-dropdown" {...props} />
   );
 
-  const Input = (props: AutocompleteField.InputProps) => (
-    <input data-testid="autocomplete-field-input" {...props}/>
-  );
+  const Input = forwardRef<HTMLInputElement, AutocompleteField.InputProps>((props, ref) => (
+    <input data-testid="autocomplete-field-input" {...props} ref={ref} />
+  ));
 
   const Form = () => {
     return (
@@ -208,7 +208,7 @@ test('Render custom components', () => {
     );
   };
 
-  const { getByTestId } = render(<Form/>);
+  const { getByTestId } = render(<Form />);
   const wrapperElement = getByTestId('autocomplete-field-wrapper');
   const inputElement = getByTestId('autocomplete-field-input');
 
@@ -218,6 +218,31 @@ test('Render custom components', () => {
 
   fireEvent.change(inputElement, { target: { value: searchQuery } });
 
+  const dropdownElement = getByTestId('autocomplete-field-dropdown');
+
+  expect(dropdownElement).toBeInTheDocument();
+});
+
+test('dropdown default visibility', () => {
+  const Dropdown = (props: AutocompleteField.DropdownProps) => (
+    <div data-testid="autocomplete-field-dropdown" {...props} />
+  );
+
+  const Form = () => {
+    return (
+      <AutocompleteField
+        displayValueForOption={displayValueForOption}
+        dropdownComponent={Dropdown}
+        dropdownIsVisibleByDefault={true}
+        getOptionKey={getOptionKey}
+        name="country"
+        optionComponent={AutocompleteFieldOption}
+        optionsBuilder={countriesOptionsBuilder}
+      />
+    );
+  };
+
+  const { getByTestId } = render(<Form />);
   const dropdownElement = getByTestId('autocomplete-field-dropdown');
 
   expect(dropdownElement).toBeInTheDocument();
