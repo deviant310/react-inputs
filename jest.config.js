@@ -2,7 +2,7 @@ const paths = require('./paths');
 
 module.exports = {
   moduleNameMapper: {
-    'react-form': paths.appMain
+    'react-fields': paths.appMain
   },
   modulePathIgnorePatterns: [
     '<rootDir>/build'

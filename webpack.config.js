@@ -12,6 +12,13 @@ const paths = require('./paths.js');
 const isDevServer = Boolean(process.env.WEBPACK_SERVE);
 const devServerPort = process.env.DEV_SERVER_PORT ?? 3000;
 
+const entries = {
+  'masked-field': resolve(paths.appSrc, 'masked-field'),
+  'number-field': resolve(paths.appSrc, 'number-field'),
+  'select-field': resolve(paths.appSrc, 'select-field'),
+  'text-field': resolve(paths.appSrc, 'text-field')
+};
+
 module.exports = env => {
   const { production } = env ?? {};
   const isProductionBuild = Boolean(production);
@@ -33,12 +40,27 @@ module.exports = env => {
       }
     },
     devtool: !isProductionBuild && 'source-map',
-    entry: isDevServer ? paths.appIndex : paths.appMain,
-    externals: {
-      ...!isDevServer ? {
-        react: 'react'
-      } : {}
+    entry: isDevServer ? paths.appHome : {
+      'index': paths.appMain,
+      ...entries,
     },
+    externals: !isDevServer ? [
+      {
+        react: 'react',
+      },
+      function ({ context, contextInfo, request }, callback) {
+        const moduleIsExternal = contextInfo.issuer && Object
+          .values(entries)
+          .includes(
+            resolve(context, request)
+          );
+
+        if (moduleIsExternal)
+          return callback(null, request);
+
+        callback();
+      },
+    ] : [],
     infrastructureLogging: {
       level: 'none',
     },
@@ -60,6 +82,11 @@ module.exports = env => {
       minimize: isProductionBuild,
     },
     output: {
+      filename: ({ chunk }) => (
+        chunk.name === 'index'
+          ? '[name].js'
+          : '[name]/index.js'
+      ),
       libraryTarget: 'umd',
       path: paths.appOutput
     },
@@ -79,7 +106,7 @@ module.exports = env => {
         typescript: {
           configOverwrite: {
             exclude: !isDevServer
-              ? [paths.appIndex]
+              ? [paths.appHome]
               : []
           }
         }
@@ -107,23 +134,21 @@ module.exports = env => {
       !isDevServer && {
         apply: compiler => {
           compiler.hooks.done.tap('Build declarations bundle', () => {
-            setTimeout(() => {
-              const files = glob.sync(resolve(paths.appSrc, '**/*{.ts,.tsx}'), {
-                ignore: [paths.appIndex]
-              });
+            const files = glob.sync(resolve(paths.appSrc, '**/*{.ts,.tsx}'), {
+              ignore: [paths.appHome]
+            });
 
-              const compilerOptions = {
-                allowJs: true,
-                declaration: true,
-                declarationDir: paths.appOutput,
-                emitDeclarationOnly: true,
-              };
+            const compilerOptions = {
+              allowJs: true,
+              declaration: true,
+              declarationDir: paths.appOutput,
+              emitDeclarationOnly: true,
+            };
 
-              const host = ts.createCompilerHost(compilerOptions);
-              const program = ts.createProgram(files, compilerOptions, host);
+            const host = ts.createCompilerHost(compilerOptions);
+            const program = ts.createProgram(files, compilerOptions, host);
 
-              program.emit();
-            }, 0);
+            program.emit();
           });
         }
       },

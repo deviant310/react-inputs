@@ -119,6 +119,7 @@
         "beforeSelfClosing": "always"
       }
     ],
+    "react/jsx-boolean-value": ["error", "never"],
     "sort-imports": [
       "error",
       {

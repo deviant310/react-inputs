@@ -18,7 +18,7 @@
     "jsx": "react-jsx",
     "downlevelIteration": true,
     "paths": {
-      "react-form": ["./src/main.ts"]
+      "react-fields": ["./src/index.ts"]
     }
   },
   "include": [

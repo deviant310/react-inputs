@@ -1,6 +1,6 @@
-import { Some } from '../../utility-types';
+import { Some } from '../utility-types';
 
-class MaskedValue {
+export class MaskedValue {
   public static DEFINITION_SYMBOL = '#';
 
   public entriesOffsets: number[];
@@ -9,9 +9,9 @@ class MaskedValue {
   public text: string;
 
   constructor (private props: MaskedValue.Props) {
-    const { definition, source, stub, value } = props;
+    const { definition, dirtyValue, source, stub } = props;
 
-    const capturedEntries = [...value.matchAll(RegExp(source, 'g'))]
+    const capturedEntries = [...dirtyValue.matchAll(RegExp(source, 'g'))]
       .map(match => match[1])
       .filter(Boolean);
 
@@ -89,13 +89,11 @@ class MaskedValue {
   }
 }
 
-namespace MaskedValue {
+export namespace MaskedValue {
   export type Props = {
     definition: string;
+    dirtyValue: string;
     source: string;
     stub: string;
-    value: string;
   }
 }
-
-export default MaskedValue;

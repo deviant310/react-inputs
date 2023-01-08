@@ -6,7 +6,7 @@ import '@testing-library/jest-dom';
 
 import { render, waitFor } from '@testing-library/react';
 
-import { MaskedField, useForm } from 'react-form';
+import { MaskedField } from 'react-fields';
 
 type FormProps = {
   card?: string;
@@ -24,30 +24,31 @@ const Input: MaskedField.InputComponent = forwardRef((props, ref) => (
   <input data-testid="masked-field-input" {...props} ref={ref} />
 ));
 
-const Form = ({ card, phone }: FormProps) => {
-  const [data, setData] = useForm({ card, phone });
+const Form = (props: FormProps) => {
+  const [phone, setPhone] = useState(props.phone);
+  const [card, setCard] = useState(props.card);
 
   return (
     <>
-      {data.phone && (
+      {phone && (
         <MaskedField
           inputComponent={Input}
           mask={phoneMask}
           name={phoneFieldName}
-          onChange={setData}
+          setValue={setPhone}
           source={phoneSource}
-          value={data.phone}
+          value={phone}
         />
       )}
 
-      {data.card && (
+      {card && (
         <MaskedField
           inputComponent={Input}
           mask={cardMask}
           name={cardFieldName}
-          onChange={setData}
+          setValue={setCard}
           source={cardSource}
-          value={data.card}
+          value={card}
         />
       )}
     </>
@@ -204,10 +205,7 @@ test('updating masked value props', () => {
   const Form = () => {
     const [phoneMask, setPhoneMask] = useState('+7 ### ###-##-##');
     const [phoneSource, setPhoneSource] = useState(String.raw`\+7|(\d)`);
-
-    const [{ phone }, setData] = useForm({
-      phone: '123456'
-    });
+    const [phone, setPhone] = useState('123456');
 
     useEffect(
       () => {
@@ -222,7 +220,7 @@ test('updating masked value props', () => {
       <MaskedField
         mask={phoneMask}
         name={phoneFieldName}
-        onChange={setData}
+        setValue={setPhone}
         source={phoneSource}
         value={phone}
       />

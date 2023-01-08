@@ -5,15 +5,14 @@ import {
   memo,
   useCallback,
   useEffect,
-  useRef,
-  useState,
+  useRef, useState,
 } from 'react';
 
-import { Input as DefaultInput, } from './components/input';
+import type { Field } from '../field';
 
-import MaskedValue from './masked-value';
+import { Input as DefaultInput } from './components';
 
-import Form from '../../form';
+import { MaskedValue } from './masked-value';
 
 type EditingInfo = {
   caretMovedBy: 'typing' | 'deleting';
@@ -29,21 +28,24 @@ type EditingInfo = {
 export const MaskedField = memo(props => {
   type Name = typeof name;
 
+  type Value = typeof dirtyValue;
+
   const {
     inputComponent: Input = DefaultInput,
     label,
     mask: definition,
     name,
-    onChange,
+    setValue,
+    setValueFromRecord,
     source,
     stub = '_',
-    value = '',
+    value: dirtyValue,
   } = props;
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   const maskedValue = useRef(
-    new MaskedValue({ definition, source, stub, value })
+    new MaskedValue({ definition, dirtyValue, source, stub })
   );
 
   const [editingInfo, setEditingInfo] = useState<EditingInfo>({
@@ -51,11 +53,14 @@ export const MaskedField = memo(props => {
     caretNativePosition: definition.length,
   });
 
-  const setValue = useCallback(
-    (value: string) => {
-      onChange?.({ [name]: value } as Record<Name, string>);
+  const setDataOrValue = useCallback(
+    (value: Value) => {
+      if (setValueFromRecord === true)
+        setValue({ [name]: value } as Record<Name, Value> & Value);
+      else
+        setValue(value as Record<Name, Value> & Value);
     },
-    [onChange, name]
+    [name, setValue, setValueFromRecord]
   );
 
   const restoreCaretPositionFrom = useCallback(
@@ -106,13 +111,16 @@ export const MaskedField = memo(props => {
 
   const onInputChange = useCallback(
     ({ currentTarget }: ChangeEvent<HTMLInputElement>) => {
-      const { selectionEnd, value } = currentTarget;
+      const { selectionEnd, value: dirtyValue } = currentTarget;
 
       if (selectionEnd === null) return;
 
       const maskedValuePreviousPayload =  maskedValue.current.payload;
 
-      maskedValue.current = maskedValue.current.copyWith({ value });
+      maskedValue.current = maskedValue.current.copyWith({ dirtyValue });
+
+      if (maskedValue.current.payload === '')
+        maskedValue.current = maskedValue.current.copyWith({ dirtyValue: '' });
 
       setEditingInfo({
         caretMovedBy: maskedValue.current.payload.length < maskedValuePreviousPayload.length
@@ -121,9 +129,9 @@ export const MaskedField = memo(props => {
         caretNativePosition: selectionEnd,
       });
 
-      setValue(maskedValue.current.payload);
+      setDataOrValue(maskedValue.current.payload as Value);
     },
-    [setValue]
+    [setDataOrValue]
   );
 
   const onInputMouseDown = useCallback(
@@ -150,9 +158,9 @@ export const MaskedField = memo(props => {
     () => {
       maskedValue.current = maskedValue.current.copyWith({ definition, source, stub });
 
-      setValue(maskedValue.current.payload);
+      setDataOrValue(maskedValue.current.payload as Value);
     },
-    [definition, setValue, source, stub]
+    [definition, setDataOrValue, source, stub]
   );
 
   return (
@@ -169,16 +177,25 @@ export const MaskedField = memo(props => {
 }) as MaskedField.Component;
 
 export namespace MaskedField {
-  export type Component = <Name extends string> (props: Props<Name>) => JSX.Element;
+  export interface Component {
+    <
+      Name extends string,
+      Value extends string,
+      SetValueFromRecord extends boolean = false
+    >
+    (props: Props<Name, Value, SetValueFromRecord>): JSX.Element;
+  }
 
-  export type InputComponent = DefaultInput.Component;
-
-  export interface Props<Name extends string> extends Form.FieldProps<Name> {
+  export interface Props<
+    Name extends string,
+    Value extends string,
+    SetValueFromRecord extends boolean = false
+  > extends Field.Props<Name, Value, SetValueFromRecord> {
     inputComponent?: InputComponent;
     mask: string;
-    onChange?: Form.FieldChangeEvent<Name, string>;
     source: string;
     stub?: string;
-    value?: string;
   }
+
+  export type InputComponent = DefaultInput.Component;
 }

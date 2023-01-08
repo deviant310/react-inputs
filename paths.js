@@ -5,9 +5,9 @@ const resolvePath = relativePath => resolve(appRoot, relativePath);
 
 module.exports = {
   appDocs: resolvePath('./docs'),
+  appHome: resolvePath('./src/home.tsx'),
   appHtmlTemplate: resolvePath('./static/build/templates/index.html'),
-  appIndex: resolvePath('./src/index.tsx'),
-  appMain: resolvePath('./src/main.ts'),
+  appMain: resolvePath('./src/index.ts'),
   appOutput: resolvePath('./build'),
   appSrc: resolvePath('./src'),
   appStatic: resolvePath('./static'),

@@ -1,17 +1,17 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState } from 'react';
 
 import '@testing-library/jest-dom';
 
 import { fireEvent, getAllByRole, getByRole, render } from '@testing-library/react';
 
-import { AutocompleteField, useForm } from 'react-form';
+import { SelectField } from 'react-fields';
 
 type Option = {
   id: number;
   value: string;
 };
 
-const AutocompleteFieldOption = ({ data, ...props }: AutocompleteField.OptionProps<Option>) => (
+const SelectFieldOption: SelectField.OptionComponent<Option> = ({ data, ...props }) => (
   <div data-id={data.id} {...props}>{data.value}</div>
 );
 
@@ -34,22 +34,21 @@ const moviesOptionsBuilder = (editingValue: string) => (
 );
 
 const getOptionKey = (option: Option) => option.id;
-const displayValueForOption = (option: Option) => option.value;
+const getOptionValue = (option: Option) => option.value;
 
 test('initial value', () => {
-  const country = countries[1];
-
   const Form = () => {
-    const [data] = useForm({ country });
+    const [country, setCountry] = useState<Option | null>(countries[1]);
 
     return (
-      <AutocompleteField
-        displayValueForOption={displayValueForOption}
+      <SelectField
+        displayStringForOption={getOptionValue}
         getOptionKey={getOptionKey}
         name="country"
-        optionComponent={AutocompleteFieldOption}
+        optionComponent={SelectFieldOption}
         optionsBuilder={countriesOptionsBuilder}
-        selected={data.country}
+        setValue={setCountry}
+        value={country}
       />
     );
   };
@@ -57,20 +56,24 @@ test('initial value', () => {
   const { getByRole } = render(<Form />);
   const inputElement = getByRole('textbox');
 
-  expect(inputElement).toHaveValue(country.value);
+  expect(inputElement).toHaveValue(countries[1].value);
 });
 
 test('typing search query', () => {
   const searchQuery = countries[0].value.slice(0, 3);
 
   const Form = () => {
+    const [country, setCountry] = useState<Option | null>(null);
+
     return (
-      <AutocompleteField
-        displayValueForOption={displayValueForOption}
+      <SelectField
+        displayStringForOption={getOptionValue}
         getOptionKey={getOptionKey}
         name="country"
-        optionComponent={AutocompleteFieldOption}
+        optionComponent={SelectFieldOption}
         optionsBuilder={countriesOptionsBuilder}
+        setValue={setCountry}
+        value={country}
       />
     );
   };
@@ -89,19 +92,17 @@ test('change field value', () => {
   const nextCountrySearchQuery = nextCountryValue.slice(0, 3);
 
   const Form = () => {
-    const [data, setData] = useForm({
-      country: countries[0] as Option | null
-    });
+    const [country, setCountry] = useState<Option | null>(countries[0]);
 
     return (
-      <AutocompleteField
-        displayValueForOption={displayValueForOption}
+      <SelectField
+        displayStringForOption={getOptionValue}
         getOptionKey={getOptionKey}
         name="country"
-        onChange={setData}
-        optionComponent={AutocompleteFieldOption}
+        optionComponent={SelectFieldOption}
         optionsBuilder={countriesOptionsBuilder}
-        selected={data.country}
+        setValue={setCountry}
+        value={country}
       />
     );
   };
@@ -127,31 +128,29 @@ test('change multiple fields values', () => {
   const nextMovieSearchQuery = nextMovieValue.slice(0, 3);
 
   const Form = () => {
-    const [data, setData] = useForm({
-      country: countries[0] as Option | null,
-      movie: movies[0] as Option | null,
-    });
+    const [country, setCountry] = useState<Option | null>(countries[0]);
+    const [movie, setMovie] = useState<Option | null>(movies[0]);
 
     return (
       <>
-        <AutocompleteField
-          displayValueForOption={displayValueForOption}
+        <SelectField
+          displayStringForOption={getOptionValue}
           getOptionKey={getOptionKey}
           name="country"
-          onChange={setData}
-          optionComponent={AutocompleteFieldOption}
+          optionComponent={SelectFieldOption}
           optionsBuilder={countriesOptionsBuilder}
-          selected={data.country}
+          setValue={setCountry}
+          value={country}
         />
 
-        <AutocompleteField
-          displayValueForOption={displayValueForOption}
+        <SelectField
+          displayStringForOption={getOptionValue}
           getOptionKey={getOptionKey}
           name="movie"
-          onChange={setData}
-          optionComponent={AutocompleteFieldOption}
+          optionComponent={SelectFieldOption}
           optionsBuilder={moviesOptionsBuilder}
-          selected={data.movie}
+          setValue={setMovie}
+          value={movie}
         />
       </>
     );
@@ -181,69 +180,77 @@ test('change multiple fields values', () => {
 test('render custom components', () => {
   const searchQuery = countries[0].value.slice(0, 3);
 
-  const Container = (props: AutocompleteField.ContainerProps) => (
-    <div data-testid="autocomplete-field-wrapper" {...props} />
+  const Container: SelectField.ContainerComponent = props => (
+    <div data-testid="select-field-container" {...props} />
   );
 
-  const Dropdown = (props: AutocompleteField.DropdownProps) => (
-    <div data-testid="autocomplete-field-dropdown" {...props} />
+  const Dropdown: SelectField.DropdownComponent = props => (
+    <div data-testid="select-field-dropdown" {...props} />
   );
 
-  const Input = forwardRef<HTMLInputElement, AutocompleteField.InputProps>((props, ref) => (
-    <input data-testid="autocomplete-field-input" {...props} ref={ref} />
+  const Input: SelectField.InputComponent = forwardRef((props, ref) => (
+    <input data-testid="select-field-input" {...props} ref={ref} />
   ));
 
   const Form = () => {
+    const [country, setCountry] = useState<Option | null>(null);
+
     return (
-      <AutocompleteField
+      <SelectField
         containerComponent={Container}
-        displayValueForOption={displayValueForOption}
+        displayStringForOption={getOptionValue}
         dropdownComponent={Dropdown}
         getOptionKey={getOptionKey}
         inputComponent={Input}
         name="country"
-        optionComponent={AutocompleteFieldOption}
+        optionComponent={SelectFieldOption}
         optionsBuilder={countriesOptionsBuilder}
+        setValue={setCountry}
+        value={country}
       />
     );
   };
 
   const { getByTestId } = render(<Form />);
-  const wrapperElement = getByTestId('autocomplete-field-wrapper');
-  const inputElement = getByTestId('autocomplete-field-input');
+  const containerElement = getByTestId('select-field-container');
+  const inputElement = getByTestId('select-field-input');
 
-  expect(wrapperElement).toBeInTheDocument();
+  expect(containerElement).toBeInTheDocument();
 
   expect(inputElement).toBeInTheDocument();
 
   fireEvent.change(inputElement, { target: { value: searchQuery } });
 
-  const dropdownElement = getByTestId('autocomplete-field-dropdown');
+  const dropdownElement = getByTestId('select-field-dropdown');
 
   expect(dropdownElement).toBeInTheDocument();
 });
 
 test('dropdown default visibility', () => {
-  const Dropdown = (props: AutocompleteField.DropdownProps) => (
-    <div data-testid="autocomplete-field-dropdown" {...props} />
+  const Dropdown: SelectField.DropdownComponent = props => (
+    <div data-testid="select-field-dropdown" {...props} />
   );
 
   const Form = () => {
+    const [country, setCountry] = useState<Option | null>(null);
+
     return (
-      <AutocompleteField
-        displayValueForOption={displayValueForOption}
+      <SelectField
+        displayStringForOption={getOptionValue}
         dropdownComponent={Dropdown}
-        dropdownIsVisibleByDefault={true}
+        dropdownIsVisibleByDefault
         getOptionKey={getOptionKey}
         name="country"
-        optionComponent={AutocompleteFieldOption}
+        optionComponent={SelectFieldOption}
         optionsBuilder={countriesOptionsBuilder}
+        setValue={setCountry}
+        value={country}
       />
     );
   };
 
   const { getByTestId } = render(<Form />);
-  const dropdownElement = getByTestId('autocomplete-field-dropdown');
+  const dropdownElement = getByTestId('select-field-dropdown');
 
   expect(dropdownElement).toBeInTheDocument();
 });

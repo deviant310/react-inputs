@@ -1,37 +1,45 @@
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 
 import '@testing-library/jest-dom';
 
 import { fireEvent, render } from '@testing-library/react';
 
-import { NumberField, useForm } from 'react-form';
+import { NumberField } from 'react-fields';
 
 test('Initial value', () => {
-  const age = 15;
+  const initialAge = 15;
 
   const Form = () => {
-    const [data, setData] = useForm({ age });
+    const [age, setAge] = useState(initialAge);
 
     return (
-      <NumberField name="age" onChange={setData} value={data.age} />
+      <NumberField
+        name="age"
+        setValue={setAge}
+        value={age}
+      />
     );
   };
 
   const { getByRole } = render(<Form />);
   const inputElement = getByRole('textbox');
 
-  expect(inputElement).toHaveValue(age.toString());
+  expect(inputElement).toHaveValue(initialAge.toString());
 });
 
 test('Change field value', () => {
-  const age = 15;
+  const initialAge = 15;
   const nextAge = 16;
 
   const Form = () => {
-    const [data, setData] = useForm({ age });
+    const [age, setAge] = useState(initialAge);
 
     return (
-      <NumberField name="age" onChange={setData} value={data.age} />
+      <NumberField
+        name="age"
+        setValue={setAge}
+        value={age}
+      />
     );
   };
 
@@ -44,19 +52,28 @@ test('Change field value', () => {
 });
 
 test('Change multiple fields values', () => {
-  const age = 15;
+  const initialAge = 15;
   const nextAge = 16;
-  const price = 500.50;
+  const initialPrice = 500.50;
   const nextPrice = 700.73;
 
   const Form = () => {
-    const [data, setData] = useForm({ age, price });
+    const [age, setAge] = useState(initialAge);
+    const [price, setPrice] = useState(initialPrice);
 
     return (
       <>
-        <NumberField name="age" onChange={setData} value={data.age} />
+        <NumberField
+          name="age"
+          setValue={setAge}
+          value={age}
+        />
 
-        <NumberField name="price" onChange={setData} value={data.price} />
+        <NumberField
+          name="price"
+          setValue={setPrice}
+          value={price}
+        />
       </>
     );
   };
@@ -74,13 +91,17 @@ test('Change multiple fields values', () => {
 });
 
 test('Enter empty value', () => {
-  const age = 15;
+  const initialAge = 15;
 
   const Form = () => {
-    const [data, setData] = useForm({ age });
+    const [age, setAge] = useState(initialAge);
 
     return (
-      <NumberField name="age" onChange={setData} value={data.age} />
+      <NumberField
+        name="age"
+        setValue={setAge}
+        value={age}
+      />
     );
   };
 
@@ -93,13 +114,17 @@ test('Enter empty value', () => {
 });
 
 test('Check maximum allowable value', () => {
-  const distance = 1500;
+  const initialDistance = 1500;
 
   const Form = () => {
-    const [data, setData] = useForm({ distance });
+    const [distance, setDistance] = useState(initialDistance);
 
     return (
-      <NumberField name="distance" onChange={setData} value={data.distance} />
+      <NumberField
+        name="distance"
+        setValue={setDistance}
+        value={distance}
+      />
     );
   };
 
@@ -108,7 +133,7 @@ test('Check maximum allowable value', () => {
 
   fireEvent.change(inputElement, { target: { value: 1e15 } });
 
-  expect(inputElement).toHaveValue(distance.toString());
+  expect(inputElement).toHaveValue(initialDistance.toString());
 
   fireEvent.change(inputElement, { target: { value: 1e14 } });
 
@@ -121,8 +146,15 @@ test('Render custom input component', () => {
   ));
 
   const Form = () => {
+    const [count, setCount] = useState(0);
+
     return (
-      <NumberField inputComponent={Input} name="age" />
+      <NumberField
+        inputComponent={Input}
+        name="count"
+        setValue={setCount}
+        value={count}
+      />
     );
   };
 

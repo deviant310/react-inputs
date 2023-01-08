@@ -1,37 +1,45 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState } from 'react';
 
 import '@testing-library/jest-dom';
 
 import { fireEvent, render } from '@testing-library/react';
 
-import { TextField, useForm } from 'react-form';
+import { TextField } from 'react-fields';
 
 test('Initial value', () => {
-  const name = 'John';
+  const initialName = 'John';
 
   const Form = () => {
-    const [data, setData] = useForm({ name });
+    const [name, setName] = useState(initialName);
 
     return (
-      <TextField name="name" onChange={setData} value={data.name} />
+      <TextField
+        name="name"
+        setValue={setName}
+        value={name}
+      />
     );
   };
 
   const { getByRole } = render(<Form />);
   const inputElement = getByRole('textbox');
 
-  expect(inputElement).toHaveValue(name);
+  expect(inputElement).toHaveValue(initialName);
 });
 
 test('Change field value', () => {
-  const name = 'John';
+  const initialName = 'John';
   const nextName = 'Anton';
 
   const Form = () => {
-    const [data, setData] = useForm({ name });
+    const [name, setName] = useState(initialName);
 
     return (
-      <TextField name="name" onChange={setData} value={data.name} />
+      <TextField
+        name="name"
+        setValue={setName}
+        value={name}
+      />
     );
   };
 
@@ -44,19 +52,28 @@ test('Change field value', () => {
 });
 
 test('Change multiple fields values', () => {
-  const firstName = 'John';
-  const lastName = 'Doe';
+  const initialFirstName = 'John';
+  const initialLastName = 'Doe';
   const nextFirstName = 'Anton';
   const nextLastName = 'Lebedev';
 
   const Form = () => {
-    const [data, setData] = useForm({ firstName, lastName });
+    const [firstName, setFirstName] = useState(initialFirstName);
+    const [lastName, setLastName] = useState(initialLastName);
 
     return (
       <>
-        <TextField name="firstName" onChange={setData} value={data.firstName} />
+        <TextField
+          name="firstName"
+          setValue={setFirstName}
+          value={firstName}
+        />
 
-        <TextField name="lastName" onChange={setData} value={data.lastName} />
+        <TextField
+          name="lastName"
+          setValue={setLastName}
+          value={lastName}
+        />
       </>
     );
   };
@@ -83,8 +100,15 @@ test('Render custom input component', () => {
   ));
 
   const Form = () => {
+    const [name, setName] = useState('');
+
     return (
-      <TextField inputComponent={Input} name="name" />
+      <TextField
+        inputComponent={Input}
+        name="name"
+        setValue={setName}
+        value={name}
+      />
     );
   };
 

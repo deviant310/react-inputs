@@ -1,6 +1,6 @@
 import { ChangeEvent, FunctionComponent, memo, useCallback } from 'react';
 
-import Form from '../../form';
+import type { Field } from '../field';
 
 /**
  * Number field component
@@ -8,17 +8,25 @@ import Form from '../../form';
 export const NumberField = memo(props => {
   type Name = typeof name;
 
+  type Value = typeof value;
+
   const {
     inputComponent: Input = DefaultInput,
     label,
     name,
-    onChange,
-    value = 0
+    setValue,
+    setValueFromRecord,
+    value
   } = props;
 
-  const setFieldData = useCallback(
-    (value: number) => onChange?.({ [name]: value } as Record<Name, number>),
-    [onChange, name]
+  const setDataOrValue = useCallback(
+    (value: Value) => {
+      if (setValueFromRecord === true)
+        setValue({ [name]: value } as Record<Name, Value> & Value);
+      else
+        setValue(value as Record<Name, Value> & Value);
+    },
+    [name, setValue, setValueFromRecord]
   );
 
   const onInputChange = useCallback(
@@ -26,9 +34,9 @@ export const NumberField = memo(props => {
       const value = parseInteger(target.value);
 
       if (!isNaN(value) && numberHasAppropriateLength(value))
-        setFieldData(value);
+        setDataOrValue(value as Value);
     },
-    [setFieldData]
+    [setDataOrValue]
   );
 
   return (
@@ -41,6 +49,7 @@ export const NumberField = memo(props => {
   );
 }) as NumberField.Component;
 
+// TODO: вынести в components
 const DefaultInput = (props: NumberField.InputProps) => <input {...props} />;
 
 /**
@@ -56,6 +65,7 @@ function parseInteger (entry: string | number) {
   return Number(digit ? `${symbol}${digit}` : '');
 }
 
+// TODO: вынести в helpers
 /**
  * Check value length
  * @param value
@@ -66,19 +76,26 @@ function numberHasAppropriateLength (value: number) {
 
 export namespace NumberField {
   export interface Component {
-    <Name extends string>(props: Props<Name>): JSX.Element;
+    <
+      Name extends string,
+      Value extends number,
+      SetValueFromRecord extends boolean = false
+    >
+    (props: Props<Name, Value, SetValueFromRecord>): JSX.Element;
   }
 
-  export interface Props<Name extends string> extends Form.FieldProps<Name> {
+  export interface Props<
+    Name extends string,
+    Value extends number,
+    SetValueFromRecord extends boolean = false
+  > extends Field.Props<Name, Value, SetValueFromRecord> {
     inputComponent?: FunctionComponent<InputProps>;
     max?: number;
     min?: number;
-    onChange?: Form.FieldChangeEvent<Name, number>;
-    value?: number;
   }
 
-  export type InputProps = {
-    onChange(e: ChangeEvent<HTMLInputElement>): void;
+  export interface InputProps {
+    onChange (e: ChangeEvent<HTMLInputElement>): void;
     placeholder?: string;
     type: 'text';
     value: number;

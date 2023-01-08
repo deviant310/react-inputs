@@ -2,11 +2,11 @@
  * Dev-server entrypoint
  */
 
-import { forwardRef, useEffect, useState } from 'react';
+import { forwardRef, useState } from 'react';
 
 import { createRoot } from 'react-dom/client';
 
-import { AutocompleteField, MaskedField, NumberField, TextField, useForm } from './main';
+import { MaskedField, NumberField, SelectField, TextField } from './index';
 
 type Option = {
   id: number;
@@ -14,13 +14,18 @@ type Option = {
 };
 
 const Form = () => {
-  const [phoneMask] = useState('+7 (###) ###-##-##');
+  const [phoneMask, setPhoneMask] = useState('+7 ### ###-##-##');
   const [cardMask] = useState('####-####-####-####');
-  const [phoneSource] = useState(String.raw`\+7|(\d)`);
+  const [phoneSource, setPhoneSource] = useState(String.raw`\+7|(\d)`);
   const [cardSource] = useState(String.raw`(\d)`);
-  const [data, setData] = useForm(initialData);
-
-  useEffect(() => console.log(data), [data]);
+  const [name, setName] = useState('Anton');
+  const [lastName, setLastName] = useState('Lebedev');
+  const [age, setAge] = useState(30);
+  const [salary, setSalary] = useState(300);
+  const [country, setCountry] = useState<Option | null>(countries[0]);
+  const [movie, setMovie] = useState<Option | null>(movies[0]);
+  const [phone, setPhone] = useState('+79991234');
+  const [card, setCard] = useState('12345678');
 
   return (
     <>
@@ -28,14 +33,14 @@ const Form = () => {
         <TextField
           inputComponent={TextFieldInput}
           name="name"
-          onChange={setData}
-          value={data.name}
+          setValue={setName}
+          value={name}
         />
 
         <TextField
           name="lastName"
-          onChange={setData}
-          value={data.lastName}
+          setValue={setLastName}
+          value={lastName}
         />
       </fieldset>
 
@@ -43,44 +48,45 @@ const Form = () => {
         <NumberField
           min={1}
           name="age"
-          onChange={setData}
-          value={data.age}
+          setValue={setAge}
+          value={age}
         />
 
         <NumberField
           min={0}
           name="salary"
-          onChange={setData}
-          value={data.salary}
+          setValue={setSalary}
+          value={salary}
         />
       </fieldset>
 
       <fieldset>
-        <AutocompleteField
-          containerComponent={AutocompleteFieldContainer}
-          displayValueForOption={getOptionValue}
-          dropdownComponent={AutocompleteFieldDropdown}
+        <SelectField
+          containerComponent={SelectFieldContainer}
+          displayStringForOption={getOptionValue}
+          dropdownComponent={SelectFieldDropdown}
           getOptionKey={getOptionId}
-          inputComponent={AutocompleteFieldInput}
+          inputComponent={SelectFieldInput}
           label="Country"
           name="country"
-          onChange={setData}
-          optionComponent={AutocompleteFieldOption}
+          optionComponent={SelectFieldOption}
           optionsBuilder={optionsBuilder.bind(countries)}
-          selected={data.country}
+          setValue={setCountry}
+          value={country}
         />
 
-        <AutocompleteField
-          containerComponent={AutocompleteFieldContainer}
-          displayValueForOption={getOptionValue}
-          dropdownComponent={AutocompleteFieldDropdown}
+        <SelectField
+          containerComponent={SelectFieldContainer}
+          displayStringForOption={getOptionValue}
+          dropdownComponent={SelectFieldDropdown}
           getOptionKey={getOptionId}
-          inputComponent={AutocompleteFieldInput}
+          inputComponent={SelectFieldInput}
+          label="Movie"
           name="movie"
-          onChange={setData}
-          optionComponent={AutocompleteFieldOption}
+          optionComponent={SelectFieldOption}
           optionsBuilder={optionsBuilder.bind(movies)}
-          selected={data.movie}
+          setValue={setMovie}
+          value={movie}
         />
       </fieldset>
 
@@ -89,31 +95,38 @@ const Form = () => {
           inputComponent={PhoneInput}
           mask={phoneMask}
           name="phone"
-          onChange={setData}
+          setValue={setPhone}
           source={phoneSource}
-          value={data.phone}
+          value={phone}
         />
 
         <MaskedField
           inputComponent={PhoneInput}
           mask={cardMask}
           name="card"
-          onChange={setData}
+          setValue={setCard}
           source={cardSource}
-          value={data.card}
+          value={card}
         />
       </fieldset>
 
-      <button onClick={() => setData(initialData)}>Reset</button>
+      <button
+        onClick={() => {
+          setPhoneMask('+995 ### ###-###');
+
+          setPhoneSource(String.raw`\+995|(\d)`);
+        }}>
+        Change Mask
+      </button>
     </>
   );
 };
 
-const AutocompleteFieldContainer = (props: AutocompleteField.ContainerProps) => (
+const SelectFieldContainer: SelectField.ContainerComponent = props => (
   <span style={{ position: 'relative' }} {...props} />
 );
 
-const AutocompleteFieldDropdown = (props: AutocompleteField.DropdownProps) => (
+const SelectFieldDropdown: SelectField.DropdownComponent = props => (
   <div
     style={{
       backgroundColor: 'white',
@@ -137,22 +150,11 @@ const movies: Option[] = [
   { id: 2, value: 'From Dusk till Dawn' }
 ];
 
-const initialData = {
-  age: 29,
-  card: '12345678',
-  country: countries[0] as Option | null,
-  lastName: 'Lebedev',
-  movie: movies[0] as Option | null,
-  name: 'Anton',
-  phone: '+79991234',
-  salary: 3500
-};
-
-const AutocompleteFieldInput = forwardRef<HTMLInputElement, AutocompleteField.InputProps>((props, ref) => (
+const SelectFieldInput: SelectField.InputComponent = forwardRef((props, ref) => (
   <input {...props} ref={ref} />
 ));
 
-const AutocompleteFieldOption = ({ data, ...props }: AutocompleteField.OptionProps<Option>) => (
+const SelectFieldOption: SelectField.OptionComponent<Option> = ({ data, ...props }) => (
   <div {...props}>{data.value}</div>
 );
 
