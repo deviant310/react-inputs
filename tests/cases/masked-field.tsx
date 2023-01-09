@@ -96,9 +96,13 @@ test('typing new symbols from the middle', async () => {
 
   await event.type(inputElement, '1', { skipClick: true });
 
+  await waitFor(() => expect(inputElement.selectionEnd).toEqual(17));
+
   await waitFor(() => expect(inputElement).toHaveValue('+7 (999) 999-99-19'));
 
   await event.type(inputElement, '2', { skipClick: true });
+
+  await waitFor(() => expect(inputElement.selectionEnd).toEqual(18));
 
   await waitFor(() => expect(inputElement).toHaveValue('+7 (999) 999-99-12'));
 });
@@ -126,13 +130,19 @@ test('deleting symbols from the end', async () => {
 
   await event.type(inputElement, '{backspace}', { skipClick: true });
 
+  await waitFor(() => expect(inputElement.selectionEnd).toEqual(17));
+
   await waitFor(() => expect(inputElement).toHaveValue('+7 (999) 123-45-6_'));
 
   await event.type(inputElement, '{backspace}', { skipClick: true });
 
+  await waitFor(() => expect(inputElement.selectionEnd).toEqual(15));
+
   await waitFor(() => expect(inputElement).toHaveValue('+7 (999) 123-45-__'));
 
   await event.type(inputElement, '{backspace}', { skipClick: true });
+
+  await waitFor(() => expect(inputElement.selectionEnd).toEqual(14));
 
   await waitFor(() => expect(inputElement).toHaveValue('+7 (999) 123-4_-__'));
 });
@@ -149,13 +159,19 @@ test('deleting symbols from the middle', async () => {
 
   await event.type(inputElement, '{backspace}', { skipClick: true });
 
+  await waitFor(() => expect(inputElement.selectionEnd).toEqual(15));
+
   await waitFor(() => expect(inputElement).toHaveValue('+7 (999) 123-45-7_'));
 
   await event.type(inputElement, '{backspace}', { skipClick: true });
 
+  await waitFor(() => expect(inputElement.selectionEnd).toEqual(14));
+
   await waitFor(() => expect(inputElement).toHaveValue('+7 (999) 123-47-__'));
 
   await event.type(inputElement, '{backspace}', { skipClick: true });
+
+  await waitFor(() => expect(inputElement.selectionEnd).toEqual(12));
 
   await waitFor(() => expect(inputElement).toHaveValue('+7 (999) 123-7_-__'));
 });
@@ -171,6 +187,8 @@ test('setting caret start position', async () => {
   await event.type(inputElement, '{backspace}', { skipClick: true });
 
   await waitFor(() => expect(inputElement.selectionEnd).toEqual(4));
+
+  await waitFor(() => expect(inputElement).toHaveValue('+7 (___) ___-__-__'));
 });
 
 test('typing when several fields rendered', async () => {

@@ -5,7 +5,7 @@ import {
   memo,
   useCallback,
   useEffect,
-  useRef, useState,
+  useRef,
 } from 'react';
 
 import type { Field } from '../field';
@@ -13,11 +13,6 @@ import type { Field } from '../field';
 import { Input as DefaultInput } from './components';
 
 import { MaskedValue } from './masked-value';
-
-type EditingInfo = {
-  caretMovedBy: 'typing' | 'deleting';
-  caretNativePosition: number;
-}
 
 /**
  * A component for helping the user entering some text by configured mask.
@@ -47,11 +42,6 @@ export const MaskedField = memo(props => {
   const maskedValue = useRef(
     new MaskedValue({ definition, dirtyValue, source, stub })
   );
-
-  const [editingInfo, setEditingInfo] = useState<EditingInfo>({
-    caretMovedBy: 'typing',
-    caretNativePosition: definition.length,
-  });
 
   const setDataOrValue = useCallback(
     (value: Value) => {
@@ -122,16 +112,16 @@ export const MaskedField = memo(props => {
       if (maskedValue.current.payload === '')
         maskedValue.current = maskedValue.current.copyWith({ dirtyValue: '' });
 
-      setEditingInfo({
-        caretMovedBy: maskedValue.current.payload.length < maskedValuePreviousPayload.length
-          ? 'deleting'
-          : 'typing',
-        caretNativePosition: selectionEnd,
-      });
-
       setDataOrValue(maskedValue.current.payload as Value);
+
+      requestAnimationFrame(() => {
+        restoreCaretPositionFrom(
+          selectionEnd,
+          maskedValue.current.payload.length < maskedValuePreviousPayload.length
+        );
+      });
     },
-    [setDataOrValue]
+    [restoreCaretPositionFrom, setDataOrValue]
   );
 
   const onInputMouseDown = useCallback(
@@ -145,13 +135,8 @@ export const MaskedField = memo(props => {
   );
 
   useEffect(
-    () => {
-      restoreCaretPositionFrom(
-        editingInfo.caretNativePosition,
-        editingInfo.caretMovedBy === 'deleting'
-      );
-    },
-    [editingInfo, restoreCaretPositionFrom]
+    () => restoreCaretPositionFrom(definition.length, false),
+    [definition.length, restoreCaretPositionFrom]
   );
 
   useEffect(

@@ -24,7 +24,7 @@ const Form = () => {
   const [salary, setSalary] = useState(300);
   const [country, setCountry] = useState<Option | null>(countries[0]);
   const [movie, setMovie] = useState<Option | null>(movies[0]);
-  const [phone, setPhone] = useState('+79991234');
+  const [phone, setPhone] = useState('+79');
   const [card, setCard] = useState('12345678');
 
   return (
