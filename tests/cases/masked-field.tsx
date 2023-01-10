@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useState } from 'react';
+import React, { forwardRef, useCallback, useEffect, useState } from 'react';
 
 import userEvent from '@testing-library/user-event';
 
@@ -61,6 +61,37 @@ test('setting initial value', () => {
   const inputElement = getByRole('textbox');
 
   expect(inputElement).toHaveValue('+7 (999) 999-99-99');
+});
+
+test('handling dirty value', () => {
+  const setPhoneMockValue = jest.fn();
+
+  const Form = () => {
+    const [phone, setPhone] = useState('123456');
+
+    const setPhoneValue = useCallback(
+      (value: string) => {
+        setPhone(value);
+
+        setPhoneMockValue(value);
+      },
+      []
+    );
+
+    return (
+      <MaskedField
+        mask={phoneMask}
+        name={phoneFieldName}
+        setValue={setPhoneValue}
+        source={phoneSource}
+        value={phone}
+      />
+    );
+  };
+
+  render(<Form />);
+
+  expect(setPhoneMockValue).toBeCalledWith('+7123456');
 });
 
 test('typing symbols from the end', async () => {
@@ -230,6 +261,8 @@ test('updating masked value props', () => {
         setPhoneMask('+995 ### ###-###');
 
         setPhoneSource(String.raw`\+995|(\d)`);
+
+        setPhone('654321');
       },
       []
     );
@@ -248,5 +281,5 @@ test('updating masked value props', () => {
   const { getByRole } = render(<Form />);
   const inputElement = getByRole('textbox');
 
-  expect(inputElement).toHaveValue('+995 123 456-___');
+  expect(inputElement).toHaveValue('+995 654 321-___');
 });

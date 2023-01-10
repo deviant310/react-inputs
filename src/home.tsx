@@ -2,7 +2,7 @@
  * Dev-server entrypoint
  */
 
-import { forwardRef, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 
 import { createRoot } from 'react-dom/client';
 
@@ -24,8 +24,10 @@ const Form = () => {
   const [salary, setSalary] = useState(300);
   const [country, setCountry] = useState<Option | null>(countries[0]);
   const [movie, setMovie] = useState<Option | null>(movies[0]);
-  const [phone, setPhone] = useState('+79');
+  const [phone, setPhone] = useState('9');
   const [card, setCard] = useState('12345678');
+
+  useEffect(() => console.log(phone), [phone]);
 
   return (
     <>
@@ -115,6 +117,8 @@ const Form = () => {
           setPhoneMask('+995 ### ###-###');
 
           setPhoneSource(String.raw`\+995|(\d)`);
+
+          setPhone('5');
         }}>
         Change Mask
       </button>

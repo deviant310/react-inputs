@@ -5,6 +5,7 @@ import {
   memo,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
 } from 'react';
 
@@ -37,11 +38,12 @@ export const MaskedField = memo(props => {
     value: dirtyValue,
   } = props;
 
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const maskedValue = useRef(
-    new MaskedValue({ definition, dirtyValue, source, stub })
+  const maskedValue = useMemo(
+    () => new MaskedValue({ definition, dirtyValue, source, stub }),
+    [definition, dirtyValue, source, stub]
   );
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const setDataOrValue = useCallback(
     (value: Value) => {
@@ -57,11 +59,11 @@ export const MaskedField = memo(props => {
     (position: number, lazy?: boolean) => {
       if (inputRef.current === null) return;
 
-      const caretPosition = maskedValue.current.getRelevantCaretPositionClosestTo(position, lazy);
+      const caretPosition = maskedValue.getRelevantCaretPositionClosestTo(position, lazy);
 
       inputRef.current.setSelectionRange(caretPosition, caretPosition);
     },
-    []
+    [maskedValue]
   );
 
   const onInputKeyDown = useCallback(
@@ -86,17 +88,17 @@ export const MaskedField = memo(props => {
         case event.code === 'ArrowUp': {
           event.preventDefault();
 
-          return restoreCaretPositionFrom(maskedValue.current.firstEntryOffset);
+          return restoreCaretPositionFrom(maskedValue.firstEntryOffset);
         }
 
         case event.code === 'ArrowDown': {
           event.preventDefault();
 
-          return restoreCaretPositionFrom(maskedValue.current.lastEntryOffset + 1);
+          return restoreCaretPositionFrom(maskedValue.lastEntryOffset + 1);
         }
       }
     },
-    [restoreCaretPositionFrom]
+    [maskedValue, restoreCaretPositionFrom]
   );
 
   const onInputChange = useCallback(
@@ -105,23 +107,20 @@ export const MaskedField = memo(props => {
 
       if (selectionEnd === null) return;
 
-      const maskedValuePreviousPayload =  maskedValue.current.payload;
+      const newMaskedValue = maskedValue.copyWith({ dirtyValue });
 
-      maskedValue.current = maskedValue.current.copyWith({ dirtyValue });
-
-      if (maskedValue.current.payload === '')
-        maskedValue.current = maskedValue.current.copyWith({ dirtyValue: '' });
-
-      setDataOrValue(maskedValue.current.payload as Value);
+      setDataOrValue(newMaskedValue.payload as Value);
 
       requestAnimationFrame(() => {
-        restoreCaretPositionFrom(
+        const caretPosition = newMaskedValue.getRelevantCaretPositionClosestTo(
           selectionEnd,
-          maskedValue.current.payload.length < maskedValuePreviousPayload.length
+          newMaskedValue.payload.length < maskedValue.payload.length
         );
+
+        currentTarget.setSelectionRange(caretPosition, caretPosition);
       });
     },
-    [restoreCaretPositionFrom, setDataOrValue]
+    [maskedValue, setDataOrValue]
   );
 
   const onInputMouseDown = useCallback(
@@ -141,11 +140,10 @@ export const MaskedField = memo(props => {
 
   useEffect(
     () => {
-      maskedValue.current = maskedValue.current.copyWith({ definition, source, stub });
-
-      setDataOrValue(maskedValue.current.payload as Value);
+      if (dirtyValue !== maskedValue.payload)
+        setDataOrValue(maskedValue.payload as Value);
     },
-    [definition, setDataOrValue, source, stub]
+    [dirtyValue, maskedValue, setDataOrValue]
   );
 
   return (
@@ -156,7 +154,7 @@ export const MaskedField = memo(props => {
       placeholder={label}
       ref={inputRef}
       type="text"
-      value={maskedValue.current.text}
+      value={maskedValue.text}
     />
   );
 }) as MaskedField.Component;
