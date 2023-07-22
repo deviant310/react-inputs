@@ -4,12 +4,10 @@ const appRoot = realpathSync(process.cwd());
 const resolvePath = relativePath => resolve(appRoot, relativePath);
 
 module.exports = {
+  appBootEntry: resolvePath('./src/bootstrap/app.tsx'),
   appDocs: resolvePath('./docs'),
-  appHome: resolvePath('./src/home.tsx'),
-  appHtmlTemplate: resolvePath('./static/build/templates/index.html'),
-  appMain: resolvePath('./src/index.ts'),
   appOutput: resolvePath('./build'),
   appSrc: resolvePath('./src'),
   appStatic: resolvePath('./static'),
-  dotenv: resolvePath('.env')
+  dotenv: resolvePath('.env'),
 };

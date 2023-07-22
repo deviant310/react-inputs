@@ -1,28 +1,28 @@
-import React, { forwardRef, useState } from 'react';
+import { useState } from 'react';
 
 import '@testing-library/jest-dom';
 
 import { fireEvent, getAllByRole, getByRole, render } from '@testing-library/react';
 
-import { SelectField } from 'react-fields';
+import { SelectInput } from 'react-inputs';
 
 type Option = {
   id: number;
   value: string;
 };
 
-const SelectFieldOption: SelectField.OptionComponent<Option> = ({ data, ...props }) => (
+const SelectInputOption: SelectInput.OptionComponent<Option> = ({ data, ...props }) => (
   <div data-id={data.id} {...props}>{data.value}</div>
 );
 
 const countries: Option[] = [
   { id: 1, value: 'Cyprus' },
-  { id: 2, value: 'Georgia' }
+  { id: 2, value: 'Georgia' },
 ];
 
 const movies: Option[] = [
   { id: 1, value: 'Home Alone' },
-  { id: 2, value: 'From Dusk till Dawn' }
+  { id: 2, value: 'From Dusk till Dawn' },
 ];
 
 const countriesOptionsBuilder = (editingValue: string) => (
@@ -41,11 +41,11 @@ test('initial value', () => {
     const [country, setCountry] = useState<Option | null>(countries[1]);
 
     return (
-      <SelectField
+      <SelectInput
         displayStringForOption={getOptionValue}
         getOptionKey={getOptionKey}
         name="country"
-        optionComponent={SelectFieldOption}
+        optionComponent={SelectInputOption}
         optionsBuilder={countriesOptionsBuilder}
         setValue={setCountry}
         value={country}
@@ -66,11 +66,11 @@ test('typing search query', () => {
     const [country, setCountry] = useState<Option | null>(null);
 
     return (
-      <SelectField
+      <SelectInput
         displayStringForOption={getOptionValue}
         getOptionKey={getOptionKey}
         name="country"
-        optionComponent={SelectFieldOption}
+        optionComponent={SelectInputOption}
         optionsBuilder={countriesOptionsBuilder}
         setValue={setCountry}
         value={country}
@@ -95,11 +95,11 @@ test('change field value', () => {
     const [country, setCountry] = useState<Option | null>(countries[0]);
 
     return (
-      <SelectField
+      <SelectInput
         displayStringForOption={getOptionValue}
         getOptionKey={getOptionKey}
         name="country"
-        optionComponent={SelectFieldOption}
+        optionComponent={SelectInputOption}
         optionsBuilder={countriesOptionsBuilder}
         setValue={setCountry}
         value={country}
@@ -133,21 +133,21 @@ test('change multiple fields values', () => {
 
     return (
       <>
-        <SelectField
+        <SelectInput
           displayStringForOption={getOptionValue}
           getOptionKey={getOptionKey}
           name="country"
-          optionComponent={SelectFieldOption}
+          optionComponent={SelectInputOption}
           optionsBuilder={countriesOptionsBuilder}
           setValue={setCountry}
           value={country}
         />
 
-        <SelectField
+        <SelectInput
           displayStringForOption={getOptionValue}
           getOptionKey={getOptionKey}
           name="movie"
-          optionComponent={SelectFieldOption}
+          optionComponent={SelectInputOption}
           optionsBuilder={moviesOptionsBuilder}
           setValue={setMovie}
           value={movie}
@@ -180,30 +180,30 @@ test('change multiple fields values', () => {
 test('render custom components', () => {
   const searchQuery = countries[0].value.slice(0, 3);
 
-  const Container: SelectField.ContainerComponent = props => (
+  const Container: SelectInput.ContainerComponent = props => (
     <div data-testid="select-field-container" {...props} />
   );
 
-  const Dropdown: SelectField.DropdownComponent = props => (
+  const Dropdown: SelectInput.DropdownComponent = props => (
     <div data-testid="select-field-dropdown" {...props} />
   );
 
-  const Input: SelectField.InputComponent = forwardRef((props, ref) => (
-    <input data-testid="select-field-input" {...props} ref={ref} />
-  ));
+  const Input: SelectInput.InputComponent = props => (
+    <input data-testid="select-field-input" {...props} />
+  );
 
   const Form = () => {
     const [country, setCountry] = useState<Option | null>(null);
 
     return (
-      <SelectField
+      <SelectInput
         containerComponent={Container}
         displayStringForOption={getOptionValue}
         dropdownComponent={Dropdown}
         getOptionKey={getOptionKey}
         inputComponent={Input}
         name="country"
-        optionComponent={SelectFieldOption}
+        optionComponent={SelectInputOption}
         optionsBuilder={countriesOptionsBuilder}
         setValue={setCountry}
         value={country}
@@ -227,7 +227,7 @@ test('render custom components', () => {
 });
 
 test('dropdown default visibility', () => {
-  const Dropdown: SelectField.DropdownComponent = props => (
+  const Dropdown: SelectInput.DropdownComponent = props => (
     <div data-testid="select-field-dropdown" {...props} />
   );
 
@@ -235,13 +235,13 @@ test('dropdown default visibility', () => {
     const [country, setCountry] = useState<Option | null>(null);
 
     return (
-      <SelectField
+      <SelectInput
         displayStringForOption={getOptionValue}
         dropdownComponent={Dropdown}
         dropdownIsVisibleByDefault
         getOptionKey={getOptionKey}
         name="country"
-        optionComponent={SelectFieldOption}
+        optionComponent={SelectInputOption}
         optionsBuilder={countriesOptionsBuilder}
         setValue={setCountry}
         value={country}

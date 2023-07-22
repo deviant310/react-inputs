@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { SelectField } from 'react-fields';
+import { SelectInput } from 'react-inputs';
 
 type Option = {
   id: number;
@@ -11,7 +11,7 @@ export const Form = () => {
   const [country, setCountry] = useState<Option | null>(countries[0]);
 
   return (
-    <SelectField
+    <SelectInput
       displayStringForOption={getOptionValue}
       getOptionKey={getOptionKey}
       name="country"
@@ -25,13 +25,13 @@ export const Form = () => {
 
 const countries: Option[] = [
   { id: 1, value: 'Cyprus' },
-  { id: 2, value: 'Georgia' }
+  { id: 2, value: 'Georgia' },
 ];
 
 const getOptionValue = (option: Option) => option.value;
 const getOptionKey = (option: Option) => option.id;
 
-const CountryOption: SelectField.OptionComponent<Option> = ({ data, ...props }) => (
+const CountryOption: SelectInput.OptionComponent<Option> = ({ data, ...props }) => (
   <div {...props}>{data.value}</div>
 );
 
@@ -41,7 +41,7 @@ const optionsBuilder = (editingValue: string) => {
       option => option.value
         .toLowerCase()
         .includes(
-          editingValue.toLowerCase()
-        )
+          editingValue.toLowerCase(),
+        ),
     );
 };

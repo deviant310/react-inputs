@@ -1,22 +1,19 @@
+const { resolve } = require('path');
 const paths = require('./paths');
 
 module.exports = {
   moduleNameMapper: {
-    'react-fields': paths.appMain
+    'react-fields': resolve(paths.appSrc, './modules/index.ts')
   },
   modulePathIgnorePatterns: [
     '<rootDir>/build'
   ],
-  setupFiles: [
-    'dotenv/config'
-  ],
   setupFilesAfterEnv: [
-    '<rootDir>/tests/setup/fail-on-console.ts'
+    '<rootDir>/tests/setup.ts'
   ],
   testEnvironment: 'jsdom',
   testMatch: [
-    '<rootDir>/tests/cases/**/*.[jt]s?(x)',
-    '**/?(*.)+(spec|test).[jt]s?(x)'
+    '<rootDir>/tests/cases/**/index.ts?(x)',
   ],
   verbose: true
 };

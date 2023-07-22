@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2016",
+    "target": "es6",
     "lib": [
       "dom",
       "dom.iterable",
@@ -12,18 +12,15 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
+    "noEmitOnError": true,
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "noEmit": true,
+    "skipLibCheck": true,
     "jsx": "react-jsx",
     "downlevelIteration": true,
     "paths": {
-      "react-fields": ["./src/index.ts"]
-    }
-  },
-  "include": [
-    "src/**/*",
-    "static/docs/examples/**/*",
-    "tests/**/*"
-  ]
+      "react-inputs": [
+        "./src/inputs/index.ts"
+      ]
+    },
+  }
 }

@@ -1,0 +1,13 @@
+{
+  "entry": ["build/inputs/masked-input/index.d.ts"],
+  "extensions": [".ts", ".d.ts"],
+  "ignorePatterns": [
+    "**/src/**",
+    "**/node_modules/**",
+    "**/*.tests.{js,jsx,ts,tsx}",
+    "**/*.test.{js,jsx,ts,tsx}",
+    "**/*.spec.{js,jsx,ts,tsx}",
+    "**/tests/**",
+    "**/__tests__/**"
+  ]
+}

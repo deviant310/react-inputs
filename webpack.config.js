@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 const { resolve } = require('path');
 const { existsSync, readdirSync, rmSync } = require('fs');
 const ESLintPlugin = require('eslint-webpack-plugin');
@@ -9,15 +7,9 @@ const ts = require('typescript');
 const glob = require('glob');
 const app = require('./package.json');
 const paths = require('./paths.js');
+const { execSync } = require('node:child_process');
 const isDevServer = Boolean(process.env.WEBPACK_SERVE);
 const devServerPort = process.env.DEV_SERVER_PORT ?? 3000;
-
-const entries = {
-  'masked-field': resolve(paths.appSrc, 'masked-field'),
-  'number-field': resolve(paths.appSrc, 'number-field'),
-  'select-field': resolve(paths.appSrc, 'select-field'),
-  'text-field': resolve(paths.appSrc, 'text-field')
-};
 
 module.exports = env => {
   const { production } = env ?? {};
@@ -31,36 +23,50 @@ module.exports = env => {
           errors: true,
           warnings: false,
         },
+        webSocketURL: 'auto://0.0.0.0:0/ws',
       },
       compress: true,
       open: true,
       port: devServerPort,
       static: {
         directory: paths.appOutput,
-      }
+      },
     },
     devtool: !isProductionBuild && 'source-map',
-    entry: isDevServer ? paths.appHome : {
-      'index': paths.appMain,
-      ...entries,
-    },
-    externals: !isDevServer ? [
-      {
-        react: 'react',
+    entry: isDevServer
+      ? paths.appBootEntry
+      : {
+        'helpers': resolve(paths.appSrc, 'factory/helpers'),
+        'index': {
+          dependOn: [
+            'masked-input',
+            'number-input',
+            'select-input',
+            'text-input',
+          ],
+          import: resolve(paths.appSrc, 'modules'),
+        },
+        'masked-input': {
+          dependOn: ['helpers'],
+          import: resolve(paths.appSrc, 'modules/masked-input'),
+        },
+        'number-input': {
+          dependOn: ['helpers'],
+          import: resolve(paths.appSrc, 'modules/number-input'),
+        },
+        'select-input': {
+          dependOn: ['helpers'],
+          import: resolve(paths.appSrc, 'modules/select-input'),
+        },
+        'text-input': {
+          dependOn: ['helpers'],
+          import: resolve(paths.appSrc, 'modules/text-input'),
+        },
       },
-      function ({ context, contextInfo, request }, callback) {
-        const moduleIsExternal = contextInfo.issuer && Object
-          .values(entries)
-          .includes(
-            resolve(context, request)
-          );
-
-        if (moduleIsExternal)
-          return callback(null, request);
-
-        callback();
-      },
-    ] : [],
+    externals: !isDevServer ? {
+      react: 'react',
+      reactDOM: 'react-dom',
+    } : {},
     infrastructureLogging: {
       level: 'none',
     },
@@ -72,55 +78,107 @@ module.exports = env => {
           options: {
             cacheCompression: false,
             cacheDirectory: true,
-            compact: isProductionBuild
+            comments: false,
+            compact: isProductionBuild,
+            presets: [
+              '@babel/preset-env',
+              [
+                '@babel/preset-typescript',
+                {
+                  onlyRemoveTypeImports: true,
+                },
+              ],
+              [
+                '@babel/preset-react',
+                {
+                  runtime: isDevServer
+                    ? 'automatic'
+                    : 'classic',
+                },
+              ],
+            ],
+
           },
           test: /\.(ts|tsx|js|jsx)$/,
         },
-      ]
+      ],
     },
     optimization: {
       minimize: isProductionBuild,
     },
     output: {
-      filename: ({ chunk }) => (
-        chunk.name === 'index'
+      /*filename: ({ chunk }) => {
+        console.log(chunk);
+
+        return chunk.name === 'index'
           ? '[name].js'
-          : '[name]/index.js'
-      ),
+          : '[name]/index.js';
+      },*/
       libraryTarget: 'umd',
-      path: paths.appOutput
+      path: paths.appOutput,
     },
     plugins: [
       new ESLintPlugin({
         extensions: ['js', 'jsx', 'ts', 'tsx'],
         failOnError: true,
         overrideConfig: {
-          rules: {
-            'no-console': isProductionBuild ? 'error' : 'off',
-            'no-debugger': isProductionBuild ? 'error' : 'off',
-          }
-        }
+          rules: isProductionBuild ? {
+            'no-console': 'error',
+            'no-debugger': 'error',
+          } : {},
+        },
       }),
-      new ForkTsCheckerWebpackPlugin({
-        async: false,
-        typescript: {
-          configOverwrite: {
-            exclude: !isDevServer
-              ? [paths.appHome]
-              : []
-          }
-        }
-      }),
+      isDevServer
+        ? new ForkTsCheckerWebpackPlugin()
+        : {
+          apply: compiler => {
+            compiler.hooks.beforeCompile.tapAsync('Declarations generation', (_, callback) => {
+              console.log('beforeCompile');
+
+              /*const files = glob.sync(resolve(paths.appSrc, '**!/!*{.ts,.tsx}'), {
+                ignore: [paths.appHome]
+              });
+
+              const compilerOptions = {
+                allowJs: true,
+                declaration: true,
+                declarationDir: paths.appOutput,
+                emitDeclarationOnly: true,
+              };
+
+              const host = ts.createCompilerHost(compilerOptions);
+              const program = ts.createProgram(files, compilerOptions, host);
+              const emitResult = program.emit();
+
+              if (emitResult.emitSkipped)
+                compilation.errors.push('type errors');*/
+              try {
+                execSync(`tsc --project tsconfig.build.json --outDir ${paths.appOutput}`, {
+                  cwd: process.cwd(),
+                  stdio: 'inherit',
+                });
+
+                callback();
+              } catch (e) {
+                callback('Declarations generating failed');
+              }
+            });
+          },
+        },
       {
         apply: compiler => {
           compiler.hooks.shouldEmit.tap('Check errors', compilation => {
+            console.log('shouldEmit');
+
             return !compilation.getStats().hasErrors();
           });
-        }
+        },
       },
       !isDevServer && {
         apply: compiler => {
           compiler.hooks.environment.tap('Clear old build', () => {
+            console.log('environment');
+
             if (existsSync(paths.appOutput)) {
               readdirSync(paths.appOutput).forEach(baseName => {
                 const path = resolve(paths.appOutput, baseName);
@@ -129,32 +187,11 @@ module.exports = env => {
               });
             }
           });
-        }
-      },
-      !isDevServer && {
-        apply: compiler => {
-          compiler.hooks.done.tap('Build declarations bundle', () => {
-            const files = glob.sync(resolve(paths.appSrc, '**/*{.ts,.tsx}'), {
-              ignore: [paths.appHome]
-            });
-
-            const compilerOptions = {
-              allowJs: true,
-              declaration: true,
-              declarationDir: paths.appOutput,
-              emitDeclarationOnly: true,
-            };
-
-            const host = ts.createCompilerHost(compilerOptions);
-            const program = ts.createProgram(files, compilerOptions, host);
-
-            program.emit();
-          });
-        }
+        },
       },
       isDevServer && new HtmlWebpackPlugin({
         template: paths.appHtmlTemplate,
-        title: app.name
+        title: app.name,
       }),
     ].filter(Boolean),
     resolve: {
@@ -162,7 +199,7 @@ module.exports = env => {
     },
     stats: {
       colors: true,
-      modules: false
+      modules: false,
     },
   };
 };

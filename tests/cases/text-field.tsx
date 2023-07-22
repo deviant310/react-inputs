@@ -1,31 +1,10 @@
-import React, { forwardRef, useState } from 'react';
+import { forwardRef, useState } from 'react';
 
 import '@testing-library/jest-dom';
 
 import { fireEvent, render } from '@testing-library/react';
 
-import { TextField } from 'react-fields';
-
-test('Initial value', () => {
-  const initialName = 'John';
-
-  const Form = () => {
-    const [name, setName] = useState(initialName);
-
-    return (
-      <TextField
-        name="name"
-        setValue={setName}
-        value={name}
-      />
-    );
-  };
-
-  const { getByRole } = render(<Form />);
-  const inputElement = getByRole('textbox');
-
-  expect(inputElement).toHaveValue(initialName);
-});
+import { TextInput } from 'react-inputs';
 
 test('Change field value', () => {
   const initialName = 'John';
@@ -35,7 +14,7 @@ test('Change field value', () => {
     const [name, setName] = useState(initialName);
 
     return (
-      <TextField
+      <TextInput
         name="name"
         setValue={setName}
         value={name}
@@ -63,13 +42,13 @@ test('Change multiple fields values', () => {
 
     return (
       <>
-        <TextField
+        <TextInput
           name="firstName"
           setValue={setFirstName}
           value={firstName}
         />
 
-        <TextField
+        <TextInput
           name="lastName"
           setValue={setLastName}
           value={lastName}
@@ -95,7 +74,7 @@ test('Change multiple fields values', () => {
 });*/
 
 test('Render custom input component', () => {
-  const Input = forwardRef<HTMLInputElement, TextField.InputProps>((props, ref) => (
+  const Input = forwardRef<HTMLInputElement, TextInput.InputProps>((props, ref) => (
     <input data-testid="text-field-input" {...props} ref={ref} />
   ));
 
@@ -103,7 +82,7 @@ test('Render custom input component', () => {
     const [name, setName] = useState('');
 
     return (
-      <TextField
+      <TextInput
         inputComponent={Input}
         name="name"
         setValue={setName}

@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 
 import { fireEvent, render } from '@testing-library/react';
 
-import { NumberField } from 'react-fields';
+import { NumberInput } from 'react-inputs';
 
 test('Initial value', () => {
   const initialAge = 15;
@@ -13,7 +13,7 @@ test('Initial value', () => {
     const [age, setAge] = useState(initialAge);
 
     return (
-      <NumberField
+      <NumberInput
         name="age"
         setValue={setAge}
         value={age}
@@ -35,7 +35,7 @@ test('Change field value', () => {
     const [age, setAge] = useState(initialAge);
 
     return (
-      <NumberField
+      <NumberInput
         name="age"
         setValue={setAge}
         value={age}
@@ -63,13 +63,13 @@ test('Change multiple fields values', () => {
 
     return (
       <>
-        <NumberField
+        <NumberInput
           name="age"
           setValue={setAge}
           value={age}
         />
 
-        <NumberField
+        <NumberInput
           name="price"
           setValue={setPrice}
           value={price}
@@ -97,7 +97,7 @@ test('Enter empty value', () => {
     const [age, setAge] = useState(initialAge);
 
     return (
-      <NumberField
+      <NumberInput
         name="age"
         setValue={setAge}
         value={age}
@@ -120,7 +120,7 @@ test('Check maximum allowable value', () => {
     const [distance, setDistance] = useState(initialDistance);
 
     return (
-      <NumberField
+      <NumberInput
         name="distance"
         setValue={setDistance}
         value={distance}
@@ -141,7 +141,7 @@ test('Check maximum allowable value', () => {
 });
 
 test('Render custom input component', () => {
-  const Input = forwardRef<HTMLInputElement, NumberField.InputProps>((props, ref) => (
+  const Input = forwardRef<HTMLInputElement, NumberInput.InputProps>((props, ref) => (
     <input data-testid="number-field-input" {...props} ref={ref} />
   ));
 
@@ -149,7 +149,7 @@ test('Render custom input component', () => {
     const [count, setCount] = useState(0);
 
     return (
-      <NumberField
+      <NumberInput
         inputComponent={Input}
         name="count"
         setValue={setCount}

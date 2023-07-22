@@ -21,12 +21,22 @@
     "sort-destructure-keys"
   ],
   "rules": {
+    "no-console": "off",
+    "no-debugger": "off",
     "indent": [
       "error",
       2,
       {
         "SwitchCase": 1
       }
+    ],
+    "comma-dangle": [
+      "error",
+      "always-multiline"
+    ],
+    "space-before-blocks": [
+      "error",
+      "always"
     ],
     "no-mixed-spaces-and-tabs": "error",
     "padding-line-between-statements": [
@@ -119,7 +129,10 @@
         "beforeSelfClosing": "always"
       }
     ],
-    "react/jsx-boolean-value": ["error", "never"],
+    "react/jsx-boolean-value": [
+      "error",
+      "never"
+    ],
     "sort-imports": [
       "error",
       {
