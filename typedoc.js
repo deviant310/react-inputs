@@ -12,9 +12,9 @@ module.exports = {
   readme: 'none',
   sort: [
     'required-first',
-    'source-order'
+    'source-order',
   ],
   theme: 'gitlab-wiki',
   titleLink: '/react-form/docs',
-  treatWarningsAsErrors: true
+  treatWarningsAsErrors: true,
 };

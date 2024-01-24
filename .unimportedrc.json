@@ -1,6 +1,8 @@
 {
-  "entry": ["build/inputs/masked-input/index.d.ts"],
+  "entry": ["./build/app/inputs/index.d.ts"],
   "extensions": [".ts", ".d.ts"],
+  "scannedDirs": ["./build"],
+  "respectGitignore": false,
   "ignorePatterns": [
     "**/src/**",
     "**/node_modules/**",

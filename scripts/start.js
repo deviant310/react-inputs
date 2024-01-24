@@ -9,6 +9,7 @@ const handlebars = require('handlebars');
 const paths = require('../paths');
 const { name: projectName } = require('../package.json');
 const compilerEventEmitter = new EventEmitter();
+const bootEntryPath = resolve(paths.appSrc, 'bootstrap/app.tsx');
 
 handlebars.registerHelper('switch', function (value, options) {
   this.switchValue = value;
@@ -22,15 +23,15 @@ handlebars.registerHelper('case', function (value, options) {
 });
 
 const templateInput = readFileSync(
-  resolve(paths.appStatic, 'templates/index.hbs'),
+  resolve(paths.appStatic, 'templates/esbuild-index.hbs'),
 ).toString();
 
 const liveReloadHtml = readFileSync(
-  resolve(paths.appStatic, 'templates/live-reload.html'),
+  resolve(paths.appStatic, 'templates/esbuild-live-reload.html'),
 ).toString();
 
-const indexTemplate = handlebars.compile(templateInput);
-const pathToScript = `/${parse(paths.appBootEntry).name}.js`;
+const handlebarsTemplate = handlebars.compile(templateInput);
+const pathToScript = `/${parse(bootEntryPath).name}.js`;
 
 let outputFiles = [];
 
@@ -42,7 +43,7 @@ const errors = {
 (async () => {
   const ctx = await esbuild.context({
     bundle: true,
-    entryPoints: [paths.appBootEntry],
+    entryPoints: [bootEntryPath],
     outdir: paths.appOutput,
     plugins: [
       typecheckPlugin({
@@ -92,7 +93,7 @@ const errors = {
         res.writeHead(200, { 'Content-Type': 'text/html' });
 
         res.end(
-          indexTemplate({
+          handlebarsTemplate({
             errors: Object.values(errors).some(({ length }) => length)
               ? errors
               : undefined,

@@ -14,6 +14,7 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
+  "ignorePatterns": ["build/**/*"],
   "plugins": [
     "react",
     "react-hooks",
@@ -21,6 +22,7 @@
     "sort-destructure-keys"
   ],
   "rules": {
+    "eol-last": ["error", "always"],
     "no-console": "off",
     "no-debugger": "off",
     "indent": [
@@ -95,6 +97,7 @@
         "omitLastInOneLineBlock": true
       }
     ],
+    "no-unused-vars": "off",
     "no-undef": "off",
     "no-use-before-define": "off",
     "spaced-comment": "off",
@@ -159,6 +162,7 @@
         "typescript-sort-keys"
       ],
       "rules": {
+        "@typescript-eslint/no-unused-vars": ["error", { "vars": "local" }],
         "@typescript-eslint/indent": [
           "error",
           2

@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 
 import { fireEvent, render } from '@testing-library/react';
 
-import { TextInput } from 'react-inputs';
+import { TextInput } from '../../src/app/inputs/text-input';
 
 test('Change field value', () => {
   const initialName = 'John';

@@ -1,14 +1,14 @@
 import { useState } from 'react';
 
-import { SelectInput } from 'react-inputs';
+import { SelectInput } from '../../../../src/app/inputs/select-input';
 
-type Option = {
+type Country = {
   id: number;
   value: string;
 };
 
 export const Form = () => {
-  const [country, setCountry] = useState<Option | null>(countries[0]);
+  const [country, setCountry] = useState<Country | null>(countries[0]);
 
   return (
     <SelectInput
@@ -23,15 +23,15 @@ export const Form = () => {
   );
 };
 
-const countries: Option[] = [
+const countries: Country[] = [
   { id: 1, value: 'Cyprus' },
   { id: 2, value: 'Georgia' },
 ];
 
-const getOptionValue = (option: Option) => option.value;
-const getOptionKey = (option: Option) => option.id;
+const getOptionValue = (country: Country) => country.value;
+const getOptionKey = (country: Country) => country.id;
 
-const CountryOption: SelectInput.OptionComponent<Option> = ({ data, ...props }) => (
+const CountryOption: SelectInput.OptionComponent<Country> = ({ data, ...props }) => (
   <div {...props}>{data.value}</div>
 );
 

@@ -10,6 +10,7 @@
 
 # production
 /build
+/*.tgz
 
 # misc
 .DS_Store
@@ -26,11 +27,5 @@ yarn-error.log*
 # lint
 .eslintcache
 
-# ide
-.idea
-
-# docker
-docker-compose.override.yml
-
-# other
+# docs
 /docs

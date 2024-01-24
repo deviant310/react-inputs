@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 import { useState } from 'react';
 
-import { MaskedInput } from 'react-inputs';
+import { MaskedInput } from '../../../src/app/inputs/masked-input';
 
 test('setting caret offset on mousedown', async () => {
   const App = () => {

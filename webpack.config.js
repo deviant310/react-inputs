@@ -1,10 +1,10 @@
 const { resolve } = require('path');
-const { existsSync, readdirSync, rmSync } = require('fs');
+const { cpSync, existsSync, readdirSync, rmSync } = require('fs');
+const { DllPlugin, DllReferencePlugin } = require('webpack');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const ts = require('typescript');
-const glob = require('glob');
 const app = require('./package.json');
 const paths = require('./paths.js');
 const { execSync } = require('node:child_process');
@@ -34,34 +34,9 @@ module.exports = env => {
     },
     devtool: !isProductionBuild && 'source-map',
     entry: isDevServer
-      ? paths.appBootEntry
+      ? resolve(paths.appSrc, 'bootstrap/app.tsx')
       : {
-        'helpers': resolve(paths.appSrc, 'factory/helpers'),
-        'index': {
-          dependOn: [
-            'masked-input',
-            'number-input',
-            'select-input',
-            'text-input',
-          ],
-          import: resolve(paths.appSrc, 'modules'),
-        },
-        'masked-input': {
-          dependOn: ['helpers'],
-          import: resolve(paths.appSrc, 'modules/masked-input'),
-        },
-        'number-input': {
-          dependOn: ['helpers'],
-          import: resolve(paths.appSrc, 'modules/number-input'),
-        },
-        'select-input': {
-          dependOn: ['helpers'],
-          import: resolve(paths.appSrc, 'modules/select-input'),
-        },
-        'text-input': {
-          dependOn: ['helpers'],
-          import: resolve(paths.appSrc, 'modules/text-input'),
-        },
+        'helpers': resolve(paths.appSrc, 'infrastructure/helpers'),
       },
     externals: !isDevServer ? {
       react: 'react',
@@ -74,32 +49,9 @@ module.exports = env => {
     module: {
       rules: [
         {
-          loader: 'babel-loader',
-          options: {
-            cacheCompression: false,
-            cacheDirectory: true,
-            comments: false,
-            compact: isProductionBuild,
-            presets: [
-              '@babel/preset-env',
-              [
-                '@babel/preset-typescript',
-                {
-                  onlyRemoveTypeImports: true,
-                },
-              ],
-              [
-                '@babel/preset-react',
-                {
-                  runtime: isDevServer
-                    ? 'automatic'
-                    : 'classic',
-                },
-              ],
-            ],
-
-          },
-          test: /\.(ts|tsx|js|jsx)$/,
+          exclude: /node_modules/,
+          test: /\.tsx?$/,
+          use: 'ts-loader',
         },
       ],
     },
@@ -107,17 +59,30 @@ module.exports = env => {
       minimize: isProductionBuild,
     },
     output: {
-      /*filename: ({ chunk }) => {
-        console.log(chunk);
-
+      /* filename: ({ chunk }) => {
         return chunk.name === 'index'
           ? '[name].js'
           : '[name]/index.js';
-      },*/
-      libraryTarget: 'umd',
+      }, */
+      library: {
+        name: app.name,
+        type: 'umd',
+      },
       path: paths.appOutput,
     },
     plugins: [
+      !isDevServer && new DllPlugin({
+        /*
+          This needs to be exactly the same as output.fileName
+          If you're exposing this as a library or
+          using a monorepo with scoped packages, set this to the fullpath
+          including the scope :)
+          e.g.:
+          @super-duper/dist/[name]
+        */
+        name: app.name,
+        path: resolve(__dirname, 'build/manifest.json'),
+      }),
       new ESLintPlugin({
         extensions: ['js', 'jsx', 'ts', 'tsx'],
         failOnError: true,
@@ -129,11 +94,17 @@ module.exports = env => {
         },
       }),
       isDevServer
-        ? new ForkTsCheckerWebpackPlugin()
+        ? new ForkTsCheckerWebpackPlugin({
+          async: isDevServer,
+        })
         : {
           apply: compiler => {
-            compiler.hooks.beforeCompile.tapAsync('Declarations generation', (_, callback) => {
-              console.log('beforeCompile');
+            compiler.hooks.beforeCompile.tapAsync('Copy type declarations', (_, callback) => {
+              cpSync(
+                resolve(paths.appSrc, 'app/declarations'),
+                paths.appOutput,
+                { recursive: true },
+              );
 
               /*const files = glob.sync(resolve(paths.appSrc, '**!/!*{.ts,.tsx}'), {
                 ignore: [paths.appHome]
@@ -153,10 +124,10 @@ module.exports = env => {
               if (emitResult.emitSkipped)
                 compilation.errors.push('type errors');*/
               try {
-                execSync(`tsc --project tsconfig.build.json --outDir ${paths.appOutput}`, {
+                /* execSync(`tsc --project tsconfig.build.json --outDir ${paths.appOutput}`, {
                   cwd: process.cwd(),
                   stdio: 'inherit',
-                });
+                }); */
 
                 callback();
               } catch (e) {
@@ -168,8 +139,6 @@ module.exports = env => {
       {
         apply: compiler => {
           compiler.hooks.shouldEmit.tap('Check errors', compilation => {
-            console.log('shouldEmit');
-
             return !compilation.getStats().hasErrors();
           });
         },
@@ -177,8 +146,6 @@ module.exports = env => {
       !isDevServer && {
         apply: compiler => {
           compiler.hooks.environment.tap('Clear old build', () => {
-            console.log('environment');
-
             if (existsSync(paths.appOutput)) {
               readdirSync(paths.appOutput).forEach(baseName => {
                 const path = resolve(paths.appOutput, baseName);
@@ -190,7 +157,7 @@ module.exports = env => {
         },
       },
       isDevServer && new HtmlWebpackPlugin({
-        template: paths.appHtmlTemplate,
+        template: resolve(paths.appStatic, 'templates/webpack-index.html'),
         title: app.name,
       }),
     ].filter(Boolean),

@@ -1,19 +1,34 @@
+/** @type {import('ts-jest').JestConfigWithTsJest} */
 const { resolve } = require('path');
 const paths = require('./paths');
 
 module.exports = {
+  moduleFileExtensions: [
+    'js',
+    'json',
+    'jsx',
+    'node',
+    'ts',
+    'tsx',
+  ],
   moduleNameMapper: {
-    'react-fields': resolve(paths.appSrc, './modules/index.ts')
+    '@copositary/react-inputs': resolve(paths.appSrc, './app/inputs/index.ts'),
   },
   modulePathIgnorePatterns: [
-    '<rootDir>/build'
+    '<rootDir>/build',
   ],
+  preset: 'ts-jest',
   setupFilesAfterEnv: [
-    '<rootDir>/tests/setup.ts'
+    '<rootDir>/tests/setup.ts',
   ],
-  testEnvironment: 'jsdom',
+  testEnvironment: 'jest-environment-jsdom',
   testMatch: [
     '<rootDir>/tests/cases/**/index.ts?(x)',
   ],
-  verbose: true
+  transform: {
+    '^.+\\.tsx?$': ['ts-jest', {
+      useESM: true,
+    }],
+  },
+  verbose: true,
 };

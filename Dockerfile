@@ -1,6 +1,6 @@
-FROM node:18.16.0
+FROM node:18.17.1
 
-RUN npm i npm@9.8.0 -g
+RUN npm i npm@10.1.0 -g
 
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 

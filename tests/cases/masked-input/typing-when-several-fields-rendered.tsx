@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 import { useState } from 'react';
 
-import { MaskedInput } from 'react-inputs';
+import { MaskedInput } from '../../../src/app/inputs/masked-input';
 
 test('typing when several fields rendered', async () => {
   const App = () => {

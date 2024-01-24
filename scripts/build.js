@@ -1,23 +1,19 @@
-const { execSync } = require('node:child_process');
 const { resolve } = require('path');
+const { execSync } = require('node:child_process');
 const { build } = require('esbuild');
-const { globSync } = require('glob');
-const ts = require('typescript');
-const { typecheckPlugin } = require('@jgoz/esbuild-plugin-typecheck');
 const paths = require('../paths');
-const tsConfig = require('../tsconfig.build.json');
 
-try {
+/* try {
   execSync(`eslint --ext .ts,.tsx ${paths.appSrc}`, {
     cwd: process.cwd(),
     stdio: 'inherit',
   });
 } catch (e) {
   process.exit(1);
-}
+} */
 
 try {
-  execSync(`tsc --project tsconfig.build.json --outDir ${paths.appOutput}`, {
+  execSync(`tsc -p tsconfig.build.json --outDir ${paths.appOutput}`, {
     cwd: process.cwd(),
     stdio: 'inherit',
   });
@@ -25,21 +21,16 @@ try {
   process.exit(1);
 }
 
-// TODO билд есть смысл запускать сразу через tsc, esbuild использовать только для запуска dev-сервера
 (async () => {
-  /*await build({
+  await build({
     //entryNames: '[dir]/[name]',
-    entryPoints: [resolve(paths.appSrc, 'inputs')],
+    entryPoints: [
+      resolve(paths.appSrc, 'app/inputs/**/*'),
+      resolve(paths.appSrc, 'infrastructure/helpers.ts'),
+    ],
     minify: true,
     outdir: paths.appOutput,
-    plugins: [
-      typecheckPlugin({
-        build: true,
-        buildMode: 'write-output',
-        configFile: resolve(process.cwd(), 'tsconfig.build.json'),
-      }),
-    ],
-  });*/
+  });
 
   /*const files = globSync(resolve(paths.appSrc, 'inputs/masked-input/index.tsx'));
 

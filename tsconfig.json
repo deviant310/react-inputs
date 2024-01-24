@@ -11,16 +11,11 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
+    "module": "CommonJS",
     "noEmitOnError": true,
-    "moduleResolution": "node",
-    "skipLibCheck": true,
+    "moduleResolution": "Node",
     "jsx": "react-jsx",
-    "downlevelIteration": true,
-    "paths": {
-      "react-inputs": [
-        "./src/inputs/index.ts"
-      ]
-    },
-  }
+    "downlevelIteration": true
+  },
+  "exclude": ["./build"]
 }

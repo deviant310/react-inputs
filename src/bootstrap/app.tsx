@@ -1,12 +1,11 @@
 /**
  * Dev-server entrypoint
  */
-
-import { StrictMode, forwardRef, useEffect, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 
 import { createRoot } from 'react-dom/client';
 
-import { MaskedInput, NumberInput, SelectInput, TextInput } from '../inputs';
+import { MaskedInput, NumberInput, SelectInput, TextInput } from '../app/inputs';
 
 type Option = {
   id: number;
@@ -14,8 +13,8 @@ type Option = {
 };
 
 const App = () => {
-  const [phone, setPhone] = useState('999526');
-  const [phoneMask, setPhoneMask] = useState('{+7} (000) 000-00-00');
+  const [phone, setPhone] = useState('');
+  const [phoneMask, setPhoneMask] = useState('+0');
   const [card, setCard] = useState('');
   const [cardMask] = useState('0000-0000-0000-0000');
   const [name, setName] = useState('Anton');
@@ -23,15 +22,15 @@ const App = () => {
   const [age, setAge] = useState(30);
   const [salary, setSalary] = useState(300);
   const [country, setCountry] = useState<Option | null>(countries[0]);
-  const [movie, setMovie] = useState<Option | null>(movies[0]);
+  //const [movie, setMovie] = useState<Option | null>(movies[0]);
 
-  useEffect(() => console.log(phone), [phone]);
+  useEffect(() => console.log(country), [country]);
 
   return (
     <>
       <fieldset>
         <TextInput
-          inputComponent={TextInputInput}
+          inputComponent={NameInput}
           name="name"
           setValue={setName}
           value={name}
@@ -66,7 +65,7 @@ const App = () => {
           displayStringForOption={getOptionValue}
           dropdownComponent={SelectInputDropdown}
           getOptionKey={getOptionId}
-          inputComponent={SelectInputInput}
+          inputComponent={CountryInput}
           label="Country"
           name="country"
           optionComponent={SelectInputOption}
@@ -75,7 +74,7 @@ const App = () => {
           value={country}
         />
 
-        <SelectInput
+        {/*<SelectInput
           containerComponent={SelectInputContainer}
           displayStringForOption={getOptionValue}
           dropdownComponent={SelectInputDropdown}
@@ -87,7 +86,7 @@ const App = () => {
           optionsBuilder={optionsBuilder.bind(movies)}
           setValue={setMovie}
           value={movie}
-        />
+        />*/}
       </fieldset>
 
       <fieldset>
@@ -143,12 +142,12 @@ const countries: Option[] = [
   { id: 2, value: 'Georgia' },
 ];
 
-const movies: Option[] = [
+/* const movies: Option[] = [
   { id: 1, value: 'Home Alone' },
   { id: 2, value: 'From Dusk till Dawn' },
-];
+]; */
 
-const SelectInputInput: SelectInput.InputComponent = props => (
+const CountryInput: SelectInput.InputComponent = props => (
   <input {...props} />
 );
 
@@ -156,7 +155,7 @@ const SelectInputOption: SelectInput.OptionComponent<Option> = ({ data, ...props
   <div {...props}>{data.value}</div>
 );
 
-const TextInputInput = (props: TextInput.InputProps) => (
+const NameInput: TextInput.InputComponent = props => (
   <input {...props} />
 );
 
@@ -180,8 +179,4 @@ const PhoneInput: MaskedInput.InputComponent = forwardRef((props, ref) => (
 
 const root = document.getElementById('root') as HTMLElement;
 
-createRoot(root).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-);
+createRoot(root).render(<App />);
