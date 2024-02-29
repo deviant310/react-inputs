@@ -1,11 +1,15 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": true,
+    "declarationMap": true,
+    "types": [
+      "./src/infrastructure/ambient.d.ts"
+    ],
+    "outDir": "build"
   },
   "extends": "./tsconfig.json",
   "include": [
-    "./src/app",
-    "./src/infrastructure"
+    "./src/app/inputs"
   ]
 }

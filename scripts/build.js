@@ -25,11 +25,10 @@ try {
   await build({
     //entryNames: '[dir]/[name]',
     entryPoints: [
-      resolve(paths.appSrc, 'app/inputs/**/*'),
-      resolve(paths.appSrc, 'infrastructure/helpers.ts'),
+      resolve(paths.appBuildEntry, '**/*'),
     ],
     minify: true,
-    outdir: paths.appOutput,
+    outdir: resolve(paths.appOutput, 'inputs'),
   });
 
   /*const files = globSync(resolve(paths.appSrc, 'inputs/masked-input/index.tsx'));

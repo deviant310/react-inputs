@@ -13,10 +13,6 @@ import {
 
 import { CompoundInputHookProps, CompoundInputProps } from './compound-input';
 
-export declare const MaskedInput: MaskedInput.Component;
-
-export const useMaskedInput: MaskedInput.Hook;
-
 export namespace MaskedInput {
   export interface Component extends Omit<FunctionComponent, number> {
     <Name extends string>(props: Props<Name>): ReactElement;

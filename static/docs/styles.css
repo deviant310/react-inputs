@@ -118,12 +118,6 @@ code.tsd-tag {
 }
 
 @media (min-width: 1024px) {
-  .col-content {
-    margin: 4rem auto;
-  }
-}
-
-@media (min-width: 1024px) {
   .menu-sticky-wrap {
     margin-top: 5rem;
   }

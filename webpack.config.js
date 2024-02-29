@@ -1,13 +1,11 @@
 const { resolve } = require('path');
 const { cpSync, existsSync, readdirSync, rmSync } = require('fs');
-const { DllPlugin, DllReferencePlugin } = require('webpack');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const ts = require('typescript');
 const app = require('./package.json');
 const paths = require('./paths.js');
-const { execSync } = require('node:child_process');
 const isDevServer = Boolean(process.env.WEBPACK_SERVE);
 const devServerPort = process.env.DEV_SERVER_PORT ?? 3000;
 
@@ -34,7 +32,7 @@ module.exports = env => {
     },
     devtool: !isProductionBuild && 'source-map',
     entry: isDevServer
-      ? resolve(paths.appSrc, 'bootstrap/app.tsx')
+      ? paths.appBootEntry
       : {
         'helpers': resolve(paths.appSrc, 'infrastructure/helpers'),
       },
@@ -71,18 +69,6 @@ module.exports = env => {
       path: paths.appOutput,
     },
     plugins: [
-      !isDevServer && new DllPlugin({
-        /*
-          This needs to be exactly the same as output.fileName
-          If you're exposing this as a library or
-          using a monorepo with scoped packages, set this to the fullpath
-          including the scope :)
-          e.g.:
-          @super-duper/dist/[name]
-        */
-        name: app.name,
-        path: resolve(__dirname, 'build/manifest.json'),
-      }),
       new ESLintPlugin({
         extensions: ['js', 'jsx', 'ts', 'tsx'],
         failOnError: true,

@@ -1,5 +1,7 @@
 import { ChangeEvent, useCallback, useMemo } from 'react';
 
+import { TextInput } from '../../../types/text-input';
+
 export const useTextInput: TextInput.Hook = props => {
   const { setValue, value } = props;
   const inputValue = value;

@@ -1,5 +1,7 @@
 import { memo } from 'react';
 
+import { MaskedInput } from '../../types/masked-input';
+
 import { Input as DefaultInput } from './components';
 
 import { useMaskedInput } from './hooks';
@@ -10,9 +12,21 @@ import { useMaskedInput } from './hooks';
  * Input pattern is determined by {@link MaskedInput.Props.mask} parameter.
  * The user's text input is controlled by {@link MaskedInput.Props.source} parameter.
  */
-export const MaskedInput = memo(props => {
-  const { inputComponent: Input = DefaultInput, label, name, ...hookProps } = props;
-  const { inputRef, inputValue, onInputChange, onInputKeyDown, onInputMouseDown } = useMaskedInput(hookProps);
+const MaskedInput = memo(props => {
+  const {
+    inputComponent: Input = DefaultInput,
+    label,
+    name,
+    ...hookProps
+  } = props;
+
+  const {
+    inputRef,
+    inputValue,
+    onInputChange,
+    onInputKeyDown,
+    onInputMouseDown,
+  } = useMaskedInput(hookProps);
 
   return (
     <Input
@@ -27,5 +41,7 @@ export const MaskedInput = memo(props => {
     />
   );
 }) as MaskedInput.Component;
+
+export { MaskedInput };
 
 MaskedInput.displayName = 'ReactInputsMaskedInput';

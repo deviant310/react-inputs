@@ -1,5 +1,7 @@
 import { memo } from 'react';
 
+import { SelectInput } from '../../types/select-input';
+
 import { useSelectInput } from './hooks';
 
 import {
@@ -15,14 +17,15 @@ import {
  * The options to be displayed are determined using {@link SelectInput.Props.optionsBuilder}
  * and rendered with {@link SelectInput.Props.optionComponent}.
  *
+ * @beta
  * @label Select input
  * @group Fields
  * @example
  * ```tsx
- * [[include:examples/autocomplete-field/basic-usage.tsx]]
+ * [[include:examples/select-input/basic-usage.tsx]]
  * ```
  */
-export const SelectInput = memo(props => {
+const SelectInput = memo(<Name extends string, OptionData>(props: SelectInput.Props<Name, OptionData>) => {
   const {
     containerComponent: Container = DefaultContainer,
     dropdownComponent: Dropdown = DefaultDropdown,
@@ -65,6 +68,8 @@ export const SelectInput = memo(props => {
       )}
     </Container>
   );
-}) as SelectInput.Component;
+});
+
+export { SelectInput };
 
 SelectInput.displayName = 'ReactInputsSelectInput';

@@ -7,9 +7,10 @@ const resolvePath = relativePath => (
 );
 
 module.exports = {
+  appBootEntry: resolvePath('./src/app'),
+  appBuildEntry: resolvePath('./src/app/inputs'),
   appDocs: resolvePath('./docs'),
   appOutput: resolvePath('./build'),
-  appSrc: resolvePath('./src'),
   appStatic: resolvePath('./static'),
   dotenv: resolvePath('.env'),
 };

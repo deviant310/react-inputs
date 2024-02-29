@@ -7,6 +7,8 @@ import {
   useState,
 } from 'react';
 
+import { SelectInput } from '../../../types/select-input';
+
 export const useSelectInput: SelectInput.Hook = props => {
   type Option = typeof optionsData[number];
 

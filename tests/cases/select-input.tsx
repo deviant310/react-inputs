@@ -4,7 +4,9 @@ import '@testing-library/jest-dom';
 
 import { fireEvent, getAllByRole, getByRole, render } from '@testing-library/react';
 
-import { SelectInput } from '../../src/app/inputs/select-input';
+import { SelectInput } from '../../src/app/inputs';
+
+import { SelectInput as SI } from '../../src/app/types/select-input';
 
 // TODO rename to Country
 type Option = {
@@ -12,7 +14,7 @@ type Option = {
   value: string;
 };
 
-const SelectInputOption: SelectInput.OptionComponent<Option> = ({ data, ...props }) => (
+const SelectInputOption: SI.OptionComponent<Option> = ({ data, ...props }) => (
   <div data-id={data.id} {...props}>{data.value}</div>
 );
 
@@ -181,15 +183,15 @@ test('change multiple fields values', () => {
 test('render custom components', () => {
   const searchQuery = countries[0].value.slice(0, 3);
 
-  const Container: SelectInput.ContainerComponent = props => (
+  const Container: SI.ContainerComponent = props => (
     <div data-testid="select-field-container" {...props} />
   );
 
-  const Dropdown: SelectInput.DropdownComponent = props => (
+  const Dropdown: SI.DropdownComponent = props => (
     <div data-testid="select-field-dropdown" {...props} />
   );
 
-  const Input: SelectInput.InputComponent = props => (
+  const Input: SI.InputComponent = props => (
     <input data-testid="select-field-input" {...props} />
   );
 
@@ -228,7 +230,7 @@ test('render custom components', () => {
 });
 
 test('dropdown default visibility', () => {
-  const Dropdown: SelectInput.DropdownComponent = props => (
+  const Dropdown: SI.DropdownComponent = props => (
     <div data-testid="select-field-dropdown" {...props} />
   );
 

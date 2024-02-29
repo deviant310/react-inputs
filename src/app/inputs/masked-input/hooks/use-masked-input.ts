@@ -1,5 +1,7 @@
 import { ChangeEvent, KeyboardEvent ,MouseEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
+import { MaskedInput } from '../../../types/masked-input';
+
 import { Mask } from '../mask';
 
 export const useMaskedInput: MaskedInput.Hook = props => {

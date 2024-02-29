@@ -5,7 +5,9 @@ import { forwardRef, useEffect, useState } from 'react';
 
 import { createRoot } from 'react-dom/client';
 
-import { MaskedInput, NumberInput, SelectInput, TextInput } from '../app/inputs';
+import { MaskedInput, NumberInput, SelectInput, TextInput } from './inputs';
+
+import { SelectInput as SI } from './types/select-input';
 
 type Option = {
   id: number;
@@ -119,11 +121,11 @@ const App = () => {
   );
 };
 
-const SelectInputContainer: SelectInput.ContainerComponent = props => (
+const SelectInputContainer: SI.ContainerComponent = props => (
   <span style={{ position: 'relative' }} {...props} />
 );
 
-const SelectInputDropdown: SelectInput.DropdownComponent = props => (
+const SelectInputDropdown: SI.DropdownComponent = props => (
   <div
     style={{
       backgroundColor: 'white',
@@ -147,11 +149,11 @@ const countries: Option[] = [
   { id: 2, value: 'From Dusk till Dawn' },
 ]; */
 
-const CountryInput: SelectInput.InputComponent = props => (
+const CountryInput: SI.InputComponent = props => (
   <input {...props} />
 );
 
-const SelectInputOption: SelectInput.OptionComponent<Option> = ({ data, ...props }) => (
+const SelectInputOption: SI.OptionComponent<Option> = ({ data, ...props }) => (
   <div {...props}>{data.value}</div>
 );
 

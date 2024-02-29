@@ -1,5 +1,7 @@
 import { memo } from 'react';
 
+import { TextInput } from '../../types/text-input';
+
 import { Input as DefaultInput } from './components';
 
 import { useTextInput } from './hooks';
@@ -7,7 +9,7 @@ import { useTextInput } from './hooks';
 /**
  * Text input component
  */
-export const TextInput = memo(props => {
+const TextInput = memo(props => {
   const {
     inputComponent: Input = DefaultInput,
     label,
@@ -27,5 +29,7 @@ export const TextInput = memo(props => {
     />
   );
 }) as TextInput.Component;
+
+export { TextInput };
 
 TextInput.displayName = 'ReactTextInput';

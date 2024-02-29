@@ -1,14 +1,15 @@
-import { ChangeEvent, FunctionComponent, InputHTMLAttributes, ReactElement } from 'react';
+import {
+  ChangeEvent,
+  FunctionComponent,
+  InputHTMLAttributes, NamedExoticComponent,
+  ReactElement,
+} from 'react';
 
 import { CompoundInputHookProps, CompoundInputProps } from './compound-input';
 
-export declare const TextInput: TextInput.Component;
-
-export const useTextInput: TextInput.Hook;
-
-export namespace TextInput {
-  export interface Component extends Omit<FunctionComponent, number> {
-    <Name extends string> (props: TextInput.Props<Name>): ReactElement;
+export namespace NumberInput {
+  export interface Component extends Omit<NamedExoticComponent, number> {
+    <Name extends string> (props: Props<Name>): ReactElement;
   }
 
   export interface Props<Name extends string> extends
@@ -16,13 +17,15 @@ export namespace TextInput {
     HookProps
   {
     inputComponent?: InputComponent;
+    max?: number;
+    min?: number;
   }
 
   export type InputComponent = FunctionComponent<InputProps>;
 
   export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     type: 'text';
-    value: string;
+    value: number;
   }
 
   export interface Hook {
@@ -36,5 +39,5 @@ export namespace TextInput {
     onInputChange(event: ChangeEvent<HTMLInputElement>): void;
   }
 
-  export type Value = string;
+  export type Value = number;
 }

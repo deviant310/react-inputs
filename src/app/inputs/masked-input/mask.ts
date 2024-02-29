@@ -1,4 +1,6 @@
-import { escapeSpecialCharacters } from '../../../infrastructure/helpers';
+import { MaskedInput } from '../../types/masked-input';
+
+import { escapeSpecialCharacters } from './helpers';
 
 export class Mask {
   private static definitions: MaskedInput.MaskDefinitions = {

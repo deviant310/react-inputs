@@ -1,0 +1,4017 @@
+{
+  "metadata": {
+    "toolPackage": "@microsoft/api-extractor",
+    "toolVersion": "7.42.0",
+    "schemaVersion": 1011,
+    "oldestForwardsCompatibleVersion": 1001,
+    "tsdocConfig": {
+      "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
+      "noStandardTags": true,
+      "tagDefinitions": [
+        {
+          "tagName": "@alpha",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@beta",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@defaultValue",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@decorator",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@deprecated",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@eventProperty",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@example",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@experimental",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@inheritDoc",
+          "syntaxKind": "inline"
+        },
+        {
+          "tagName": "@internal",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@label",
+          "syntaxKind": "inline"
+        },
+        {
+          "tagName": "@link",
+          "syntaxKind": "inline",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@override",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@packageDocumentation",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@param",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@privateRemarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@public",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@readonly",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@remarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@returns",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@sealed",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@see",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@throws",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@typeParam",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@virtual",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@betaDocumentation",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@internalRemarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@preapproved",
+          "syntaxKind": "modifier"
+        }
+      ],
+      "supportForTags": {
+        "@alpha": true,
+        "@beta": true,
+        "@defaultValue": true,
+        "@decorator": true,
+        "@deprecated": true,
+        "@eventProperty": true,
+        "@example": true,
+        "@experimental": true,
+        "@inheritDoc": true,
+        "@internal": true,
+        "@label": true,
+        "@link": true,
+        "@override": true,
+        "@packageDocumentation": true,
+        "@param": true,
+        "@privateRemarks": true,
+        "@public": true,
+        "@readonly": true,
+        "@remarks": true,
+        "@returns": true,
+        "@sealed": true,
+        "@see": true,
+        "@throws": true,
+        "@typeParam": true,
+        "@virtual": true,
+        "@betaDocumentation": true,
+        "@internalRemarks": true,
+        "@preapproved": true
+      },
+      "reportUnsupportedHtmlElements": false
+    }
+  },
+  "kind": "Package",
+  "canonicalReference": "@copositary/react-inputs!",
+  "docComment": "",
+  "name": "@copositary/react-inputs",
+  "preserveMemberOrder": false,
+  "members": [
+    {
+      "kind": "EntryPoint",
+      "canonicalReference": "@copositary/react-inputs!",
+      "name": "",
+      "preserveMemberOrder": false,
+      "members": [
+        {
+          "kind": "Namespace",
+          "canonicalReference": "@copositary/react-inputs!MaskedInput:namespace",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare namespace MaskedInput "
+            }
+          ],
+          "fileUrlPath": "src/app/types/masked-input.ts",
+          "releaseTag": "Public",
+          "name": "MaskedInput",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Interface",
+              "canonicalReference": "@copositary/react-inputs!MaskedInput.Component:interface",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "interface Component extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Omit",
+                  "canonicalReference": "!Omit:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FunctionComponent",
+                  "canonicalReference": "@types/react!React.FunctionComponent:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", number>"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "Component",
+              "preserveMemberOrder": false,
+              "members": [
+                {
+                  "kind": "CallSignature",
+                  "canonicalReference": "@copositary/react-inputs!MaskedInput.Component:call(1)",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "<Name extends "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "string"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ">(props: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "Props",
+                      "canonicalReference": "@copositary/react-inputs!MaskedInput.Props:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<Name>"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "ReactElement",
+                      "canonicalReference": "@types/react!React.ReactElement:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "returnTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 7
+                  },
+                  "releaseTag": "Public",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "props",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 3,
+                        "endIndex": 5
+                      },
+                      "isOptional": false
+                    }
+                  ],
+                  "typeParameters": [
+                    {
+                      "typeParameterName": "Name",
+                      "constraintTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      },
+                      "defaultTypeTokenRange": {
+                        "startIndex": 0,
+                        "endIndex": 0
+                      }
+                    }
+                  ]
+                }
+              ],
+              "extendsTokenRanges": [
+                {
+                  "startIndex": 1,
+                  "endIndex": 5
+                }
+              ]
+            },
+            {
+              "kind": "Interface",
+              "canonicalReference": "@copositary/react-inputs!MaskedInput.Hook:interface",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "interface Hook "
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "Hook",
+              "preserveMemberOrder": false,
+              "members": [
+                {
+                  "kind": "CallSignature",
+                  "canonicalReference": "@copositary/react-inputs!MaskedInput.Hook:call(1)",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "(props: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "HookProps",
+                      "canonicalReference": "@copositary/react-inputs!MaskedInput.HookProps:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "HookResult",
+                      "canonicalReference": "@copositary/react-inputs!MaskedInput.HookResult:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "returnTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "releaseTag": "Public",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "props",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      },
+                      "isOptional": false
+                    }
+                  ]
+                }
+              ],
+              "extendsTokenRanges": []
+            },
+            {
+              "kind": "Interface",
+              "canonicalReference": "@copositary/react-inputs!MaskedInput.HookProps:interface",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "interface HookProps extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CompoundInputHookProps",
+                  "canonicalReference": "@copositary/react-inputs!~CompoundInputHookProps:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Value",
+                  "canonicalReference": "@copositary/react-inputs!MaskedInput.Value:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "HookProps",
+              "preserveMemberOrder": false,
+              "members": [
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!MaskedInput.HookProps#definitions:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "definitions?: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "Record",
+                      "canonicalReference": "!Record:type"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<string, "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "RegExp",
+                      "canonicalReference": "!RegExp:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ">"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": true,
+                  "releaseTag": "Public",
+                  "name": "definitions",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!MaskedInput.HookProps#mask:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "mask: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "string"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": false,
+                  "releaseTag": "Public",
+                  "name": "mask",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!MaskedInput.HookProps#stub:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "stub?: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "string"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": true,
+                  "releaseTag": "Public",
+                  "name": "stub",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "extendsTokenRanges": [
+                {
+                  "startIndex": 1,
+                  "endIndex": 5
+                }
+              ]
+            },
+            {
+              "kind": "Interface",
+              "canonicalReference": "@copositary/react-inputs!MaskedInput.HookResult:interface",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "interface HookResult "
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "HookResult",
+              "preserveMemberOrder": false,
+              "members": [
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!MaskedInput.HookResult#inputRef:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "inputRef: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "RefObject",
+                      "canonicalReference": "@types/react!React.RefObject:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<"
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "HTMLInputElement",
+                      "canonicalReference": "!HTMLInputElement:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ">"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": false,
+                  "releaseTag": "Public",
+                  "name": "inputRef",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!MaskedInput.HookResult#inputValue:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "inputValue: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "Value",
+                      "canonicalReference": "@copositary/react-inputs!MaskedInput.Value:type"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": false,
+                  "releaseTag": "Public",
+                  "name": "inputValue",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "kind": "MethodSignature",
+                  "canonicalReference": "@copositary/react-inputs!MaskedInput.HookResult#onInputChange:member(1)",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "onInputChange(event: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "ChangeEvent",
+                      "canonicalReference": "@types/react!React.ChangeEvent:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<"
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "HTMLInputElement",
+                      "canonicalReference": "!HTMLInputElement:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ">"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "void"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isOptional": false,
+                  "returnTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 7
+                  },
+                  "releaseTag": "Public",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "event",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 5
+                      },
+                      "isOptional": false
+                    }
+                  ],
+                  "name": "onInputChange"
+                },
+                {
+                  "kind": "MethodSignature",
+                  "canonicalReference": "@copositary/react-inputs!MaskedInput.HookResult#onInputKeyDown:member(1)",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "onInputKeyDown(event: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "KeyboardEvent",
+                      "canonicalReference": "@types/react!React.KeyboardEvent:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<"
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "HTMLInputElement",
+                      "canonicalReference": "!HTMLInputElement:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ">"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "void"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isOptional": false,
+                  "returnTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 7
+                  },
+                  "releaseTag": "Public",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "event",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 5
+                      },
+                      "isOptional": false
+                    }
+                  ],
+                  "name": "onInputKeyDown"
+                },
+                {
+                  "kind": "MethodSignature",
+                  "canonicalReference": "@copositary/react-inputs!MaskedInput.HookResult#onInputMouseDown:member(1)",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "onInputMouseDown(event: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "MouseEvent",
+                      "canonicalReference": "@types/react!React.MouseEvent:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<"
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "HTMLInputElement",
+                      "canonicalReference": "!HTMLInputElement:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ">"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "void"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isOptional": false,
+                  "returnTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 7
+                  },
+                  "releaseTag": "Public",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "event",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 5
+                      },
+                      "isOptional": false
+                    }
+                  ],
+                  "name": "onInputMouseDown"
+                }
+              ],
+              "extendsTokenRanges": []
+            },
+            {
+              "kind": "TypeAlias",
+              "canonicalReference": "@copositary/react-inputs!MaskedInput.InputComponent:type",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type InputComponent = "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ForwardRefExoticComponent",
+                  "canonicalReference": "@types/react!React.ForwardRefExoticComponent:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "PropsWithoutRef",
+                  "canonicalReference": "@types/react!React.PropsWithoutRef:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "InputProps",
+                  "canonicalReference": "@copositary/react-inputs!MaskedInput.InputProps:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "> & "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RefAttributes",
+                  "canonicalReference": "@types/react!React.RefAttributes:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "HTMLInputElement",
+                  "canonicalReference": "!HTMLInputElement:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "InputComponent",
+              "typeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 11
+              }
+            },
+            {
+              "kind": "Interface",
+              "canonicalReference": "@copositary/react-inputs!MaskedInput.InputProps:interface",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "interface InputProps extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "InputHTMLAttributes",
+                  "canonicalReference": "@types/react!React.InputHTMLAttributes:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "HTMLInputElement",
+                  "canonicalReference": "!HTMLInputElement:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "InputProps",
+              "preserveMemberOrder": false,
+              "members": [
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!MaskedInput.InputProps#type:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "type: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "'text'"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": false,
+                  "releaseTag": "Public",
+                  "name": "type",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!MaskedInput.InputProps#value:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "value: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "string"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": false,
+                  "releaseTag": "Public",
+                  "name": "value",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "extendsTokenRanges": [
+                {
+                  "startIndex": 1,
+                  "endIndex": 5
+                }
+              ]
+            },
+            {
+              "kind": "TypeAlias",
+              "canonicalReference": "@copositary/react-inputs!MaskedInput.MaskDefinitions:type",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type MaskDefinitions = "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Record",
+                  "canonicalReference": "!Record:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string, "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RegExp",
+                  "canonicalReference": "!RegExp:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "MaskDefinitions",
+              "typeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              }
+            },
+            {
+              "kind": "Interface",
+              "canonicalReference": "@copositary/react-inputs!MaskedInput.MaskEntry:interface",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "interface MaskEntry "
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "MaskEntry",
+              "preserveMemberOrder": false,
+              "members": [
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!MaskedInput.MaskEntry#source:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "source: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "string"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": false,
+                  "releaseTag": "Public",
+                  "name": "source",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!MaskedInput.MaskEntry#type:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "type: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "MaskEntryType",
+                      "canonicalReference": "@copositary/react-inputs!MaskedInput.MaskEntryType:type"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": false,
+                  "releaseTag": "Public",
+                  "name": "type",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!MaskedInput.MaskEntry#value:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "value?: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "string"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": true,
+                  "releaseTag": "Public",
+                  "name": "value",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "extendsTokenRanges": []
+            },
+            {
+              "kind": "TypeAlias",
+              "canonicalReference": "@copositary/react-inputs!MaskedInput.MaskEntryType:type",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type MaskEntryType = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "'include' | 'definition' | 'other'"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "MaskEntryType",
+              "typeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "TypeAlias",
+              "canonicalReference": "@copositary/react-inputs!MaskedInput.MaskProps:type",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type MaskProps = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "{\n        definitions?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "MaskDefinitions",
+                  "canonicalReference": "@copositary/react-inputs!MaskedInput.MaskDefinitions:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";\n        dirtyValue: string;\n        pattern: string;\n        stub: string;\n    }"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "MaskProps",
+              "typeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 4
+              }
+            },
+            {
+              "kind": "Interface",
+              "canonicalReference": "@copositary/react-inputs!MaskedInput.Props:interface",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "interface Props<Name extends "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "> extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CompoundInputProps",
+                  "canonicalReference": "@copositary/react-inputs!~CompoundInputProps:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<Name, "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Value",
+                  "canonicalReference": "@copositary/react-inputs!MaskedInput.Value:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "HookProps",
+                  "canonicalReference": "@copositary/react-inputs!MaskedInput.HookProps:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                }
+              ],
+              "releaseTag": "Public",
+              "typeParameters": [
+                {
+                  "typeParameterName": "Name",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "name": "Props",
+              "preserveMemberOrder": false,
+              "members": [
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!MaskedInput.Props#inputComponent:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "inputComponent?: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "InputComponent",
+                      "canonicalReference": "@copositary/react-inputs!MaskedInput.InputComponent:type"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": true,
+                  "releaseTag": "Public",
+                  "name": "inputComponent",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "extendsTokenRanges": [
+                {
+                  "startIndex": 3,
+                  "endIndex": 7
+                },
+                {
+                  "startIndex": 8,
+                  "endIndex": 9
+                }
+              ]
+            },
+            {
+              "kind": "TypeAlias",
+              "canonicalReference": "@copositary/react-inputs!MaskedInput.Value:type",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type Value = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "Value",
+              "typeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ]
+        },
+        {
+          "kind": "Namespace",
+          "canonicalReference": "@copositary/react-inputs!NumberInput:namespace",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare namespace NumberInput "
+            }
+          ],
+          "fileUrlPath": "src/app/types/number-input.ts",
+          "releaseTag": "Public",
+          "name": "NumberInput",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Interface",
+              "canonicalReference": "@copositary/react-inputs!NumberInput.Component:interface",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "interface Component extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Omit",
+                  "canonicalReference": "!Omit:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "NamedExoticComponent",
+                  "canonicalReference": "@types/react!React.NamedExoticComponent:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", number>"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "Component",
+              "preserveMemberOrder": false,
+              "members": [
+                {
+                  "kind": "CallSignature",
+                  "canonicalReference": "@copositary/react-inputs!NumberInput.Component:call(1)",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "<Name extends "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "string"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ">(props: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "Props",
+                      "canonicalReference": "@copositary/react-inputs!NumberInput.Props:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<Name>"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "ReactElement",
+                      "canonicalReference": "@types/react!React.ReactElement:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "returnTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 7
+                  },
+                  "releaseTag": "Public",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "props",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 3,
+                        "endIndex": 5
+                      },
+                      "isOptional": false
+                    }
+                  ],
+                  "typeParameters": [
+                    {
+                      "typeParameterName": "Name",
+                      "constraintTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      },
+                      "defaultTypeTokenRange": {
+                        "startIndex": 0,
+                        "endIndex": 0
+                      }
+                    }
+                  ]
+                }
+              ],
+              "extendsTokenRanges": [
+                {
+                  "startIndex": 1,
+                  "endIndex": 5
+                }
+              ]
+            },
+            {
+              "kind": "Interface",
+              "canonicalReference": "@copositary/react-inputs!NumberInput.Hook:interface",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "interface Hook "
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "Hook",
+              "preserveMemberOrder": false,
+              "members": [
+                {
+                  "kind": "CallSignature",
+                  "canonicalReference": "@copositary/react-inputs!NumberInput.Hook:call(1)",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "(props: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "HookProps",
+                      "canonicalReference": "@copositary/react-inputs!NumberInput.HookProps:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "HookResult",
+                      "canonicalReference": "@copositary/react-inputs!NumberInput.HookResult:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "returnTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "releaseTag": "Public",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "props",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      },
+                      "isOptional": false
+                    }
+                  ]
+                }
+              ],
+              "extendsTokenRanges": []
+            },
+            {
+              "kind": "Interface",
+              "canonicalReference": "@copositary/react-inputs!NumberInput.HookProps:interface",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "interface HookProps extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CompoundInputHookProps",
+                  "canonicalReference": "@copositary/react-inputs!~CompoundInputHookProps:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Value",
+                  "canonicalReference": "@copositary/react-inputs!NumberInput.Value:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "HookProps",
+              "preserveMemberOrder": false,
+              "members": [],
+              "extendsTokenRanges": [
+                {
+                  "startIndex": 1,
+                  "endIndex": 5
+                }
+              ]
+            },
+            {
+              "kind": "Interface",
+              "canonicalReference": "@copositary/react-inputs!NumberInput.HookResult:interface",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "interface HookResult "
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "HookResult",
+              "preserveMemberOrder": false,
+              "members": [
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!NumberInput.HookResult#inputValue:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "inputValue: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "Value",
+                      "canonicalReference": "@copositary/react-inputs!NumberInput.Value:type"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": false,
+                  "releaseTag": "Public",
+                  "name": "inputValue",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "kind": "MethodSignature",
+                  "canonicalReference": "@copositary/react-inputs!NumberInput.HookResult#onInputChange:member(1)",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "onInputChange(event: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "ChangeEvent",
+                      "canonicalReference": "@types/react!React.ChangeEvent:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<"
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "HTMLInputElement",
+                      "canonicalReference": "!HTMLInputElement:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ">"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "void"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isOptional": false,
+                  "returnTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 7
+                  },
+                  "releaseTag": "Public",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "event",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 5
+                      },
+                      "isOptional": false
+                    }
+                  ],
+                  "name": "onInputChange"
+                }
+              ],
+              "extendsTokenRanges": []
+            },
+            {
+              "kind": "TypeAlias",
+              "canonicalReference": "@copositary/react-inputs!NumberInput.InputComponent:type",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type InputComponent = "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FunctionComponent",
+                  "canonicalReference": "@types/react!React.FunctionComponent:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "InputProps",
+                  "canonicalReference": "@copositary/react-inputs!NumberInput.InputProps:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "InputComponent",
+              "typeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              }
+            },
+            {
+              "kind": "Interface",
+              "canonicalReference": "@copositary/react-inputs!NumberInput.InputProps:interface",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "interface InputProps extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "InputHTMLAttributes",
+                  "canonicalReference": "@types/react!React.InputHTMLAttributes:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "HTMLInputElement",
+                  "canonicalReference": "!HTMLInputElement:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "InputProps",
+              "preserveMemberOrder": false,
+              "members": [
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!NumberInput.InputProps#type:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "type: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "'text'"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": false,
+                  "releaseTag": "Public",
+                  "name": "type",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!NumberInput.InputProps#value:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "value: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "number"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": false,
+                  "releaseTag": "Public",
+                  "name": "value",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "extendsTokenRanges": [
+                {
+                  "startIndex": 1,
+                  "endIndex": 5
+                }
+              ]
+            },
+            {
+              "kind": "Interface",
+              "canonicalReference": "@copositary/react-inputs!NumberInput.Props:interface",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "interface Props<Name extends "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "> extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CompoundInputProps",
+                  "canonicalReference": "@copositary/react-inputs!~CompoundInputProps:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<Name, "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Value",
+                  "canonicalReference": "@copositary/react-inputs!NumberInput.Value:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "HookProps",
+                  "canonicalReference": "@copositary/react-inputs!NumberInput.HookProps:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                }
+              ],
+              "releaseTag": "Public",
+              "typeParameters": [
+                {
+                  "typeParameterName": "Name",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "name": "Props",
+              "preserveMemberOrder": false,
+              "members": [
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!NumberInput.Props#inputComponent:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "inputComponent?: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "InputComponent",
+                      "canonicalReference": "@copositary/react-inputs!NumberInput.InputComponent:type"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": true,
+                  "releaseTag": "Public",
+                  "name": "inputComponent",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!NumberInput.Props#max:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "max?: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "number"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": true,
+                  "releaseTag": "Public",
+                  "name": "max",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!NumberInput.Props#min:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "min?: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "number"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": true,
+                  "releaseTag": "Public",
+                  "name": "min",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "extendsTokenRanges": [
+                {
+                  "startIndex": 3,
+                  "endIndex": 7
+                },
+                {
+                  "startIndex": 8,
+                  "endIndex": 9
+                }
+              ]
+            },
+            {
+              "kind": "TypeAlias",
+              "canonicalReference": "@copositary/react-inputs!NumberInput.Value:type",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type Value = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "Value",
+              "typeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ]
+        },
+        {
+          "kind": "Namespace",
+          "canonicalReference": "@copositary/react-inputs!SelectInput:namespace",
+          "docComment": "/**\n * @beta\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare namespace SelectInput "
+            }
+          ],
+          "fileUrlPath": "src/app/types/select-input.ts",
+          "releaseTag": "Beta",
+          "name": "SelectInput",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "TypeAlias",
+              "canonicalReference": "@copositary/react-inputs!SelectInput.ContainerComponent:type",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type ContainerComponent = "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FunctionComponent",
+                  "canonicalReference": "@types/react!React.FunctionComponent:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ContainerProps",
+                  "canonicalReference": "@copositary/react-inputs!SelectInput.ContainerProps:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Beta",
+              "name": "ContainerComponent",
+              "typeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              }
+            },
+            {
+              "kind": "TypeAlias",
+              "canonicalReference": "@copositary/react-inputs!SelectInput.ContainerProps:type",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type ContainerProps = "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "PropsWithChildren",
+                  "canonicalReference": "@types/react!React.PropsWithChildren:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "HTMLAttributes",
+                  "canonicalReference": "@types/react!React.HTMLAttributes:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "HTMLElement",
+                  "canonicalReference": "!HTMLElement:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "> & {\n        role: 'group';\n        tabIndex: -1;\n    }>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Beta",
+              "name": "ContainerProps",
+              "typeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 7
+              }
+            },
+            {
+              "kind": "TypeAlias",
+              "canonicalReference": "@copositary/react-inputs!SelectInput.DropdownComponent:type",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type DropdownComponent = "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FunctionComponent",
+                  "canonicalReference": "@types/react!React.FunctionComponent:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "DropdownProps",
+                  "canonicalReference": "@copositary/react-inputs!SelectInput.DropdownProps:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Beta",
+              "name": "DropdownComponent",
+              "typeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              }
+            },
+            {
+              "kind": "TypeAlias",
+              "canonicalReference": "@copositary/react-inputs!SelectInput.DropdownProps:type",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type DropdownProps = "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "PropsWithChildren",
+                  "canonicalReference": "@types/react!React.PropsWithChildren:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "HTMLAttributes",
+                  "canonicalReference": "@types/react!React.HTMLAttributes:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "HTMLElement",
+                  "canonicalReference": "!HTMLElement:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "> & {\n        role: 'dialog';\n    }>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Beta",
+              "name": "DropdownProps",
+              "typeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 7
+              }
+            },
+            {
+              "kind": "Interface",
+              "canonicalReference": "@copositary/react-inputs!SelectInput.Hook:interface",
+              "docComment": "/**\n * Select input hook\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "interface Hook "
+                }
+              ],
+              "releaseTag": "Beta",
+              "name": "Hook",
+              "preserveMemberOrder": false,
+              "members": [
+                {
+                  "kind": "CallSignature",
+                  "canonicalReference": "@copositary/react-inputs!SelectInput.Hook:call(1)",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "<OptionData>(props: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "HookProps",
+                      "canonicalReference": "@copositary/react-inputs!SelectInput.HookProps:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<OptionData>"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "HookResult",
+                      "canonicalReference": "@copositary/react-inputs!SelectInput.HookResult:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<OptionData>"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "returnTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 6
+                  },
+                  "releaseTag": "Beta",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "props",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 3
+                      },
+                      "isOptional": false
+                    }
+                  ],
+                  "typeParameters": [
+                    {
+                      "typeParameterName": "OptionData",
+                      "constraintTokenRange": {
+                        "startIndex": 0,
+                        "endIndex": 0
+                      },
+                      "defaultTypeTokenRange": {
+                        "startIndex": 0,
+                        "endIndex": 0
+                      }
+                    }
+                  ]
+                }
+              ],
+              "extendsTokenRanges": []
+            },
+            {
+              "kind": "Interface",
+              "canonicalReference": "@copositary/react-inputs!SelectInput.HookProps:interface",
+              "docComment": "/**\n * Select input hook props\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "interface HookProps<OptionData> extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CompoundInputHookProps",
+                  "canonicalReference": "@copositary/react-inputs!~CompoundInputHookProps:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Value",
+                  "canonicalReference": "@copositary/react-inputs!SelectInput.Value:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<OptionData>>"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                }
+              ],
+              "releaseTag": "Beta",
+              "typeParameters": [
+                {
+                  "typeParameterName": "OptionData",
+                  "constraintTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "name": "HookProps",
+              "preserveMemberOrder": false,
+              "members": [
+                {
+                  "kind": "MethodSignature",
+                  "canonicalReference": "@copositary/react-inputs!SelectInput.HookProps#displayStringForOption:member(1)",
+                  "docComment": "/**\n * A function that should return the string to display in the input when the option is selected.\n *\n * @param option - The first input number\n */\n",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "displayStringForOption(option: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "OptionData"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "string"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isOptional": false,
+                  "returnTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "releaseTag": "Beta",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "option",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      },
+                      "isOptional": false
+                    }
+                  ],
+                  "name": "displayStringForOption"
+                },
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!SelectInput.HookProps#dropdownIsVisibleByDefault:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "dropdownIsVisibleByDefault?: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "boolean"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": true,
+                  "releaseTag": "Beta",
+                  "name": "dropdownIsVisibleByDefault",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "kind": "MethodSignature",
+                  "canonicalReference": "@copositary/react-inputs!SelectInput.HookProps#getOptionKey:member(1)",
+                  "docComment": "/**\n * @param option - The first input number\n */\n",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "getOptionKey(option: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "OptionData"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "OptionKey",
+                      "canonicalReference": "@copositary/react-inputs!SelectInput.OptionKey:type"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isOptional": false,
+                  "returnTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "releaseTag": "Beta",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "option",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      },
+                      "isOptional": false
+                    }
+                  ],
+                  "name": "getOptionKey"
+                },
+                {
+                  "kind": "MethodSignature",
+                  "canonicalReference": "@copositary/react-inputs!SelectInput.HookProps#onBlur:member(1)",
+                  "docComment": "/**\n * Container blur event handler\n */\n",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "onBlur?(event: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "FocusEvent",
+                      "canonicalReference": "@types/react!React.FocusEvent:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<"
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "HTMLElement",
+                      "canonicalReference": "!HTMLElement:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ">"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "void"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isOptional": true,
+                  "returnTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 7
+                  },
+                  "releaseTag": "Beta",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "event",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 5
+                      },
+                      "isOptional": false
+                    }
+                  ],
+                  "name": "onBlur"
+                },
+                {
+                  "kind": "MethodSignature",
+                  "canonicalReference": "@copositary/react-inputs!SelectInput.HookProps#optionsBuilder:member(1)",
+                  "docComment": "/**\n * A function that should return the current selectable options array given the current editing value.\n */\n",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "optionsBuilder(editingValue: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "string"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "OptionData[]"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isOptional": false,
+                  "returnTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "releaseTag": "Beta",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "editingValue",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      },
+                      "isOptional": false
+                    }
+                  ],
+                  "name": "optionsBuilder"
+                }
+              ],
+              "extendsTokenRanges": [
+                {
+                  "startIndex": 1,
+                  "endIndex": 5
+                }
+              ]
+            },
+            {
+              "kind": "Interface",
+              "canonicalReference": "@copositary/react-inputs!SelectInput.HookResult:interface",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "interface HookResult<OptionData> "
+                }
+              ],
+              "releaseTag": "Beta",
+              "typeParameters": [
+                {
+                  "typeParameterName": "OptionData",
+                  "constraintTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "name": "HookResult",
+              "preserveMemberOrder": false,
+              "members": [
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!SelectInput.HookResult#inputValue:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "inputValue: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "string"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": false,
+                  "releaseTag": "Beta",
+                  "name": "inputValue",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "kind": "MethodSignature",
+                  "canonicalReference": "@copositary/react-inputs!SelectInput.HookResult#onContainerBlur:member(1)",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "onContainerBlur(event: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "FocusEvent",
+                      "canonicalReference": "@types/react!React.FocusEvent:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<"
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "HTMLElement",
+                      "canonicalReference": "!HTMLElement:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ">"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "void"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isOptional": false,
+                  "returnTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 7
+                  },
+                  "releaseTag": "Beta",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "event",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 5
+                      },
+                      "isOptional": false
+                    }
+                  ],
+                  "name": "onContainerBlur"
+                },
+                {
+                  "kind": "MethodSignature",
+                  "canonicalReference": "@copositary/react-inputs!SelectInput.HookResult#onInputChange:member(1)",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "onInputChange(event: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "ChangeEvent",
+                      "canonicalReference": "@types/react!React.ChangeEvent:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<"
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "HTMLInputElement",
+                      "canonicalReference": "!HTMLInputElement:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ">"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "void"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isOptional": false,
+                  "returnTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 7
+                  },
+                  "releaseTag": "Beta",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "event",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 5
+                      },
+                      "isOptional": false
+                    }
+                  ],
+                  "name": "onInputChange"
+                },
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!SelectInput.HookResult#options:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "options: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "Array",
+                      "canonicalReference": "!Array:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<{\n            data: OptionData;\n            key: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "OptionKey",
+                      "canonicalReference": "@copositary/react-inputs!SelectInput.OptionKey:type"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";\n            onClick(event: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "MouseEvent",
+                      "canonicalReference": "@types/react!React.MouseEvent:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<"
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "HTMLElement",
+                      "canonicalReference": "!HTMLElement:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ">): void;\n        }>"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": false,
+                  "releaseTag": "Beta",
+                  "name": "options",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 9
+                  }
+                },
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!SelectInput.HookResult#showDropdown:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "showDropdown: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "boolean"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": false,
+                  "releaseTag": "Beta",
+                  "name": "showDropdown",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "extendsTokenRanges": []
+            },
+            {
+              "kind": "TypeAlias",
+              "canonicalReference": "@copositary/react-inputs!SelectInput.InputComponent:type",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type InputComponent = "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FunctionComponent",
+                  "canonicalReference": "@types/react!React.FunctionComponent:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "InputProps",
+                  "canonicalReference": "@copositary/react-inputs!SelectInput.InputProps:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Beta",
+              "name": "InputComponent",
+              "typeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              }
+            },
+            {
+              "kind": "Interface",
+              "canonicalReference": "@copositary/react-inputs!SelectInput.InputProps:interface",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "interface InputProps extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "InputHTMLAttributes",
+                  "canonicalReference": "@types/react!React.InputHTMLAttributes:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "HTMLInputElement",
+                  "canonicalReference": "!HTMLInputElement:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                }
+              ],
+              "releaseTag": "Beta",
+              "name": "InputProps",
+              "preserveMemberOrder": false,
+              "members": [
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!SelectInput.InputProps#type:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "type: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "'text'"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": false,
+                  "releaseTag": "Beta",
+                  "name": "type",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!SelectInput.InputProps#value:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "value: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "string"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": false,
+                  "releaseTag": "Beta",
+                  "name": "value",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "extendsTokenRanges": [
+                {
+                  "startIndex": 1,
+                  "endIndex": 5
+                }
+              ]
+            },
+            {
+              "kind": "TypeAlias",
+              "canonicalReference": "@copositary/react-inputs!SelectInput.OptionComponent:type",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type OptionComponent<OptionData> = "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FunctionComponent",
+                  "canonicalReference": "@types/react!React.FunctionComponent:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "OptionProps",
+                  "canonicalReference": "@copositary/react-inputs!SelectInput.OptionProps:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<OptionData>>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Beta",
+              "name": "OptionComponent",
+              "typeParameters": [
+                {
+                  "typeParameterName": "OptionData",
+                  "constraintTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "typeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              }
+            },
+            {
+              "kind": "TypeAlias",
+              "canonicalReference": "@copositary/react-inputs!SelectInput.OptionKey:type",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type OptionKey = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Beta",
+              "name": "OptionKey",
+              "typeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "Interface",
+              "canonicalReference": "@copositary/react-inputs!SelectInput.OptionProps:interface",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "interface OptionProps<OptionData> extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "OptionHTMLAttributes",
+                  "canonicalReference": "@types/react!React.OptionHTMLAttributes:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "HTMLElement",
+                  "canonicalReference": "!HTMLElement:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                }
+              ],
+              "releaseTag": "Beta",
+              "typeParameters": [
+                {
+                  "typeParameterName": "OptionData",
+                  "constraintTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "name": "OptionProps",
+              "preserveMemberOrder": false,
+              "members": [
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!SelectInput.OptionProps#data:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "data: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "OptionData"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": false,
+                  "releaseTag": "Beta",
+                  "name": "data",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!SelectInput.OptionProps#role:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "role: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "'option'"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": false,
+                  "releaseTag": "Beta",
+                  "name": "role",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "extendsTokenRanges": [
+                {
+                  "startIndex": 1,
+                  "endIndex": 5
+                }
+              ]
+            },
+            {
+              "kind": "Interface",
+              "canonicalReference": "@copositary/react-inputs!SelectInput.Props:interface",
+              "docComment": "/**\n * Select input component props\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "interface Props<Name extends "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", OptionData> extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CompoundInputProps",
+                  "canonicalReference": "@copositary/react-inputs!~CompoundInputProps:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<Name, "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Value",
+                  "canonicalReference": "@copositary/react-inputs!SelectInput.Value:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<OptionData>>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "HookProps",
+                  "canonicalReference": "@copositary/react-inputs!SelectInput.HookProps:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<OptionData>"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                }
+              ],
+              "releaseTag": "Beta",
+              "typeParameters": [
+                {
+                  "typeParameterName": "Name",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                },
+                {
+                  "typeParameterName": "OptionData",
+                  "constraintTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "name": "Props",
+              "preserveMemberOrder": false,
+              "members": [
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!SelectInput.Props#containerComponent:member",
+                  "docComment": "/**\n * Custom container component\n */\n",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "containerComponent?: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "ContainerComponent",
+                      "canonicalReference": "@copositary/react-inputs!SelectInput.ContainerComponent:type"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": true,
+                  "releaseTag": "Beta",
+                  "name": "containerComponent",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!SelectInput.Props#dropdownComponent:member",
+                  "docComment": "/**\n * Custom dropdown component\n */\n",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "dropdownComponent?: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "DropdownComponent",
+                      "canonicalReference": "@copositary/react-inputs!SelectInput.DropdownComponent:type"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": true,
+                  "releaseTag": "Beta",
+                  "name": "dropdownComponent",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!SelectInput.Props#inputComponent:member",
+                  "docComment": "/**\n * Custom input component\n */\n",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "inputComponent?: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "InputComponent",
+                      "canonicalReference": "@copositary/react-inputs!SelectInput.InputComponent:type"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": true,
+                  "releaseTag": "Beta",
+                  "name": "inputComponent",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!SelectInput.Props#optionComponent:member",
+                  "docComment": "/**\n * Option component from which options list are rendering\n */\n",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "optionComponent: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "OptionComponent",
+                      "canonicalReference": "@copositary/react-inputs!SelectInput.OptionComponent:type"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<OptionData>"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": false,
+                  "releaseTag": "Beta",
+                  "name": "optionComponent",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  }
+                }
+              ],
+              "extendsTokenRanges": [
+                {
+                  "startIndex": 3,
+                  "endIndex": 7
+                },
+                {
+                  "startIndex": 8,
+                  "endIndex": 10
+                }
+              ]
+            },
+            {
+              "kind": "TypeAlias",
+              "canonicalReference": "@copositary/react-inputs!SelectInput.Value:type",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type Value<OptionData> = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "OptionData | null"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Beta",
+              "name": "Value",
+              "typeParameters": [
+                {
+                  "typeParameterName": "OptionData",
+                  "constraintTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "typeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ]
+        },
+        {
+          "kind": "Namespace",
+          "canonicalReference": "@copositary/react-inputs!TextInput:namespace",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare namespace TextInput "
+            }
+          ],
+          "fileUrlPath": "src/app/types/text-input.ts",
+          "releaseTag": "Public",
+          "name": "TextInput",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Interface",
+              "canonicalReference": "@copositary/react-inputs!TextInput.Component:interface",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "interface Component extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Omit",
+                  "canonicalReference": "!Omit:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FunctionComponent",
+                  "canonicalReference": "@types/react!React.FunctionComponent:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", number>"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "Component",
+              "preserveMemberOrder": false,
+              "members": [
+                {
+                  "kind": "CallSignature",
+                  "canonicalReference": "@copositary/react-inputs!TextInput.Component:call(1)",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "<Name extends "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "string"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ">(props: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "TextInput.Props",
+                      "canonicalReference": "@copositary/react-inputs!TextInput.Props:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<Name>"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "ReactElement",
+                      "canonicalReference": "@types/react!React.ReactElement:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "returnTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 7
+                  },
+                  "releaseTag": "Public",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "props",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 3,
+                        "endIndex": 5
+                      },
+                      "isOptional": false
+                    }
+                  ],
+                  "typeParameters": [
+                    {
+                      "typeParameterName": "Name",
+                      "constraintTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      },
+                      "defaultTypeTokenRange": {
+                        "startIndex": 0,
+                        "endIndex": 0
+                      }
+                    }
+                  ]
+                }
+              ],
+              "extendsTokenRanges": [
+                {
+                  "startIndex": 1,
+                  "endIndex": 5
+                }
+              ]
+            },
+            {
+              "kind": "Interface",
+              "canonicalReference": "@copositary/react-inputs!TextInput.Hook:interface",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "interface Hook "
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "Hook",
+              "preserveMemberOrder": false,
+              "members": [
+                {
+                  "kind": "CallSignature",
+                  "canonicalReference": "@copositary/react-inputs!TextInput.Hook:call(1)",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "(props: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "HookProps",
+                      "canonicalReference": "@copositary/react-inputs!TextInput.HookProps:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "HookResult",
+                      "canonicalReference": "@copositary/react-inputs!TextInput.HookResult:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "returnTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "releaseTag": "Public",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "props",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 2
+                      },
+                      "isOptional": false
+                    }
+                  ]
+                }
+              ],
+              "extendsTokenRanges": []
+            },
+            {
+              "kind": "Interface",
+              "canonicalReference": "@copositary/react-inputs!TextInput.HookProps:interface",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "interface HookProps extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CompoundInputHookProps",
+                  "canonicalReference": "@copositary/react-inputs!~CompoundInputHookProps:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Value",
+                  "canonicalReference": "@copositary/react-inputs!TextInput.Value:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "HookProps",
+              "preserveMemberOrder": false,
+              "members": [],
+              "extendsTokenRanges": [
+                {
+                  "startIndex": 1,
+                  "endIndex": 5
+                }
+              ]
+            },
+            {
+              "kind": "Interface",
+              "canonicalReference": "@copositary/react-inputs!TextInput.HookResult:interface",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "interface HookResult "
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "HookResult",
+              "preserveMemberOrder": false,
+              "members": [
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!TextInput.HookResult#inputValue:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "inputValue: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "Value",
+                      "canonicalReference": "@copositary/react-inputs!TextInput.Value:type"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": false,
+                  "releaseTag": "Public",
+                  "name": "inputValue",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "kind": "MethodSignature",
+                  "canonicalReference": "@copositary/react-inputs!TextInput.HookResult#onInputChange:member(1)",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "onInputChange(event: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "ChangeEvent",
+                      "canonicalReference": "@types/react!React.ChangeEvent:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "<"
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "HTMLInputElement",
+                      "canonicalReference": "!HTMLInputElement:interface"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ">"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "): "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "void"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isOptional": false,
+                  "returnTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 7
+                  },
+                  "releaseTag": "Public",
+                  "overloadIndex": 1,
+                  "parameters": [
+                    {
+                      "parameterName": "event",
+                      "parameterTypeTokenRange": {
+                        "startIndex": 1,
+                        "endIndex": 5
+                      },
+                      "isOptional": false
+                    }
+                  ],
+                  "name": "onInputChange"
+                }
+              ],
+              "extendsTokenRanges": []
+            },
+            {
+              "kind": "TypeAlias",
+              "canonicalReference": "@copositary/react-inputs!TextInput.InputComponent:type",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type InputComponent = "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FunctionComponent",
+                  "canonicalReference": "@types/react!React.FunctionComponent:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "InputProps",
+                  "canonicalReference": "@copositary/react-inputs!TextInput.InputProps:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "InputComponent",
+              "typeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              }
+            },
+            {
+              "kind": "Interface",
+              "canonicalReference": "@copositary/react-inputs!TextInput.InputProps:interface",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "interface InputProps extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "InputHTMLAttributes",
+                  "canonicalReference": "@types/react!React.InputHTMLAttributes:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "HTMLInputElement",
+                  "canonicalReference": "!HTMLInputElement:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "InputProps",
+              "preserveMemberOrder": false,
+              "members": [
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!TextInput.InputProps#type:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "type: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "'text'"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": false,
+                  "releaseTag": "Public",
+                  "name": "type",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!TextInput.InputProps#value:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "value: "
+                    },
+                    {
+                      "kind": "Content",
+                      "text": "string"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": false,
+                  "releaseTag": "Public",
+                  "name": "value",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "extendsTokenRanges": [
+                {
+                  "startIndex": 1,
+                  "endIndex": 5
+                }
+              ]
+            },
+            {
+              "kind": "Interface",
+              "canonicalReference": "@copositary/react-inputs!TextInput.Props:interface",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "interface Props<Name extends "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "> extends "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "CompoundInputProps",
+                  "canonicalReference": "@copositary/react-inputs!~CompoundInputProps:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<Name, "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Value",
+                  "canonicalReference": "@copositary/react-inputs!TextInput.Value:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "HookProps",
+                  "canonicalReference": "@copositary/react-inputs!TextInput.HookProps:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": " "
+                }
+              ],
+              "releaseTag": "Public",
+              "typeParameters": [
+                {
+                  "typeParameterName": "Name",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "name": "Props",
+              "preserveMemberOrder": false,
+              "members": [
+                {
+                  "kind": "PropertySignature",
+                  "canonicalReference": "@copositary/react-inputs!TextInput.Props#inputComponent:member",
+                  "docComment": "",
+                  "excerptTokens": [
+                    {
+                      "kind": "Content",
+                      "text": "inputComponent?: "
+                    },
+                    {
+                      "kind": "Reference",
+                      "text": "InputComponent",
+                      "canonicalReference": "@copositary/react-inputs!TextInput.InputComponent:type"
+                    },
+                    {
+                      "kind": "Content",
+                      "text": ";"
+                    }
+                  ],
+                  "isReadonly": false,
+                  "isOptional": true,
+                  "releaseTag": "Public",
+                  "name": "inputComponent",
+                  "propertyTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "extendsTokenRanges": [
+                {
+                  "startIndex": 3,
+                  "endIndex": 7
+                },
+                {
+                  "startIndex": 8,
+                  "endIndex": 9
+                }
+              ]
+            },
+            {
+              "kind": "TypeAlias",
+              "canonicalReference": "@copositary/react-inputs!TextInput.Value:type",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type Value = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "Value",
+              "typeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ]
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@copositary/react-inputs!useMaskedInput:var",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "useMaskedInput: "
+            },
+            {
+              "kind": "Reference",
+              "text": "MaskedInput.Hook",
+              "canonicalReference": "@copositary/react-inputs!MaskedInput.Hook:interface"
+            }
+          ],
+          "fileUrlPath": "src/app/inputs/masked-input/hooks/use-masked-input.ts",
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "useMaskedInput",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@copositary/react-inputs!useNumberInput:var",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "useNumberInput: "
+            },
+            {
+              "kind": "Reference",
+              "text": "NumberInput.Hook",
+              "canonicalReference": "@copositary/react-inputs!NumberInput.Hook:interface"
+            }
+          ],
+          "fileUrlPath": "src/app/inputs/number-input/hooks/use-number-input.ts",
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "useNumberInput",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@copositary/react-inputs!useSelectInput:var",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "useSelectInput: "
+            },
+            {
+              "kind": "Reference",
+              "text": "SelectInput.Hook",
+              "canonicalReference": "@copositary/react-inputs!SelectInput.Hook:interface"
+            }
+          ],
+          "fileUrlPath": "src/app/inputs/select-input/hooks/use-select-input.ts",
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "useSelectInput",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "@copositary/react-inputs!useTextInput:var",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "useTextInput: "
+            },
+            {
+              "kind": "Reference",
+              "text": "TextInput.Hook",
+              "canonicalReference": "@copositary/react-inputs!TextInput.Hook:interface"
+            }
+          ],
+          "fileUrlPath": "src/app/inputs/text-input/hooks/use-text-input.ts",
+          "isReadonly": true,
+          "releaseTag": "Public",
+          "name": "useTextInput",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          }
+        }
+      ]
+    }
+  ]
+}

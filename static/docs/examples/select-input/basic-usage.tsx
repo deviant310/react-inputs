@@ -1,6 +1,8 @@
 import { useState } from 'react';
 
-import { SelectInput } from '../../../../src/app/inputs/select-input';
+import { SelectInput } from '../../../../src/app/inputs';
+
+import { SelectInput as SI } from '../../../../src/app/types/select-input';
 
 type Country = {
   id: number;
@@ -31,7 +33,7 @@ const countries: Country[] = [
 const getOptionValue = (country: Country) => country.value;
 const getOptionKey = (country: Country) => country.id;
 
-const CountryOption: SelectInput.OptionComponent<Country> = ({ data, ...props }) => (
+const CountryOption: SI.OptionComponent<Country> = ({ data, ...props }) => (
   <div {...props}>{data.value}</div>
 );
 

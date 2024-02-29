@@ -1,5 +1,7 @@
 import { ChangeEvent, useCallback, useMemo } from 'react';
 
+import { NumberInput } from '../../../types/number-input';
+
 import { numberHasAppropriateLength, parseInteger } from '../helpers';
 
 export const useNumberInput: NumberInput.Hook = props => {

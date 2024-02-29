@@ -4,7 +4,7 @@ import {
   FunctionComponent,
   HTMLAttributes,
   InputHTMLAttributes,
-  MouseEvent,
+  MouseEvent, NamedExoticComponent,
   OptionHTMLAttributes,
   PropsWithChildren,
   ReactElement,
@@ -12,25 +12,16 @@ import {
 
 import { CompoundInputHookProps, CompoundInputProps } from './compound-input';
 
-export declare const SelectInput: SelectInput.Component;
-
-export const useSelectInput: SelectInput.Hook;
-
+/**
+ * @beta
+ */
 export namespace SelectInput {
-
-  /**
-   * Select input component
-   */
-  export interface Component extends Omit<FunctionComponent, number> {
-    <Name extends string, OptionData>(props: Props<Name, OptionData>): ReactElement;
-  }
-
   /**
    * Select input component props
    */
   export interface Props<Name extends string, OptionData> extends
     CompoundInputProps<Name, Value<OptionData>>,
-    HookProps<Value<OptionData>>
+    HookProps<OptionData>
   {
 
     /**
@@ -98,16 +89,14 @@ export namespace SelectInput {
     /**
      * A function that should return the string to display in the input when the option is selected.
      *
-     * @param option
+     * @param option - The first input number
      */
     displayStringForOption(option: OptionData): string;
 
     dropdownIsVisibleByDefault?: boolean;
 
     /**
-     * A function that should return the unique key to identify every option component in React DOM tree.
-     *
-     * @param option
+     * @param option - The first input number
      */
     getOptionKey(option: OptionData): OptionKey;
 

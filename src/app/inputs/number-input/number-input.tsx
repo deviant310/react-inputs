@@ -1,13 +1,15 @@
 import { memo } from 'react';
 
+import { NumberInput } from '../../types/number-input';
+
 import { Input as DefaultInput } from './components';
 
 import { useNumberInput } from './hooks';
 
 /**
- * Number field component
+ * Number input component
  */
-export const NumberInput = memo(props => {
+const NumberInput = memo(props => {
   const {
     inputComponent: Input = DefaultInput,
     label,
@@ -27,5 +29,7 @@ export const NumberInput = memo(props => {
     />
   );
 }) as NumberInput.Component;
+
+export { NumberInput };
 
 NumberInput.displayName = 'ReactNumberInput';
