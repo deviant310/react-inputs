@@ -3,8 +3,7 @@
     "start": "yarn --cwd package start",
     "build": "yarn --cwd package build",
     "pack": "yarn --cwd package pack",
-    "docs-start": "yarn --cwd documentation start",
-    "docs-check-examples": "yarn --cwd package tsc --project ../documentation/examples/tsconfig.json"
+    "docs-start": "yarn --cwd documentation start"
   },
   "workspaces": [
     "package",
