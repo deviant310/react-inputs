@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 import { useState } from 'react';
 
-import { MaskedInput } from '../../../src/app/inputs/masked-input';
+import { MaskedInput } from 'app/inputs';
 
 test('typing symbols from the middle', async () => {
   const App = () => {

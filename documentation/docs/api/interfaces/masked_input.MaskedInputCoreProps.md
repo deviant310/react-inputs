@@ -1,17 +1,17 @@
 ---
-id: "masked_input.MaskedInput.InputProps"
-title: "Interface: InputProps"
-sidebar_label: "InputProps"
+id: "masked_input.MaskedInputCoreProps"
+title: "Interface: MaskedInputCoreProps"
+sidebar_label: "MaskedInputCoreProps"
 custom_edit_url: null
 ---
 
-[masked-input](../modules/masked_input.md).[MaskedInput](../namespaces/masked_input.MaskedInput.md).InputProps
+[masked-input](../modules/masked_input.md).MaskedInputCoreProps
 
 ## Hierarchy
 
 - `InputHTMLAttributes`\<`HTMLInputElement`\>
 
-  ↳ **`InputProps`**
+  ↳ **`MaskedInputCoreProps`**
 
 ## Properties
 

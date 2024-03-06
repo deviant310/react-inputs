@@ -12,6 +12,6 @@ module.exports = {
   packageTSConfigDocs: resolvePath('./package/tsconfig.build.json'),
   packageOutput: resolvePath('./package/dist'),
   packageStatic: resolvePath('./package/static'),
-  documentationOutput: resolvePath('./documentation/docs'),
+  documentationTypeDocOutput: resolvePath('./documentation/docs/api'),
   documentationExamples: resolvePath('./documentation/examples'),
 };

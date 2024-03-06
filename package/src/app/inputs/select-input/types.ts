@@ -9,7 +9,7 @@ import {
   PropsWithChildren,
 } from 'react';
 
-import { CompoundInputHookProps, CompoundInputProps } from '../../types/compound-input';
+import { CompoundInputHookProps, CompoundInputProps } from 'app/types/compound-input';
 
 /**
  * Select input main component props
@@ -92,14 +92,16 @@ export interface SelectInputHookProps<OptionData> extends CompoundInputHookProps
   /**
    * A function that should return the string to display in the input when the option is selected.
    *
-   * @param option - The first input number
+   * @param option - Data of selected option
    */
   displayStringForOption(option: OptionData): string;
 
   dropdownIsVisibleByDefault?: boolean;
 
   /**
-   * @param option - The first input number
+   * A function that should return option key.
+   *
+   * @param option - Data of selected option
    */
   getOptionKey(option: OptionData): SelectInputOptionKey;
 
@@ -132,4 +134,3 @@ export interface SelectInputHookResult<OptionData> {
 }
 
 export type SelectInputValue<OptionData> = OptionData | null;
-//}

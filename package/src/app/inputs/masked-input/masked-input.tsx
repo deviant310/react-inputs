@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { MaskedInput } from '../../types/masked-input';
+import { MaskedInputProps } from './types';
 
 import { Input as DefaultInput } from './components';
 
@@ -8,11 +8,11 @@ import { useMaskedInput } from './hooks';
 
 /**
  * A component for helping the user entering some text by configured mask.
+ * Input pattern is determined by {@link MaskedInputProps.mask} parameter.
  *
- * Input pattern is determined by {@link MaskedInput.Props.mask} parameter.
- * The user's text input is controlled by {@link MaskedInput.Props.source} parameter.
+ * @category Main component
  */
-const MaskedInput = memo(props => {
+export const MaskedInput = memo(<Name extends string>(props: MaskedInputProps<Name>) => {
   const {
     inputComponent: Input = DefaultInput,
     label,
@@ -40,8 +40,6 @@ const MaskedInput = memo(props => {
       value={inputValue}
     />
   );
-}) as MaskedInput.Component;
-
-export { MaskedInput };
+});
 
 MaskedInput.displayName = 'ReactInputsMaskedInput';

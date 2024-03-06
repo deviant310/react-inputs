@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 
 import { useEffect, useState } from 'react';
 
-import { MaskedInput } from '../../../src/app/inputs/masked-input';
+import { MaskedInput } from 'app/inputs';
 
 test('updating mask', () => {
   const App = () => {

@@ -6,22 +6,91 @@ sidebar_position: 0
 custom_edit_url: null
 ---
 
-## Namespaces
+## Interfaces
 
-- [MaskedInput](../namespaces/masked_input.MaskedInput.md)
+- [MaskedInputProps](../interfaces/masked_input.MaskedInputProps.md)
+- [MaskedInputCoreProps](../interfaces/masked_input.MaskedInputCoreProps.md)
+- [MaskedInputHook](../interfaces/masked_input.MaskedInputHook.md)
+- [MaskedInputHookProps](../interfaces/masked_input.MaskedInputHookProps.md)
+- [MaskedInputHookResult](../interfaces/masked_input.MaskedInputHookResult.md)
+- [MaskEntry](../interfaces/masked_input.MaskEntry.md)
 
-## Functions
+## Main component
 
-### useMaskedInput
+### MaskedInput
 
-▸ **useMaskedInput**(`props`): [`HookResult`](../interfaces/masked_input.MaskedInput.HookResult.md)
+▸ **MaskedInput**\<`Name`\>(`props`): `Element`
+
+A component for helping the user entering some text by configured mask.
+Input pattern is determined by [MaskedInputProps.mask](../interfaces/masked_input.MaskedInputHookProps.md#mask) parameter.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `Name` | extends `string` |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `props` | [`HookProps`](../interfaces/masked_input.MaskedInput.HookProps.md) |
+| `props` | [`MaskedInputProps`](../interfaces/masked_input.MaskedInputProps.md)\<`Name`\> |
 
 #### Returns
 
-[`HookResult`](../interfaces/masked_input.MaskedInput.HookResult.md)
+`Element`
+
+## Hooks
+
+### useMaskedInput
+
+▸ **useMaskedInput**(`props`): [`MaskedInputHookResult`](../interfaces/masked_input.MaskedInputHookResult.md)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `props` | [`MaskedInputHookProps`](../interfaces/masked_input.MaskedInputHookProps.md) |
+
+#### Returns
+
+[`MaskedInputHookResult`](../interfaces/masked_input.MaskedInputHookResult.md)
+
+## Other
+
+### MaskedInputCoreComponent
+
+Ƭ **MaskedInputCoreComponent**: `ForwardRefExoticComponent`\<`PropsWithoutRef`\<[`MaskedInputCoreProps`](../interfaces/masked_input.MaskedInputCoreProps.md)\> & `RefAttributes`\<`HTMLInputElement`\>\>
+
+___
+
+### MaskedInputValue
+
+Ƭ **MaskedInputValue**: `string`
+
+___
+
+### MaskProps
+
+Ƭ **MaskProps**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `dirtyValue` | `string` |
+| `pattern` | `string` |
+| `stub` | `string` |
+| `definitions?` | [`MaskDefinitions`](masked_input.md#maskdefinitions) |
+
+___
+
+### MaskDefinitions
+
+Ƭ **MaskDefinitions**: `Record`\<`string`, `RegExp`\>
+
+___
+
+### MaskEntryType
+
+Ƭ **MaskEntryType**: ``"include"`` \| ``"definition"`` \| ``"other"``

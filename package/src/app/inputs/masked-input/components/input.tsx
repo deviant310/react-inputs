@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 
-import { MaskedInput } from 'app/types/masked-input';
+import { MaskedInputCoreComponent } from '../types';
 
-export const Input: MaskedInput.InputComponent = memo(forwardRef((props, ref) => (
+export const Input: MaskedInputCoreComponent = memo(forwardRef((props, ref) => (
   <input {...props} ref={ref} />
 )));

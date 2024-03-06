@@ -1,20 +1,20 @@
 import { Some } from 'infrastructure/utility-types';
 
-import { MaskedInput } from 'app/types/masked-input';
+import { MaskDefinitions, MaskEntry, MaskEntryType, MaskProps } from './types';
 
 import { escapeSpecialCharacters } from './helpers';
 
 export class Mask {
-  private static definitions: MaskedInput.MaskDefinitions = {
+  private static definitions: MaskDefinitions = {
     '*': /./,
     '0': /\d/,
     'a': /[a-zA-Z]/,
   };
 
-  private entries: MaskedInput.MaskEntry[];
+  private entries: MaskEntry[];
   private stub: string;
 
-  constructor (public props: MaskedInput.MaskProps) {
+  constructor (public props: MaskProps) {
     const { definitions, dirtyValue, pattern, stub } = props;
 
     const definitionsPatternChunk = Object
@@ -30,7 +30,7 @@ export class Mask {
     const { entries } = [...pattern.matchAll(maskRegExpPattern)]
       .map(({ groups }) => Object
         .entries(groups as Record<string, string>)
-        .find(([, value]) => value !== undefined) as [MaskedInput.MaskEntryType, string],
+        .find(([, value]) => value !== undefined) as [MaskEntryType, string],
       )
       .reduce((obj, [type, source]) => {
         const dirtyValueMatcher = {
@@ -52,7 +52,7 @@ export class Mask {
         return obj;
       }, {
         dirtyValueSlice: dirtyValue,
-        entries: [] as MaskedInput.MaskEntry[],
+        entries: [] as MaskEntry[],
       });
 
     this.stub = stub;
@@ -148,7 +148,7 @@ export class Mask {
       : this.startOffset;
   }
 
-  copyWith (props: Some<MaskedInput.MaskProps>) {
+  copyWith (props: Some<MaskProps>) {
     return new Mask({ ...this.props, ...props });
   }
 }

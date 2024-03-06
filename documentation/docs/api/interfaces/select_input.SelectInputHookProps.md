@@ -61,7 +61,7 @@ A function that should return the string to display in the input when the option
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `option` | `OptionData` | The first input number |
+| `option` | `OptionData` | Data of selected option |
 
 #### Returns
 
@@ -73,11 +73,13 @@ ___
 
 ▸ **getOptionKey**(`option`): [`SelectInputOptionKey`](../modules/select_input.md#selectinputoptionkey)
 
+A function that should return option key.
+
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `option` | `OptionData` | The first input number |
+| `option` | `OptionData` | Data of selected option |
 
 #### Returns
 

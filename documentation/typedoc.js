@@ -1,6 +1,10 @@
 const {resolve} = require('path');
 const paths = require('../paths');
 
+/**
+ * @property out can be omitted when using as docusaurus plugin
+ * @property treatWarningsAsErrors doesn't work when using as docusaurus plugin
+ * */
 module.exports = {
   disableSources: true,
   entryPoints: [
@@ -12,7 +16,7 @@ module.exports = {
   includeVersion: true,
   excludeExternals: true,
   name: 'React inputs',
-  out: paths.documentationOutput,
+  out: paths.documentationTypeDocOutput,
   readme: 'none',
   sort: [
     'required-first',
@@ -21,5 +25,7 @@ module.exports = {
   plugin: [
     require.resolve('typedoc-plugin-markdown')
   ],
+  hideParameterTypesInTitle: true,
   tsconfig: paths.packageTSConfigDocs,
+  hideInPageTOC: true
 };

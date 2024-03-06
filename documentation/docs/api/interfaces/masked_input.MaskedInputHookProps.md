@@ -1,19 +1,19 @@
 ---
-id: "masked_input.MaskedInput.HookProps"
-title: "Interface: HookProps"
-sidebar_label: "HookProps"
+id: "masked_input.MaskedInputHookProps"
+title: "Interface: MaskedInputHookProps"
+sidebar_label: "MaskedInputHookProps"
 custom_edit_url: null
 ---
 
-[masked-input](../modules/masked_input.md).[MaskedInput](../namespaces/masked_input.MaskedInput.md).HookProps
+[masked-input](../modules/masked_input.md).MaskedInputHookProps
 
 ## Hierarchy
 
-- `CompoundInputHookProps`\<[`Value`](../namespaces/masked_input.MaskedInput.md#value)\>
+- `CompoundInputHookProps`\<[`MaskedInputValue`](../modules/masked_input.md#maskedinputvalue)\>
 
-  ↳ **`HookProps`**
+  ↳ **`MaskedInputHookProps`**
 
-  ↳↳ [`Props`](masked_input.MaskedInput.Props.md)
+  ↳↳ [`MaskedInputProps`](masked_input.MaskedInputProps.md)
 
 ## Properties
 

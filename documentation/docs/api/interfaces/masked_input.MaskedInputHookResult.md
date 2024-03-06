@@ -1,11 +1,11 @@
 ---
-id: "masked_input.MaskedInput.HookResult"
-title: "Interface: HookResult"
-sidebar_label: "HookResult"
+id: "masked_input.MaskedInputHookResult"
+title: "Interface: MaskedInputHookResult"
+sidebar_label: "MaskedInputHookResult"
 custom_edit_url: null
 ---
 
-[masked-input](../modules/masked_input.md).[MaskedInput](../namespaces/masked_input.MaskedInput.md).HookResult
+[masked-input](../modules/masked_input.md).MaskedInputHookResult
 
 ## Properties
 

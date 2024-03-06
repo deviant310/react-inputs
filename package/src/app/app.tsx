@@ -7,6 +7,7 @@ import { createRoot } from 'react-dom/client';
 
 import {
   MaskedInput,
+  MaskedInputCoreComponent,
   NumberInput,
   SelectInput,
   SelectInputContainerComponent,
@@ -182,7 +183,7 @@ function optionsBuilder (this: Option[], editingValue: string) {
 const getOptionId = (option: Option) => option.id;
 const getOptionValue = (option: Option) => option.value;
 
-const PhoneInput: MaskedInput.InputComponent = forwardRef((props, ref) => (
+const PhoneInput: MaskedInputCoreComponent = forwardRef((props, ref) => (
   <input {...props} ref={ref} />
 ));
 
