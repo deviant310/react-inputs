@@ -2,12 +2,15 @@ import {
   ChangeEvent,
   FocusEvent,
   useCallback,
-  useEffect,
   useMemo,
   useState,
 } from 'react';
 
-import { SelectInputHook } from '../types';
+import {
+  SelectInputHook,
+  SelectInputOptionItem,
+  SelectInputOptionProps,
+} from '../types';
 
 /**
  * @category Hooks
@@ -20,110 +23,114 @@ export const useSelectInput: SelectInputHook = props => {
     displayStringForOption,
     dropdownIsVisibleByDefault = false,
     getOptionKey,
-    onBlur,
+    onReset,
+    onTextboxValueChange,
     optionsBuilder,
-    setValue,
-    value,
+    setValue: setSelectedOption,
+    value: selectedOption,
   } = props;
 
+  const stringForSelectedOption = selectedOption
+    ?  displayStringForOption(selectedOption)
+    : '';
+
   const [dropdownIsVisible, setDropdownVisibility] = useState(dropdownIsVisibleByDefault);
-  const [inputValue, setInputValue] = useState('');
+  const [textboxValue, setTextboxValue] = useState(stringForSelectedOption);
+  const trimmedInputValue = textboxValue.trim();
 
   const onOptionSelect = useCallback(
     (option: Option) => {
       setDropdownVisibility(false);
 
-      setInputValue(
+      setTextboxValue(
         displayStringForOption(option),
       );
 
-      setValue(option);
+      setSelectedOption(option);
     },
-    [displayStringForOption, setValue],
+    [displayStringForOption, setSelectedOption],
   );
 
   const optionsData = useMemo(
-    () => optionsBuilder(inputValue),
-    [optionsBuilder, inputValue],
+    () => optionsBuilder(trimmedInputValue),
+    [optionsBuilder, trimmedInputValue],
   );
 
   const options = useMemo(
-    () => optionsData
-      .map(option => ({
-        data: option,
-        key: getOptionKey(option),
-        onClick: () => onOptionSelect(option),
-      })),
+    () => {
+      return optionsData
+        .map(optionData => <SelectInputOptionItem<Option>>({
+          data: optionData,
+          key: getOptionKey(optionData),
+          onClick: () => onOptionSelect(optionData),
+        }));
+    },
     [getOptionKey, onOptionSelect, optionsData],
   );
 
-  const fieldHasOptions = useMemo(
+  const inputHasOptions = useMemo(
     () => options.length > 0,
     [options],
   );
 
   const showDropdown = useMemo(
-    () => fieldHasOptions && dropdownIsVisible,
-    [dropdownIsVisible, fieldHasOptions],
+    () => inputHasOptions && dropdownIsVisible,
+    [dropdownIsVisible, inputHasOptions],
   );
 
-  const onContainerBlur = useCallback(
+  const reset = useCallback(
+    () => {
+      setDropdownVisibility(false);
+
+      setTextboxValue(stringForSelectedOption);
+
+      onReset?.();
+    },
+    [onReset, stringForSelectedOption],
+  );
+
+  const handleBlur = useCallback(
     (event: FocusEvent<HTMLElement>) => {
       const { currentTarget, relatedTarget } = event;
 
       if (currentTarget.contains(relatedTarget)) return;
 
-      setDropdownVisibility(false);
-
-      setInputValue(
-        value === null
-          ? ''
-          : displayStringForOption(value),
-      );
-
-      onBlur?.(event);
+      reset();
     },
-    [displayStringForOption, onBlur, value],
+    [reset],
   );
 
-  const onInputChange = useCallback(
+  const handleTextboxChange = useCallback(
     ({ target }: ChangeEvent<HTMLInputElement>) => {
-      const inputHasValue = Boolean(target.value.length);
+      const { value } = target;
+      const inputHasValue = Boolean(value.length);
 
       setDropdownVisibility(inputHasValue);
 
-      setInputValue(target.value);
+      setTextboxValue(value);
 
       if (!inputHasValue)
-        setValue(null);
-    },
-    [setValue],
-  );
+        setSelectedOption(null);
 
-  useEffect(
-    () => {
-      if (value !== null)
-        setInputValue(
-          displayStringForOption(value),
-        );
+      onTextboxValueChange?.(value);
     },
-    [value, displayStringForOption],
+    [onTextboxValueChange, setSelectedOption],
   );
 
   return useMemo(
     () => ({
-      inputValue,
-      onContainerBlur,
-      onInputChange,
+      handleBlur,
+      handleTextboxChange,
       options,
       showDropdown,
+      textboxValue,
     }),
     [
-      inputValue,
-      onContainerBlur,
-      onInputChange,
+      handleBlur,
+      handleTextboxChange,
       options,
       showDropdown,
+      textboxValue,
     ],
   );
 };

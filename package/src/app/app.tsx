@@ -11,9 +11,10 @@ import {
   NumberInput,
   SelectInput,
   SelectInputContainerComponent,
-  SelectInputCoreComponent,
   SelectInputDropdownComponent,
   SelectInputOptionComponent,
+  SelectInputOptionProps,
+  SelectInputTextBoxComponent,
   TextInput,
 } from './inputs';
 
@@ -38,7 +39,7 @@ const App = () => {
 
   return (
     <>
-      <fieldset>
+      {/*<fieldset>
         <TextInput
           inputComponent={NameInput}
           name="name"
@@ -51,9 +52,9 @@ const App = () => {
           setValue={setLastName}
           value={lastName}
         />
-      </fieldset>
+      </fieldset>*/}
 
-      <fieldset>
+      {/*<fieldset>
         <NumberInput
           min={1}
           name="age"
@@ -67,20 +68,21 @@ const App = () => {
           setValue={setSalary}
           value={salary}
         />
-      </fieldset>
+      </fieldset>*/}
 
       <fieldset>
         <SelectInput
           containerComponent={SelectInputContainer}
           displayStringForOption={getOptionValue}
           dropdownComponent={SelectInputDropdown}
+          dropdownIsVisibleByDefault
           getOptionKey={getOptionId}
-          inputComponent={CountryInput}
           label="Country"
           name="country"
           optionComponent={SelectInputOption}
           optionsBuilder={optionsBuilder.bind(countries)}
           setValue={setCountry}
+          textBoxComponent={CountryTextBox}
           value={country}
         />
 
@@ -99,7 +101,7 @@ const App = () => {
         />*/}
       </fieldset>
 
-      <fieldset>
+      {/*<fieldset>
         <MaskedInput
           inputComponent={PhoneInput}
           mask={phoneMask}
@@ -115,16 +117,16 @@ const App = () => {
           setValue={setCard}
           value={card}
         />
-      </fieldset>
+      </fieldset>*/}
 
-      <button
+      {/*<button
         onClick={() => {
           setPhoneMask('{+995} 000 000-000');
 
           setPhone('+995123');
         }}>
         Change Mask
-      </button>
+      </button>*/}
     </>
   );
 };
@@ -139,6 +141,8 @@ const SelectInputDropdown: SelectInputDropdownComponent = props => (
       backgroundColor: 'white',
       border: '1px solid grey',
       left: 0,
+      maxHeight: '500px',
+      overflow: 'auto',
       position: 'absolute',
       width: '100%',
       zIndex: 9999,
@@ -147,22 +151,39 @@ const SelectInputDropdown: SelectInputDropdownComponent = props => (
   />
 );
 
-const countries: Option[] = [
-  { id: 1, value: 'Cyprus' },
-  { id: 2, value: 'Georgia' },
-];
+const countries: Option[] = [...Array(300).keys()]
+  .map(id => ({
+    id,
+    value: `Country ${id}`,
+  }));
 
 /* const movies: Option[] = [
   { id: 1, value: 'Home Alone' },
   { id: 2, value: 'From Dusk till Dawn' },
 ]; */
 
-const CountryInput: SelectInputCoreComponent = props => (
+const CountryTextBox: SelectInputTextBoxComponent = props => (
   <input {...props} />
 );
 
-const SelectInputOption: SelectInputOptionComponent<Option> = ({ data, ...props }) => (
-  <div {...props}>{data.value}</div>
+const SelectInputOption = forwardRef<HTMLDivElement, SelectInputOptionProps<Option>>(
+  ({ data, ...props }, ref) => {
+    return (
+      <div {...props} ref={ref}>
+        <div style={{ lineHeight: '20px', padding: '10px' }}>
+          <div style={{
+            display: 'grid',
+            gridAutoFlow: 'column',
+            justifyContent: 'space-between',
+          }}>
+            <span>{data.value}</span>
+
+            <span>{data.id}</span>
+          </div>
+        </div>
+      </div>
+    );
+  },
 );
 
 const NameInput: TextInput.InputComponent = props => (
@@ -170,14 +191,19 @@ const NameInput: TextInput.InputComponent = props => (
 );
 
 function optionsBuilder (this: Option[], editingValue: string) {
-  return this
-    .filter(
-      option => option.value
-        .toLowerCase()
-        .includes(
-          editingValue.toLowerCase(),
-        ),
-    );
+  const options: Option[] = [];
+  const limit = this.length;
+
+  for (let index = 0; index < limit; index++) {
+    if (this[index].value
+      .toLowerCase()
+      .includes(
+        editingValue.toLowerCase(),
+      ))
+      options.push(this[index]);
+  }
+
+  return options;
 }
 
 const getOptionId = (option: Option) => option.id;

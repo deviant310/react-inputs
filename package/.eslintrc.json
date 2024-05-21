@@ -97,7 +97,7 @@
         "omitLastInOneLineBlock": true
       }
     ],
-    "no-unused-vars": "off",
+    "no-unused-vars": "warn",
     "no-undef": "off",
     "no-use-before-define": "off",
     "spaced-comment": "off",
@@ -162,7 +162,7 @@
         "typescript-sort-keys"
       ],
       "rules": {
-        "@typescript-eslint/no-unused-vars": ["error", { "vars": "local" }],
+        "@typescript-eslint/no-unused-vars": "warn",
         "@typescript-eslint/indent": [
           "error",
           2

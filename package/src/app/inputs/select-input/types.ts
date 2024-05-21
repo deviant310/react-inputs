@@ -1,20 +1,24 @@
 import {
   ChangeEvent,
-  FocusEvent,
+  FocusEvent, ForwardRefExoticComponent,
   FunctionComponent,
   HTMLAttributes,
   InputHTMLAttributes,
   MouseEvent,
   OptionHTMLAttributes,
-  PropsWithChildren,
+  PropsWithChildren, ReactElement, RefAttributes,
 } from 'react';
 
-import { CompoundInputHookProps, CompoundInputProps } from 'app/types/compound-input';
+import { CompoundInputHookProps, CompoundInputProps } from '../../types/compound-input';
 
 /**
  * Select input main component props
  */
-export interface SelectInputProps<Name extends string, OptionData> extends
+export interface SelectInputProps<
+  Name extends string,
+  OptionElement extends HTMLElement,
+  OptionData
+> extends
   CompoundInputProps<Name, SelectInputValue<OptionData>>,
   SelectInputHookProps<OptionData>
 {
@@ -30,14 +34,14 @@ export interface SelectInputProps<Name extends string, OptionData> extends
   dropdownComponent?: SelectInputDropdownComponent;
 
   /**
-   * Custom input component
-   */
-  inputComponent?: SelectInputCoreComponent;
-
-  /**
    * Option component from which options list are rendering
    */
-  optionComponent: SelectInputOptionComponent<OptionData>;
+  optionComponent: SelectInputOptionComponent<OptionElement, OptionData>;
+
+  /**
+   * Custom input component
+   */
+  textBoxComponent?: SelectInputTextBoxComponent;
 }
 
 /**
@@ -61,14 +65,16 @@ export type SelectInputDropdownProps = PropsWithChildren<HTMLAttributes<HTMLElem
   role: 'dialog';
 }>;
 
-export type SelectInputCoreComponent = FunctionComponent<SelectInputCoreProps>;
+export type SelectInputTextBoxComponent = FunctionComponent<SelectInputTextBoxProps>;
 
-export interface SelectInputCoreProps extends InputHTMLAttributes<HTMLInputElement> {
-  type: 'text';
+export interface SelectInputTextBoxProps extends InputHTMLAttributes<HTMLInputElement> {
+  role: 'textbox';
   value: string;
 }
 
-export type SelectInputOptionComponent<OptionData> = FunctionComponent<SelectInputOptionProps<OptionData>>;
+export type SelectInputOptionComponent<Element extends HTMLElement, OptionData> =
+  & ForwardRefExoticComponent<SelectInputOptionProps<OptionData>
+  & RefAttributes<Element>>;
 
 export type SelectInputOptionKey = string | number;
 
@@ -88,11 +94,10 @@ export interface SelectInputHook {
  * Select input hook props
  */
 export interface SelectInputHookProps<OptionData> extends CompoundInputHookProps<SelectInputValue<OptionData>> {
-
   /**
    * A function that should return the string to display in the input when the option is selected.
    *
-   * @param option - Data of selected option
+   * @param option
    */
   displayStringForOption(option: OptionData): string;
 
@@ -106,9 +111,14 @@ export interface SelectInputHookProps<OptionData> extends CompoundInputHookProps
   getOptionKey(option: OptionData): SelectInputOptionKey;
 
   /**
-   * Container blur event handler
+   * Event triggered when input reset
    */
-  onBlur?(event: FocusEvent<HTMLElement>): void;
+  onReset?(): void;
+
+  /**
+   * Event triggered when textbox value changed
+   */
+  onTextboxValueChange?(value: string): void;
 
   /**
    * A function that should return the current selectable options array given the current editing value.
@@ -119,18 +129,27 @@ export interface SelectInputHookProps<OptionData> extends CompoundInputHookProps
 /**
  * An option object that can be used to render option element
  */
-export interface SelectInputOption<OptionData> {
+export interface SelectInputOptionItem<OptionData> {
   data: OptionData;
   key: SelectInputOptionKey;
   onClick(event: MouseEvent<HTMLElement>): void;
 }
 
 export interface SelectInputHookResult<OptionData> {
-  inputValue: string;
-  onContainerBlur(event: FocusEvent<HTMLElement>): void;
-  onInputChange(event: ChangeEvent<HTMLInputElement>): void;
-  options: Array<SelectInputOption<OptionData>>;
+  handleBlur(event: FocusEvent<HTMLElement>): void;
+  handleTextboxChange(event: ChangeEvent<HTMLInputElement>): void;
+  options: Array<SelectInputOptionItem<OptionData>>;
   showDropdown: boolean;
+  textboxValue: string;
 }
 
 export type SelectInputValue<OptionData> = OptionData | null;
+
+export interface SelectInputVirtualListProps<Element extends HTMLElement, Item> {
+  items: Array<Item>;
+  renderItem: SelectInputVirtualListItemRenderer<Element, Item>;
+}
+
+export interface SelectInputVirtualListItemRenderer<Element extends HTMLElement, Item> {
+  (item: Item, ref: (element: Element) => void, index: number): ReactElement;
+}

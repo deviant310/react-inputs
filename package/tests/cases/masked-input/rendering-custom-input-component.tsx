@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 
 import { forwardRef, useState } from 'react';
 
-import { MaskedInput, MaskedInputCoreComponent } from 'app/inputs';
+import { MaskedInput, MaskedInputCoreComponent } from '../../../src/app/inputs';
 
 test('rendering custom input component', () => {
   const Input: MaskedInputCoreComponent = forwardRef((props, ref) => (

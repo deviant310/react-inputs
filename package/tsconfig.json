@@ -15,15 +15,6 @@
     "noEmitOnError": true,
     "moduleResolution": "Node",
     "jsx": "react-jsx",
-    "downlevelIteration": true,
-    "baseUrl": "./src",
-    "paths": {
-      "app/*": [
-        "./app/*"
-      ],
-      "infrastructure/*": [
-        "./infrastructure/*"
-      ]
-    }
+    "downlevelIteration": true
   }
 }

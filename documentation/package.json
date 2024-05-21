@@ -17,7 +17,7 @@
     "check-examples": "tsc --project ./examples/tsconfig.json"
   },
   "dependencies": {
-    "@copositary/react-inputs": "file:../package/package.tgz",
+    "@copositary/react-inputs": "file:../package/@copositary-react-inputs-1.0.0.tgz",
     "@docusaurus/core": "3.1.1",
     "@docusaurus/preset-classic": "^3.1.1",
     "@mdx-js/react": "^3.0.0",

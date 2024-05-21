@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { forwardRef, useState } from 'react';
 
 import '@testing-library/jest-dom';
 
@@ -7,10 +7,10 @@ import { fireEvent, getAllByRole, getByRole, render } from '@testing-library/rea
 import {
   SelectInput,
   SelectInputContainerComponent,
-  SelectInputCoreComponent,
   SelectInputDropdownComponent,
-  SelectInputOptionComponent,
-} from '@copositary/react-inputs';
+  SelectInputOptionProps,
+  SelectInputTextBoxComponent,
+} from '../../src/app/inputs';
 
 // TODO rename to Country
 type Option = {
@@ -18,8 +18,12 @@ type Option = {
   value: string;
 };
 
-const SelectInputOption: SelectInputOptionComponent<Option> = ({ data, ...props }) => (
-  <div data-id={data.id} {...props}>{data.value}</div>
+const SelectInputOption = forwardRef<HTMLDivElement, SelectInputOptionProps<Option>>(
+  ({ data, ...props }, ref) => (
+    <div data-id={data.id} {...props} ref={ref}>
+      {data.value}
+    </div>
+  ),
 );
 
 const countries: Option[] = [
@@ -195,7 +199,7 @@ test('render custom components', () => {
     <div data-testid="select-field-dropdown" {...props} />
   );
 
-  const Input: SelectInputCoreComponent = props => (
+  const TextBox: SelectInputTextBoxComponent = props => (
     <input data-testid="select-field-input" {...props} />
   );
 
@@ -208,11 +212,11 @@ test('render custom components', () => {
         displayStringForOption={getOptionValue}
         dropdownComponent={Dropdown}
         getOptionKey={getOptionKey}
-        inputComponent={Input}
         name="country"
         optionComponent={SelectInputOption}
         optionsBuilder={countriesOptionsBuilder}
         setValue={setCountry}
+        textBoxComponent={TextBox}
         value={country}
       />
     );

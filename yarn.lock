@@ -1697,7 +1697,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@copositary/react-inputs-documentation@workspace:documentation"
   dependencies:
-    "@copositary/react-inputs": "file:../package/package.tgz"
+    "@copositary/react-inputs": "file:../package/copositary-react-inputs-1.0.0.tgz"
     "@docusaurus/core": "npm:3.1.1"
     "@docusaurus/module-type-aliases": "npm:3.1.1"
     "@docusaurus/preset-classic": "npm:^3.1.1"
@@ -1719,13 +1719,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@copositary/react-inputs@file:../package/package.tgz::locator=%40copositary%2Freact-inputs-documentation%40workspace%3Adocumentation":
+"@copositary/react-inputs@file:../package/copositary-react-inputs-1.0.0.tgz::locator=%40copositary%2Freact-inputs-documentation%40workspace%3Adocumentation":
   version: 1.0.0
-  resolution: "@copositary/react-inputs@file:../package/package.tgz#../package/package.tgz::hash=cb1a14&locator=%40copositary%2Freact-inputs-documentation%40workspace%3Adocumentation"
+  resolution: "@copositary/react-inputs@file:../package/copositary-react-inputs-1.0.0.tgz#../package/copositary-react-inputs-1.0.0.tgz::hash=b1c4f3&locator=%40copositary%2Freact-inputs-documentation%40workspace%3Adocumentation"
   peerDependencies:
     react: ^18
     react-dom: ^18
-  checksum: 10c0/e5c82a36eb60a36c031792cb8905d7395db273562291c5b2c1bedb3fee5f19b8d11fd3f442953b024666216a5cd71f7af75cc7e18f0aec16fe48cdacc5fa07c4
+  checksum: 10c0/6691ba31675ceb5cbefe75e804172f19006052cb29f0367075f0cffe39cfb25525b4e40a906776972f03db7ac7bb4ff4863c0b2985961de02f80b1e5efcb8209
   languageName: node
   linkType: hard
 

@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 
 import { fireEvent, render } from '@testing-library/react';
 
-import { NumberInput } from '../../src/app/inputs/number-input';
+import { NumberInput } from '../../src/app/inputs';
 
 test('Initial value', () => {
   const initialAge = 15;

@@ -1,14 +1,19 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 
 import { useSelectInput } from './hooks';
 
 import {
   Container as DefaultContainer,
   Dropdown as DefaultDropdown,
-  Input as DefaultInput,
+  TextBox as DefaultTextBox,
+  VirtualList,
 } from './components';
 
-import { SelectInputProps } from './types';
+import {
+  SelectInputOptionItem,
+  SelectInputProps,
+  SelectInputVirtualListItemRenderer,
+} from './types';
 
 /**
  * A component for helping the user make a selection by entering some text and choosing from among a list of options.
@@ -17,51 +22,59 @@ import { SelectInputProps } from './types';
  * The options to be displayed are determined using {@link SelectInputProps.optionsBuilder}
  * and rendered with {@link SelectInputProps.optionComponent}.
  *
+ * @see [Factorial - Wikipedia](https://en.wikipedia.org/wiki/Factorial)
  * @category Main component
  */
-export const SelectInput = memo(<Name extends string, OptionData>(props: SelectInputProps<Name, OptionData>) => {
-  const {
-    containerComponent: Container = DefaultContainer,
-    dropdownComponent: Dropdown = DefaultDropdown,
-    inputComponent: Input = DefaultInput,
-    label,
-    name,
-    optionComponent: Option,
-    ...hookProps
-  } = props;
+export const SelectInput = memo(
+  <Name extends string, OptionElement extends HTMLElement, OptionData>(
+    props: SelectInputProps<Name, OptionElement, OptionData>,
+  ) => {
+    type OptionRenderer = SelectInputVirtualListItemRenderer<OptionElement, SelectInputOptionItem<OptionData>>;
 
-  const {
-    inputValue,
-    onContainerBlur,
-    onInputChange,
-    options,
-    showDropdown,
-  } = useSelectInput(hookProps);
+    const {
+      containerComponent: Container = DefaultContainer,
+      dropdownComponent: Dropdown = DefaultDropdown,
+      label,
+      name,
+      optionComponent: Option,
+      textBoxComponent: TextBox = DefaultTextBox,
+      ...hookProps
+    } = props;
 
-  return (
-    <Container onBlur={onContainerBlur} role="group" tabIndex={-1}>
-      <Input
-        name={name}
-        onChange={onInputChange}
-        placeholder={label}
-        type="text"
-        value={inputValue}
-      />
+    const {
+      handleBlur,
+      handleTextboxChange,
+      options,
+      showDropdown,
+      textboxValue,
+    } = useSelectInput(hookProps);
 
-      {showDropdown && (
-        <Dropdown role="dialog">
-          {options.map(({ data, key, onClick }) => (
-            <Option
-              data={data}
-              key={key}
-              onClick={onClick}
-              role="option"
+    const renderOption = useCallback<OptionRenderer>(
+      (item, ref) => <Option {...item} ref={ref} role="option" />,
+      [Option],
+    );
+
+    return (
+      <Container onBlur={handleBlur} role="group" tabIndex={-1}>
+        <TextBox
+          name={name}
+          onChange={handleTextboxChange}
+          placeholder={label}
+          role="textbox"
+          value={textboxValue}
+        />
+
+        {showDropdown && (
+          <Dropdown role="dialog">
+            <VirtualList
+              items={options}
+              renderItem={renderOption}
             />
-          ))}
-        </Dropdown>
-      )}
-    </Container>
-  );
-});
+          </Dropdown>
+        )}
+      </Container>
+    );
+  },
+);
 
 SelectInput.displayName = 'ReactInputsSelectInput';

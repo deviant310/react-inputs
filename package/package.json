@@ -15,7 +15,9 @@
   ],
   "scripts": {
     "start": "webpack serve",
+    "start-production": "webpack serve --env production",
     "build": "node scripts/build.js",
+    "pack": "yarn pack -o %s-%v.tgz",
     "test": "jest"
   },
   "devDependencies": {

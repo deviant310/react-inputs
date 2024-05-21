@@ -2,7 +2,7 @@
   "scripts": {
     "start": "yarn --cwd package start",
     "build": "yarn --cwd package build",
-    "pack": "yarn --cwd package pack",
+    "pack": "yarn --cwd package pack -o %s-%v.tgz",
     "docs-start": "yarn --cwd documentation start"
   },
   "workspaces": [

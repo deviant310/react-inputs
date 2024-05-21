@@ -1,4 +1,4 @@
-import { Some } from 'infrastructure/utility-types';
+import { Some } from '../../../infrastructure/utility-types';
 
 import { MaskDefinitions, MaskEntry, MaskEntryType, MaskProps } from './types';
 

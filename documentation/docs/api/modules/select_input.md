@@ -47,6 +47,10 @@ and rendered with [SelectInputProps.optionComponent](../interfaces/select_input.
 
 `Element`
 
+**`See`**
+
+[Factorial - Wikipedia](https://en.wikipedia.org/wiki/Factorial)
+
 ## Hooks
 
 ### useSelectInput

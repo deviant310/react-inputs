@@ -9,7 +9,7 @@ import {
   RefObject,
 } from 'react';
 
-import { CompoundInputHookProps, CompoundInputProps } from 'app/types/compound-input';
+import { CompoundInputHookProps, CompoundInputProps } from '../../types/compound-input';
 
 export interface MaskedInputProps<Name extends string> extends
   CompoundInputProps<Name, MaskedInputValue>,

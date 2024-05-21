@@ -25,7 +25,8 @@ module.exports = {
   plugin: [
     require.resolve('typedoc-plugin-markdown')
   ],
+  hideInPageTOC: true,
   hideParameterTypesInTitle: true,
   tsconfig: paths.packageTSConfigDocs,
-  hideInPageTOC: true
+
 };
