@@ -1,4 +1,4 @@
-import { forwardRef, useState } from 'react';
+import { forwardRef, useMemo, useState } from 'react';
 
 import '@testing-library/jest-dom';
 
@@ -9,10 +9,8 @@ import {
   SelectInputContainerComponent,
   SelectInputDropdownComponent,
   SelectInputOptionProps,
-  SelectInputTextBoxComponent,
 } from '../../src/app/inputs';
 
-// TODO rename to Country
 type Option = {
   id: number;
   value: string;
@@ -49,6 +47,14 @@ const getOptionValue = (option: Option) => option.value;
 
 test('initial value', () => {
   const Form = () => {
+    const [countryText, setCountryText] = useState('');
+
+    const countriesOptions = useMemo(
+      () => countries
+        .filter(country => country.value.includes(countryText)),
+      [countryText],
+    );
+
     const [country, setCountry] = useState<Option | null>(countries[1]);
 
     return (
@@ -56,8 +62,9 @@ test('initial value', () => {
         displayStringForOption={getOptionValue}
         getOptionKey={getOptionKey}
         name="country"
+        onTextboxValueChange={setCountryText}
         optionComponent={SelectInputOption}
-        optionsBuilder={countriesOptionsBuilder}
+        options={countriesOptions}
         setValue={setCountry}
         value={country}
       />

@@ -1,14 +1,13 @@
-import { act, render, waitFor } from '@testing-library/react';
+import { useState } from "react";
 
-import userEvent from '@testing-library/user-event';
+import { act, render, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
-import { useState } from 'react';
+import { MaskedInput } from "../../../src";
 
-import { MaskedInput } from '../../../src/app/inputs';
-
-test('deleting symbols from the end', async () => {
+test("deleting symbols from the end", async () => {
   const App = () => {
-    const [phone, setPhone] = useState('+79991234567');
+    const [phone, setPhone] = useState("+79991234567");
 
     return (
       <MaskedInput
@@ -22,19 +21,19 @@ test('deleting symbols from the end', async () => {
 
   const event = userEvent.setup();
   const { getByRole } = render(<App />);
-  const inputElement = getByRole('textbox') as HTMLInputElement;
+  const inputElement = getByRole("textbox") as HTMLInputElement;
 
   inputElement.focus();
 
-  await act(() => event.type(inputElement, '{backspace}', { skipClick: true }));
+  await act(() => event.type(inputElement, "{backspace}", { skipClick: true }));
 
-  await waitFor(() => expect(inputElement).toHaveValue('+7 (999) 123-45-6_'));
+  await waitFor(() => expect(inputElement).toHaveValue("+7 (999) 123-45-6_"));
 
-  await act(() => event.type(inputElement, '{backspace}', { skipClick: true }));
+  await act(() => event.type(inputElement, "{backspace}", { skipClick: true }));
 
-  await waitFor(() => expect(inputElement).toHaveValue('+7 (999) 123-45-__'));
+  await waitFor(() => expect(inputElement).toHaveValue("+7 (999) 123-45-__"));
 
-  await act(() => event.type(inputElement, '{backspace}', { skipClick: true }));
+  await act(() => event.type(inputElement, "{backspace}", { skipClick: true }));
 
-  await waitFor(() => expect(inputElement).toHaveValue('+7 (999) 123-4_-__'));
+  await waitFor(() => expect(inputElement).toHaveValue("+7 (999) 123-4_-__"));
 });

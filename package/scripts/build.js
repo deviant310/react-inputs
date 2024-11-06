@@ -1,7 +1,7 @@
 const { resolve } = require('path');
 const { execSync } = require('node:child_process');
 const { build } = require('esbuild');
-const paths = require('../../paths');
+const paths = require('../paths');
 
 /* try {
   execSync(`eslint --ext .ts,.tsx ${paths.appSrc}`, {
@@ -13,7 +13,7 @@ const paths = require('../../paths');
 } */
 
 try {
-  execSync(`tsc -p tsconfig.build.json --outDir ${paths.packageOutput}`, {
+  execSync(`tsc -p tsconfig.build.json --outDir ${paths.output}`, {
     cwd: process.cwd(),
     stdio: 'inherit',
   });
@@ -23,12 +23,12 @@ try {
 
 (async () => {
   await build({
-    //entryNames: '[dir]/[name]',
+    entryNames: 'inputs/[dir]/[name]',
     entryPoints: [
-      resolve(paths.packageSource, '**/*'),
+      resolve (paths.source, 'inputs/**/*'),
     ],
     minify: true,
-    outdir: paths.packageOutput,
+    outdir: paths.output,
   });
 
   /*const files = globSync(resolve(paths.appSrc, 'inputs/masked-input/index.tsx'));

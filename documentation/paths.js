@@ -8,4 +8,6 @@ const resolvePath = relativePath => (
 
 module.exports = {
   appDocs: resolvePath('./docs'),
+  typeDocOutput: resolvePath('./docs/api'),
+  examples: resolvePath('./examples'),
 };

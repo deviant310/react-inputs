@@ -1,5 +1,6 @@
 const {resolve} = require('path');
-const paths = require('../paths');
+const paths = require('./paths');
+const packagePaths = require('../package/paths');
 
 /**
  * @property out can be omitted when using as docusaurus plugin
@@ -8,15 +9,15 @@ const paths = require('../paths');
 module.exports = {
   disableSources: true,
   entryPoints: [
-    resolve(paths.packageEntrypoint, 'select-input'),
-    resolve(paths.packageEntrypoint, 'masked-input')
+    //resolve(paths.packageEntrypoint, 'select-input'),
+    //resolve(paths.packageEntrypoint, 'masked-input')
   ],
   categoryOrder: ["Main component", "Hooks", "*"],
   hideGenerator: true,
   includeVersion: true,
   excludeExternals: true,
   name: 'React inputs',
-  out: paths.documentationTypeDocOutput,
+  out: paths.typeDocOutput,
   readme: 'none',
   sort: [
     'required-first',
@@ -27,6 +28,6 @@ module.exports = {
   ],
   hideInPageTOC: true,
   hideParameterTypesInTitle: true,
-  tsconfig: paths.packageTSConfigDocs,
+  tsconfig: packagePaths.buildTSConfig,
 
 };

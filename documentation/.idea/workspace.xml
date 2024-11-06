@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1e2404b8-6315-486c-9cb4-9552fffdeaf7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.nvmrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/documentation.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../package/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../package/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../package/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../package/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../package/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../package/.idea/jsLinters/eslint.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../package/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../package/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../package/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../package/eslint.config.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../package/package.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../package/src/inputs/select-input/components/text-box.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../package/src/inputs/select-input/components/virtual-list/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../package/src/inputs/select-input/components/virtual-list/types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../package/start/home.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../package/start/home.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../package/start/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../package/start/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../package/start/select-field.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../package/start/select-field.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../package/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/../package/.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/jsLibraryMappings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/jsLinters/eslint.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/node_modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/php.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/react-inputs.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.vscode/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.yarnrc.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../package/.yarnrc.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paths.js" beforeDir="false" afterPath="$PROJECT_DIR$/paths.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/typedoc.js" beforeDir="false" afterPath="$PROJECT_DIR$/typedoc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/.eslintrc.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/jest.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../package/jest.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/scripts/build.js" beforeDir="false" afterPath="$PROJECT_DIR$/../package/scripts/build.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/app.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/masked-input/components/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/masked-input/components/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/masked-input/components/input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/masked-input/components/input.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/masked-input/helpers/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/masked-input/helpers/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/masked-input/hooks/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/masked-input/hooks/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/masked-input/hooks/use-masked-input.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/masked-input/hooks/use-masked-input.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/masked-input/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/masked-input/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/masked-input/mask.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/masked-input/mask.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/masked-input/masked-input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/masked-input/masked-input.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/masked-input/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/masked-input/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/number-input/components/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/number-input/components/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/number-input/components/input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/number-input/components/input.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/number-input/helpers/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/number-input/helpers/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/number-input/hooks/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/number-input/hooks/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/number-input/hooks/use-number-input.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/number-input/hooks/use-number-input.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/number-input/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/number-input/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/number-input/number-input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/number-input/number-input.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/select-input/components/container.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/select-input/components/container.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/select-input/components/dropdown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/select-input/components/dropdown.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/select-input/components/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/select-input/components/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/select-input/components/text-box.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/select-input/components/virtual-list.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/select-input/components/virtual-list/virtual-list.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/select-input/hooks/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/select-input/hooks/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/select-input/hooks/use-select-input.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/select-input/hooks/use-select-input.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/select-input/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/select-input/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/select-input/select-input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/select-input/select-input.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/select-input/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/select-input/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/text-input/components/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/text-input/components/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/text-input/components/input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/text-input/components/input.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/text-input/hooks/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/text-input/hooks/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/text-input/hooks/use-text-input.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/text-input/hooks/use-text-input.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/text-input/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/text-input/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/inputs/text-input/text-input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/text-input/text-input.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/types/compound-input.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/types/compound-input.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/types/number-input.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/number-input/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/app/types/text-input.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/inputs/text-input/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/infrastructure/ambient.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/types/ambient.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/src/infrastructure/utility-types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../package/src/types/utility-types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/tests/cases/select-input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../package/tests/cases/select-input.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/tsconfig.build.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package/tsconfig.build.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../package/webpack.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../paths.js" beforeDir="false" afterPath="$PROJECT_DIR$/../package/paths.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2huWLEqAZyLMgRUcXKQI2zGNrwT" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/a.lebedev/Applications/IntelliJ IDEA Ultimate.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1e2404b8-6315-486c-9cb4-9552fffdeaf7" name="Changes" comment="" />
+      <created>1718444387403</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1718444387403</updated>
+      <workItem from="1718444388560" duration="8192000" />
+      <workItem from="1718964355088" duration="920000" />
+      <workItem from="1718973114080" duration="602000" />
+      <workItem from="1718973844040" duration="597000" />
+      <workItem from="1718977677672" duration="600000" />
+      <workItem from="1719053930082" duration="294000" />
+      <workItem from="1719057002896" duration="5252000" />
+      <workItem from="1719597174895" duration="1198000" />
+      <workItem from="1719651456665" duration="1383000" />
+      <workItem from="1719665387177" duration="7578000" />
+      <workItem from="1720029742999" duration="8736000" />
+      <workItem from="1720434424883" duration="1804000" />
+      <workItem from="1721062725066" duration="3693000" />
+      <workItem from="1721068967113" duration="2038000" />
+      <workItem from="1721071659484" duration="271000" />
+      <workItem from="1721071951463" duration="1946000" />
+      <workItem from="1721230626755" duration="1199000" />
+      <workItem from="1721422655757" duration="4829000" />
+      <workItem from="1721650516191" duration="520000" />
+      <workItem from="1721656823869" duration="612000" />
+      <workItem from="1721657450515" duration="581000" />
+      <workItem from="1721658048182" duration="19801000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>

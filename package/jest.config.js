@@ -12,7 +12,7 @@ module.exports = {
     'tsx',
   ],
   moduleNameMapper: {
-    '@copositary/react-inputs': resolve(paths.appSrc, './app/inputs/index.ts'),
+    'react-inputs': resolve(paths.appSrc, './app/inputs/index.ts'),
   },
   modulePathIgnorePatterns: [
     '<rootDir>/build',
