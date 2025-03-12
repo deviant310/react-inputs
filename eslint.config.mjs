@@ -1,13 +1,17 @@
+import eslintPluginReact from "eslint-plugin-react";
+import eslintPluginReactHooks from "eslint-plugin-react-hooks";
+
 import { fixupPluginRules } from "@eslint/compat";
 import pluginJs from "@eslint/js";
 import perfectionist from "eslint-plugin-perfectionist";
 import eslintPluginPrettier from "eslint-plugin-prettier";
-import eslintPluginReact from "eslint-plugin-react";
-import eslintPluginReactHooks from "eslint-plugin-react-hooks";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
 export default [
+  {
+    ignores: ["dist"],
+  },
   {
     languageOptions: {
       globals: globals.browser,
@@ -34,9 +38,9 @@ export default [
           type: "natural",
           order: "asc",
           groups: ["builtin", "react", "external", "parent", "sibling"],
-          "custom-groups": {
+          customGroups: {
             value: {
-              react: ["react", "react-dom/*"],
+              react: ["react", "react-dom(/.*)?"],
             },
           },
         },

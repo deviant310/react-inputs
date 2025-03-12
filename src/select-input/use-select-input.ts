@@ -23,16 +23,13 @@ export const useSelectInput = <OptionData>(
     [displayStringForOption, selectedOption],
   );
 
-  const optionsProps = useMemo(
+  const optionsProps = useMemo<Array<SelectInputOptionProps<OptionData>>>(
     () =>
-      options.map(
-        option =>
-          ({
-            option,
-            key: getOptionKey?.(option) ?? `${option}`,
-            onClick: () => onOptionSelect?.(option),
-          }) satisfies SelectInputOptionProps<OptionData> as SelectInputOptionProps<OptionData>,
-      ),
+      options.map(option => ({
+        option,
+        key: getOptionKey?.(option) ?? `${option}`,
+        onClick: () => onOptionSelect?.(option),
+      })),
     [getOptionKey, onOptionSelect, options],
   );
 

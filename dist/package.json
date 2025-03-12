@@ -1,0 +1,25 @@
+{
+  "name": "react-inputs",
+  "version": "1.0.0",
+  "exports": {
+    "./masked-input": {
+      "import": "./masked-input/index.mjs",
+      "require": "./masked-input/index.js"
+    },
+    "./number-input": {
+      "import": "./number-input/index.mjs",
+      "require": "./number-input/index.js"
+    },
+    "./select-input": {
+      "import": "./select-input/index.mjs",
+      "require": "./select-input/index.js"
+    },
+    "./text-input": {
+      "import": "./text-input/index.mjs",
+      "require": "./text-input/index.js"
+    }
+  },
+  "peerDependencies": {
+    "react": "^18 || ^19"
+  }
+}

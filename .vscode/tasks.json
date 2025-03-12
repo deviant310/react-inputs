@@ -1,0 +1,35 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build",
+			"type": "shell",
+			"command": "vite",
+			"icon": {
+				"id": "tools",
+				"color": "terminal.ansiBlue"
+			},
+			"args": [
+				"build",
+			],
+			"problemMatcher": [],
+			"detail": "Bild package",
+		},
+		{
+			"label": "Pack",
+			"type": "shell",
+			"group": "test",
+			"icon": {
+				"id": "package",
+				"color": "terminal.ansiRed"
+			},
+			"command": "npm",
+			"args": [
+				"pack",
+				"./dist"
+			],
+			"problemMatcher": [],
+			"detail": "Create package tarball"
+		}
+	]
+}
